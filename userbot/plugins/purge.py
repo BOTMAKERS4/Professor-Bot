@@ -70,7 +70,7 @@ async def purgeme(delme):
     )
     if MAFIABOT_LOGGER:
         await delme.client.send_message(
-            MAFIABOT_LOGGER, "Purge of " + str(count) + " messages done successfully!.
+            MAFIABOT_LOGGER, "Purge of " + str(count) + " messages done successfully!."
         )
     await sleep(2)
     i = 1
