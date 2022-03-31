@@ -28,7 +28,7 @@ async def _(event):
         await edit_or_reply(event, "**Saving Output To ProfessorBot's Local Database...**")
         await asyncio.sleep(3.5)
         await edit_or_reply(event, 
-            "Your[ProfessorBot](https:/t.me/harshjais369) is working fine!\n       Contact @harshjais369 for any help.\n\n**ᴮᵒᵗ ⁾⁾**  ᴹᵃᶠⁱᵃᴮᵒᵗ ⁽ᵇʸ ᴴⁱᵐᵃⁿˢʰᵘ⁾\n**ᴿᵉ⁻ᵉⁿᵍⁱⁿᵉᵉʳᵉᵈ ᵃˢ ⁾⁾**  ᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ ⁽ᵇʸ ᴴᵃʳˢʰ ᴶᵃⁱˢʷᵃˡ⁾"
+            "Your [ProfessorBot](https:/t.me/harshjais369) is working fine!\n       Contact @harshjais369 for any help.\n\n**ᴮᵒᵗ ⁾⁾**  ᴹᵃᶠⁱᵃᴮᵒᵗ ⁽ᵇʸ ᴴⁱᵐᵃⁿˢʰᵘ⁾\n**ᴿᵉ⁻ᵉⁿᵍⁱⁿᵉᵉʳᵉᵈ ᵃˢ ⁾⁾**  ᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ ⁽ᵇʸ ᴴᵃʳˢʰ ᴶᵃⁱˢʷᵃˡ⁾"
         )
 
 CmdHelp("test").add_command(
