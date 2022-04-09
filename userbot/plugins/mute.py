@@ -14,7 +14,7 @@ async def startmute(event):
     if event.fwd_from:
         return
     elif event.is_private:
-        await edit_or_reply(event, "Muted!")
+        await edit_or_reply(event, "Muting...")
         await asyncio.sleep(3)
         private = True
     if any(
@@ -85,7 +85,7 @@ async def startmute(event):
         try:
             mute(userid, chat_id)
         except Exception as e:
-            await edit_or_reply(event, "An error occured!\nError info:" + str(e))
+            await edit_or_reply(event, "An error occured!\nError info: " + str(e))
         else:
             await edit_or_reply(event, str(userid) + " muted!")
 
