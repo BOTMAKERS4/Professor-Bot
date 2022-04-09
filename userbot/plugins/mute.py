@@ -14,7 +14,7 @@ async def startmute(event):
     if event.fwd_from:
         return
     elif event.is_private:
-        await edit_or_reply(event, "Shut The Fukk Up!!!!!")
+        await edit_or_reply(event, "Muted!")
         await asyncio.sleep(3)
         private = True
     if any(
@@ -70,24 +70,24 @@ async def startmute(event):
             if chat.admin_rights.delete_messages is True:
                 pass
             else:
-                return await edit_or_reply(event, "`You can't mute a person if you dont have delete messages permission. ಥ﹏ಥ`"
+                return await edit_or_reply(event, "`You can't mute a person if you dont have delete messages permission."
                 )
         elif "creator" in vars(chat):
             pass
         elif private == True:
             pass
         else:
-            return await edit_or_reply(event, "I'm not admin here!! Chutiya sala...😒🚶"
+            return await edit_or_reply(event, "I'm not admin here!"
             )
         if is_muted(userid, chat_id):
-            return await edit_or_reply(event, "This user is already muted in this chat ~~lmfao sed rip~~"
+            return await edit_or_reply(event, "This user is already muted in this chat."
             )
         try:
             mute(userid, chat_id)
         except Exception as e:
-            await edit_or_reply(event, "Error occured!\nError is " + str(e))
+            await edit_or_reply(event, "An error occured!\nError info:" + str(e))
         else:
-            await edit_or_reply(event, "Chup Reh Lawde.\n**｀-´)⊃━☆ﾟ.*･｡ﾟ **")
+            await edit_or_reply(event, str(userid) + " muted!")
 
 
 @bot.on(admin_cmd(pattern="unmute ?(\d+)?", outgoing=True))
@@ -97,7 +97,7 @@ async def endmute(event):
     if event.fwd_from:
         return
     elif event.is_private:
-        await edit_or_reply(event, "Unmutting!!!")
+        await edit_or_reply(event, "Unmuting...")
         await asyncio.sleep(3)
         private = True
     if any(
@@ -151,14 +151,14 @@ async def endmute(event):
         chat_id = event.chat_id
         if not is_muted(userid, chat_id):
             return await edit_or_reply(event, 
-                "__This user is not muted in this chat__\n（ ^_^）o自自o（^_^ ）"
+                "__This user is not muted in this chat.__"
             )
         try:
             unmute(userid, chat_id)
         except Exception as e:
-            await edit_or_reply(event, "Error occured!\nError is " + str(e))
+            await edit_or_reply(event, "An error occured!\nError info: " + str(e))
         else:
-            await edit_or_reply(event, "Haa Abb Boll lavde\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍")
+            await edit_or_reply(event, str(userid) + " unmuted!")
 
 
 @command(incoming=True)
