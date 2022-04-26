@@ -18,7 +18,7 @@ from telethon.tl.functions.channels import EditAdminRequest, EditBannedRequest, 
 from telethon.tl.types import ChatAdminRights, ChannelParticipantsAdmins, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto
 
 
-HIMANSHU = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+HARSHJ = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot user"
 papa = borg.uid
 
 
@@ -97,7 +97,7 @@ async def gban(userbot):
     if user:
         if user.id == 881259026:
             return await mafiabot.edit(
-                f"`First Grow Some Balls To Gban My Creater. 🤫🚶`"
+                f"`First Grow Some Balls To Gban My Creater. 🤫`"
             )
         try:
             from userbot.plugins.sql_helper.gmute_sql import gmute
@@ -127,7 +127,7 @@ async def gban(userbot):
     except:
         pass
     return await mafiabot.edit(
-        f"**[{user.first_name}](tg://user?id={user.id}) has been GBanned successfully!**\nAffected Chats: {a}\nBy: [{Harsh Jaiswal}](tg://user?id={papa})"
+        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been GBanned successfully!**\nAffected chats: {a}\nBy: [{HarshJ}](tg://user?id={papa})"
     )
 
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
@@ -189,11 +189,11 @@ async def gunban(userbot):
         await mafiabot.edit("**Reply to a user**")     
     try:
         if ungmute(user.id) is False:
-            return await mafiabot.edit("**Error! I think User already ungbanned.**")
+            return await mafiabot.edit("**Error! It seems user is already ungbanned.**")
     except:
         pass
     return await mafiabot.edit(
-        f"**[{user.first_name}](tg://user?id={user.id}) Aur bhai.... Aagya swaad.**\n\nUngban Successful 🔥\nChats :- `{a}`"
+        f"**[{user.first_name}](tg://user?id={user.id}) has been ungbanned now successfully!**\nAffected chats: `{a}`\nBy: [{HarshJ}](tg://user?id={papa})"
     )
 
 
@@ -212,8 +212,8 @@ async def _(event):
                         user.id,
                         view_messages=False,
                     )
-                    gban_watcher = f"⚠️⚠️**Warning**⚠️⚠️\n\n`Gbanned User Joined the chat!!`\n**⚜️ Victim Id :**  [{user.first_name}](tg://user?id={user.id})\n"
-                    gban_watcher += f"**🔥 Action 🔥**  \n`Banned this piece of shit....` **AGAIN!**"
+                    gban_watcher = f"⚠️ **Warning!** `GBanned User Joined the chat!`\n**⚜️ Victim id:**  [{user.first_name}](tg://user?id={user.id})\n\n"
+                    gban_watcher += f"**🔥 Action:**  `Banned this user again automatically by` **Professor Bot**!"
                     await event.reply(gban_watcher)
                 except BaseException:
                     pass
