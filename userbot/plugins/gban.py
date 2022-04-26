@@ -36,7 +36,7 @@ async def get_full_user(event):
         if user.isnumeric():
             user = int(user)
         if not user:
-            await edit_or_reply(event, "**Som3thing W3nt Wr0ng**\n`Can you please provide me a user id`")
+            await edit_or_reply(event, "**Something went wrong**\n`Please provide me a user id.`")
             return
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
@@ -48,7 +48,7 @@ async def get_full_user(event):
         try:
             user_obj = await event.client.get_entity(user)
         except Exception as err:
-            return await edit_or_reply(event, "**Som3thing W3nt Wr0ng**\n", str(err))           
+            return await edit_or_reply(event, "**Something went wrong**\nError: ", str(err))           
     return user_obj, extra
 
 
@@ -71,11 +71,11 @@ async def gban(userbot):
     sender = await ids.get_sender()
     hum = await ids.client.get_me()
     if not sender.id == hum.id:
-        mafiabot = await edit_or_reply(ids, "Trying to gban this retard!")
+        mafiabot = await edit_or_reply(ids, "Trying to gban this user...")
     else:
-        mafiabot = await edit_or_reply(ids, "`Ok! Gbaning this piece of shit....`")
+        mafiabot = await edit_or_reply(ids, "`Ok! GBaning this user...`")
     hum = await userbot.client.get_me()
-    await mafiabot.edit(f"`🔥Global Ban Iz Cumin💦.... Wait and watch nigga🚶`")
+    await mafiabot.edit(f"`❌ Global Ban is in progress... Please wait!`")
     my_mention = "[{}](tg://user?id={})".format(hum.first_name, hum.id)
     f"@{hum.username}" if hum.username else my_mention
     await userbot.get_chat()
@@ -93,11 +93,11 @@ async def gban(userbot):
         if not reason:
             reason = "Private"
     except:
-        return await mafiabot.edit(f"**Something W3NT Wrong 🤔**")
+        return await mafiabot.edit(f"**Something went wrong!**")
     if user:
-        if user.id == 1212368262:
+        if user.id == 881259026:
             return await mafiabot.edit(
-                f"`First Grow Some Balls To Gban My Creater🤫🚶`"
+                f"`First Grow Some Balls To Gban My Creater. 🤫🚶`"
             )
         try:
             from userbot.plugins.sql_helper.gmute_sql import gmute
@@ -116,18 +116,18 @@ async def gban(userbot):
             try:
                 await userbot.client.edit_permissions(i, user, view_messages=False)
                 a += 1
-                await mafiabot.edit(f"Gbaning This retard🚶\n\n**Please Wait Few Minutes**😏")
+                await mafiabot.edit(f"❌ GBaning this user...\n**Please wait few minutes...**")
             except:
                 b += 1
     else:
-        await mafiabot.edit(f"`Either reply to a user or gib me user id/name`")
+        await mafiabot.edit(f"`Either reply to a user or give me user id/name`")
     try:        
         if gmute(user.id) is False:
-            return await mafiabot.edit(f"**Error! User already gbanned.**")
+            return await mafiabot.edit(f"**Error! User is already GBanned.**")
     except:
         pass
     return await mafiabot.edit(
-        f"[{user.first_name}](tg://user?id={user.id}) Beta majdur ko khodna aur [{HIMANSHU}](tg://user?id={papa}) ko chodna kabhi sikhana nhi.\n\n**Gban Successful 🔥\nAffected Chats😏 : {a} **"
+        f"**[{user.first_name}](tg://user?id={user.id}) has been GBanned successfully!**\nAffected Chats: {a}\nBy: [{Harsh Jaiswal}](tg://user?id={papa})"
     )
 
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
@@ -139,11 +139,11 @@ async def gunban(userbot):
     sender = await ids.get_sender()
     hum = await ids.client.get_me()
     if not sender.id == hum.id:
-        mafiabot = await edit_or_reply(ids, "`Trying to ungban this kid...`")
+        mafiabot = await edit_or_reply(ids, "`Trying to ungban this user...`")
     else:
         mafiabot = await edit_or_reply(ids, "`Ungban in progress...`")
     hum = await userbot.client.get_me()
-    await mafiabot.edit(f"`Trying to ungban this kiddo...`")
+    await mafiabot.edit(f"`Trying to ungban this user...`")
     my_mention = "[{}](tg://user?id={})".format(hum.first_name, hum.id)
     f"@{hum.username}" if hum.username else my_mention
     await userbot.get_chat()
@@ -161,10 +161,10 @@ async def gunban(userbot):
         if not reason:
             reason = "Private"
     except:
-        return await mafiabot.edit("**Som3ting W3nt Wr0ng**")
+        return await mafiabot.edit("**Something went wrong!**")
     if user:
-        if user.id == 1212368262:
-            return await mafiabot.edit("**You need to grow some balls to gban / ungban my creator**")
+        if user.id == 881259026:
+            return await mafiabot.edit("**You need to grow some balls to gban / ungban my creator!**")
         try:
             from userbot.plugins.sql_helper.gmute_sql import ungmute
         except:
@@ -182,7 +182,7 @@ async def gunban(userbot):
             try:
                 await userbot.client.edit_permissions(i, user, send_messages=True)
                 a += 1
-                await mafiabot.edit(f"Ok! Now Ungbaning this kiddo.\n\n**Please Wait Few Minutes**😏")
+                await mafiabot.edit(f"Ok! Now Ungbaning this user.\n\n**Please wait few minutes...**")
             except:
                 b += 1
     else:
