@@ -127,7 +127,7 @@ async def gban(userbot):
     except:
         pass
     return await mafiabot.edit(
-        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been GBanned successfully!**\nAffected chats: {a}\nBy: [{HarshJ}](tg://user?id={papa})"
+        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been GBanned successfully!**\nAffected chats: {a}\nBy: [{HARSHJ}](tg://user?id={papa})"
     )
 
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
