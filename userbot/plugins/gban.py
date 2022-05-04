@@ -36,7 +36,7 @@ async def get_full_user(event):
         if user.isnumeric():
             user = int(user)
         if not user:
-            await edit_or_reply(event, "**Something went wrong**\n`Please provide me a user id.`")
+            await edit_or_reply(event, "**Something went wrong!**\n`Please provide me a user id.`")
             return
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
@@ -73,7 +73,7 @@ async def gban(userbot):
     if not sender.id == hum.id:
         mafiabot = await edit_or_reply(ids, "Trying to gban this user...")
     else:
-        mafiabot = await edit_or_reply(ids, "`Ok! GBaning this user...`")
+        mafiabot = await edit_or_reply(ids, "Ok! GBaning this user...")
     hum = await userbot.client.get_me()
     await mafiabot.edit(f"`❌ Global Ban is in progress... Please wait!`")
     my_mention = "[{}](tg://user?id={})".format(hum.first_name, hum.id)
@@ -97,8 +97,7 @@ async def gban(userbot):
     if user:
         if user.id == 881259026:
             return await mafiabot.edit(
-                f"`Are you kidding? You're trying to G-Ban my creater. 😑`"
-            )
+                f"Are you kidding? You're trying to G-Ban my creater. 😑")
         try:
             from userbot.plugins.sql_helper.gmute_sql import gmute
         except:
@@ -127,8 +126,7 @@ async def gban(userbot):
     except:
         pass
     return await mafiabot.edit(
-        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been G-Banned successfully!**\n\n`Affected chats: {a}\nBy: [{HARSHJ}](tg://user?id={papa})`"
-    )
+        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been G-Banned successfully!**\n\nAffected chats: `{a}`\nBy: [{HARSHJ}](tg://user?id={papa})")
 
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
 @bot.on(sudo_cmd(pattern="ungban ?(.*)", allow_sudo=True))
@@ -164,7 +162,7 @@ async def gunban(userbot):
         return await mafiabot.edit("**Something went wrong!**")
     if user:
         if user.id == 881259026:
-            return await mafiabot.edit("**You need to grow some balls to gban / ungban my creator!**")
+            return await mafiabot.edit("**You can't gban / ungban my creator!**")
         try:
             from userbot.plugins.sql_helper.gmute_sql import ungmute
         except:
@@ -189,12 +187,11 @@ async def gunban(userbot):
         await mafiabot.edit("**Reply to a user**")     
     try:
         if ungmute(user.id) is False:
-            return await mafiabot.edit("**Error! It seems user is un-gbanned already.**")
+            return await mafiabot.edit("**Error!**\n\n`It seems user isn't G-banned.`")
     except:
         pass
     return await mafiabot.edit(
-        f"**[{user.first_name}](tg://user?id={user.id}) has been un-gbanned now successfully!**\n\n`Affected chats: {a}\nBy: [{HARSHJ}](tg://user?id={papa})`"
-    )
+        f"**[{user.first_name}](tg://user?id={user.id}) has been un-gbanned now successfully!**\n\nAffected chats: `{a}`\nBy: [{HARSHJ}](tg://user?id={papa})")
 
 
 
