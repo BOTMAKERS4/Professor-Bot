@@ -1,4 +1,4 @@
-import html
+ import html
 
 from userbot.cmdhelp import CmdHelp
 from userbot import bot, CMD_HELP, ALIVE_NAME
@@ -97,7 +97,7 @@ async def gban(userbot):
     if user:
         if user.id == 881259026:
             return await mafiabot.edit(
-                f"`First Grow Some Balls To Gban My Creater. 🤫`"
+                f"`Are you kidding? You're trying to G-Ban my creater. 😑`"
             )
         try:
             from userbot.plugins.sql_helper.gmute_sql import gmute
@@ -116,18 +116,18 @@ async def gban(userbot):
             try:
                 await userbot.client.edit_permissions(i, user, view_messages=False)
                 a += 1
-                await mafiabot.edit(f"❌ GBaning this user...\n**Please wait few minutes...**")
+                await mafiabot.edit(f"❌ **G-Baning this user...**\n`Please wait few minutes...`")
             except:
                 b += 1
     else:
         await mafiabot.edit(f"`Either reply to a user or give me user id/name`")
     try:        
         if gmute(user.id) is False:
-            return await mafiabot.edit(f"**Error! User is already GBanned.**")
+            return await mafiabot.edit(f"**Error! User is GBanned already.**")
     except:
         pass
     return await mafiabot.edit(
-        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been GBanned successfully!**\n\nAffected chats: {a}\nBy: [{HARSHJ}](tg://user?id={papa})"
+        f"❌ **[{user.first_name}](tg://user?id={user.id}) has been G-Banned successfully!**\n\n`Affected chats: {a}\nBy: [{HARSHJ}](tg://user?id={papa})`"
     )
 
 @bot.on(admin_cmd(pattern="ungban ?(.*)"))
@@ -182,18 +182,18 @@ async def gunban(userbot):
             try:
                 await userbot.client.edit_permissions(i, user, send_messages=True)
                 a += 1
-                await mafiabot.edit(f"Ok! Now Ungbaning this user.\n\n**Please wait few minutes...**")
+                await mafiabot.edit(f"**Ok! Now Ungbaning this user.**\n\n`Please wait few minutes...`")
             except:
                 b += 1
     else:
         await mafiabot.edit("**Reply to a user**")     
     try:
         if ungmute(user.id) is False:
-            return await mafiabot.edit("**Error! It seems user is already ungbanned.**")
+            return await mafiabot.edit("**Error! It seems user is un-gbanned already.**")
     except:
         pass
     return await mafiabot.edit(
-        f"**[{user.first_name}](tg://user?id={user.id}) has been ungbanned now successfully!**\nAffected chats: `{a}`\nBy: [{HARSHJ}](tg://user?id={papa})"
+        f"**[{user.first_name}](tg://user?id={user.id}) has been un-gbanned now successfully!**\n\n`Affected chats: {a}\nBy: [{HARSHJ}](tg://user?id={papa})`"
     )
 
 
