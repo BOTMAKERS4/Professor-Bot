@@ -21,7 +21,7 @@ def all_users(a, b):
 async def _(event):
     try:
         await event.client(CreateGroupCallRequest(event.chat_id))
-        await event.edit(event, "**🔊 Voice Chat Started Successfully!**")
+        await event.edit("**🔊 Voice Chat Started Successfully!**")
     except Exception as e:
         await event.edit( f"`{str(e)}`")
 
@@ -31,7 +31,7 @@ async def _(event):
 async def _(event):
     try:
         await bot(DiscardGroupCallRequest(await getvc(event)))
-        await event.edit(event, "**❌ Voice Chat Ended Successfully!**")
+        await event.edit("**❌ Voice Chat Ended Successfully!**")
     except Exception as e:
         await event.edit( f"`{str(e)}`")
 
