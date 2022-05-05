@@ -85,8 +85,8 @@ async def on_view_blacklist(event):
     OUT_STR = "❌ **Blacklists in the current chat:** \n"
     if len(all_blacklisted) > 0:
         for trigger in all_blacklisted:
-            OUT_STR += f"👉 ||{trigger}|| \n"
-        OUT_STR += "\n_(Effective for all the members including group's staff as well.)_"
+            OUT_STR += f"👉 || {trigger} || \n"
+        OUT_STR += "\n__(Effective for all the members including group's staff as well.)__"
     else:
         OUT_STR = "No Blacklists found. Start saving using `.addblacklist`"
     if len(OUT_STR) > Config.MAX_MESSAGE_SIZE_LIMIT:
