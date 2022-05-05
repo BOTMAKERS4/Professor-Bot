@@ -126,12 +126,12 @@ async def parse_ocr_space_api(event):
             int(test_file["ProcessingTimeInMilliseconds"]) // 1000
         )
     except Exception as e:
-        await edit_or_reply(event, "Errors.\n `{}`\nReport This to @MafiaBot_Support\n\n`{}`".format(
+        await edit_or_reply(event, "❌ **Error:** `{}`\n**More info:** __{}__\n\nContact @harshjais369 for any kind of help regarding bot.".format(
                 str(e), json.dumps(test_file, sort_keys=True, indent=4)
             )
         )
     else:
-        await edit_or_reply(event, "Read Document in {} seconds. \n{}".format(
+        await edit_or_reply(event, "Read document completed in {} seconds.\n{}".format(
                 ProcessingTimeInMilliseconds, ParsedText
             )
         )
