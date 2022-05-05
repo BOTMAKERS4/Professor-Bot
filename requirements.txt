@@ -21,6 +21,7 @@ DateTime
 dnspython
 emoji
 faker
+fontTools
 glitch_this
 gTTS-token
 gTTS
