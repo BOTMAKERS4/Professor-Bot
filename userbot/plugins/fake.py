@@ -38,9 +38,9 @@ async def gbun(event):
         return
     gbunVar = event.text
     gbunVar = gbunVar[6:]
-    mentions = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
+    mentions = "❌ `Warning! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
     no_reason = "Reason: __Not given__"
-    await event.edit("** Go to the hell!❗️⚜️☠️**")
+    await event.edit("**❌ G-Banning the user...**")
     asyncio.sleep(3.5)
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
@@ -53,22 +53,22 @@ async def gbun(event):
         usname = replied_user.user.username
         idd = reply_message.sender_id
         # make meself invulnerable cuz why not xD
-        if idd == 1212368262:
+        if idd == 881259026:
             await reply_message.reply(
-                "`Wait a second, This is my master!`\n**How dare you threaten to ban my master!**\n\n__Your account has been hacked! Pay 99$ to my master__ [Harsh Jaiswal](https://t.me/harshjais369) __to release your account__😏"
+                "`Wait a second, this is my master!`\n**How dare you threaten to ban my master!**\n\n__Your account has been hacked! Pay 99$ to my master__ [Harsh Jaiswal](https://t.me/harshjais369) __to release your account__😏"
             )
         else:
             jnl = (
-                "`Warning!! `"
+                "❌ `Warning! `"
                 "[{}](tg://user?id={})"
                 "` 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n\n`"
                 "**Person's Name: ** __{}__\n"
-                "**ID : ** `{}`\n"
+                "**ID: ** `{}`\n"
             ).format(firstname, idd, firstname, idd)
             if usname == None:
-                jnl += "**Victim's username: ** `Doesn't own a username!`\n"
+                jnl += "**Victim's username:** `Doesn't own a username!`\n"
             elif usname != "None":
-                jnl += "**Victim's username** : @{}\n".format(usname)
+                jnl += "**Victim's username:** @{}\n".format(usname)
             if len(gbunVar) > 0:
                 gbunm = "`{}`".format(gbunVar)
                 gbunr = "**Reason: **" + gbunm
@@ -77,7 +77,7 @@ async def gbun(event):
                 jnl += no_reason
             await reply_message.reply(jnl)
     else:
-        mention = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\nReason: Not Given `"
+        mention = "❌ `Warning! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\nReason: Not Given `"
         await event.reply(mention)
     await event.delete()
 
@@ -85,7 +85,7 @@ async def gbun(event):
 CmdHelp("fake").add_command(
   'fake', '<action>', 'This shows the fake action in the group  the actions are typing, contact, game ,location, voice, round, video, photo, document.'
 ).add_command(
-  'gbam', '<reason> (optional)', 'Fake gban. Just for fun🤓'
+  'gbam', '<reason> (optional)', 'Fake gban. Just for fun! 😂'
 ).add_command(
-  'picgen', None, 'Gives a fake face image'
+  'picgen', None, 'Gives a fake face image.'
 ).add()
