@@ -24,7 +24,7 @@ from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from telethon.tl import functions, types
 
-from userbot.utils import utils
+from userbot import utils
 
 COLORS = [
     "#F07975",
