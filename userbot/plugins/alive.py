@@ -25,18 +25,18 @@ mafia = bot.uid
 MAFIA_IMG = Config.ALIVE_PIC or "https://telegra.ph/file/e97d640332ce5eadb3f89.mp4"
 pm_caption = "  __**🔥⚡ 𝙿𝚁𝙾𝙵𝙴𝚂𝚂𝙾𝚁 𝙱𝙾𝚃 𝙸𝚂 𝙰𝙻𝙸𝚅𝙴 ⚡🔥**__\n\n"
 
-pm_caption += f"**━━━━━━━━━━━━━━━━━━━━**\n\n"
+pm_caption += f"**━━━━━━━━━━━━━━━━━━━━━━**\n\n"
 pm_caption += (
-    f"                 👑𝐌𝐀𝐒𝐓𝐄𝐑👑\n    **『😈[{DEFAULTUSER}](tg://user?id={mafia})😈』**\n\n"
+    f"                 👑𝐌𝐀𝐒𝐓𝐄𝐑👑\n       **『😈[{DEFAULTUSER}](tg://user?id={mafia})😈』**\n\n"
 )
-pm_caption += f"┏━━━━━━━━━━━━━━━━━━━\n"
-pm_caption += f"┣•➳➠ `Telethon:` `{version.__version__}`\n"
-pm_caption += f"┣•➳➠ `Version:` `{mafiaversion}`\n"
-pm_caption += f"┣•➳➠ `Sudo:` `{sudou}`\n"
-pm_caption += f"┣•➳➠ `Creator:` Himanshu\n"
-pm_caption += f"┣•➳➠ `Re-engineered by:` Harsh Jaiswal\n"
-pm_caption += f"┣•➳➠ `Contact:` [ᴛᴀᴘ ʜᴇʀᴇ 👈🏻](https://t.me/harshjais369)\n"
-pm_caption += f"┗━━━━━━━━━━━━━━━━━━━\n"
+pm_caption += f"┏━━━━━━━━━━━━━━━━━━━━━\n"
+pm_caption += f"┣•**➳ Telethon:** `{version.__version__}`\n"
+pm_caption += f"┣•**➳ Version:** `{mafiaversion}`\n"
+pm_caption += f"┣•**➳ Sudo:** `{sudou}`\n"
+pm_caption += f"┣•**➳ Creator:** Himanshu\n"
+pm_caption += f"┣•**➳ Re-engineered by:** Harsh Jaiswal\n"
+pm_caption += f"┣•**➳ Contact:** [ᴛᴀᴘ ʜᴇʀᴇ 👈🏻](https://t.me/harshjais369)\n"
+pm_caption += f"┗━━━━━━━━━━━━━━━━━━━━━\n"
 pm_caption += "   🔸 [Repository](https://github.com/harshjais369/ProfessorBot) 🔸 [License](https://github.com/harshjais369/ProfessorBot/blob/main/LICENSE) 🔸"
 
 # @command(outgoing=True, pattern="^.alive$")
