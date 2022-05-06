@@ -21,11 +21,11 @@ if ENV:
         # This is required for the hash to torrent file functionality to work.
         HASH_TO_TORRENT_API = os.environ.get("HASH_TO_TORRENT_API", "https://example.com/torrent/{}");
         # This is required for the @telegraph functionality.
-        TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "MafiaBot")
+        TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "ProfessorBot")
         # Get a Free API Key from OCR.Space
         OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
         # Send .get_id in any group with all your administration bots (added)
-        G_BAN_LOGGER_GROUP = int(os.environ.get("G_BAN_LOGGER_GROUP", -1001462549597))
+        G_BAN_LOGGER_GROUP = int(os.environ.get("G_BAN_LOGGER_GROUP", -1001625589718))
         # TG API limit. An album can have atmost 10 media!
         FBAN_LOGGER_GROUP = os.environ.get("FBAN_LOGGER_GROUP", None)
         if FBAN_LOGGER_GROUP:
@@ -71,7 +71,7 @@ if ENV:
         NO_P_M_SPAM = bool(os.environ.get("NO_P_M_SPAM", True))
         # define "spam" in PMs
         NO_SONGS = bool(os.environ.get("NO_SONGS", False))
-        MAX_FLOOD_IN_P_M_s = int(os.environ.get("MAX_FLOOD_IN_P_M_s", 3))
+        MAX_FLOOD_IN_P_M_s = int(os.environ.get("MAX_FLOOD_IN_P_M_s", 5))
         #pm log
         PM_LOG_GRP_ID = os.environ.get("PM_LOG_GRP_ID", None)
         # set to True if you want to log PMs to your PM_LOGGR_BOT_API_ID
