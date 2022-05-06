@@ -36,9 +36,9 @@ else:
             api_hash=Var.API_HASH
         ).start(bot_token=Var.TG_BOT_TOKEN_BF_HER)
         print("Initialisation finished with no errors")
-        print("Starting MafiaBot")
+        print("Starting ProfessorBot...")
         bot.loop.run_until_complete(add_bot(Var.TG_BOT_USER_NAME_BF_HER))
-        print("MafiaBot Startup Completed")
+        print("ProfessorBot Startup Completed!")
     else:
         bot.start()
 
@@ -54,14 +54,14 @@ for name in files:
 
 import userbot._core
 
-print(f"""MAFIABOT IS ON!!! MAFIABOT VERSION :- {mafiaversion} YOUR 𝕄𝔸𝔽𝕀𝔸𝔹𝕆𝕋 IS READY TO USE! FOR CHECK YOUR BOT WORKING OR NOT PLEASE TYPE (.alive/.ping) ENJOY YOUR BOT! JOIN FOR MORE FUTURE UPDATES @MafiaBot_Support .""")
+print(f"""PROFESSOR BOT IS ON!!! PROFESSOR BOT VERSION:- {mafiaversion} YOUR ℙℝ𝕆𝔽𝔼𝕊𝕊𝕆ℝ 𝔹𝕆𝕋 IS READY TO USE! TO CHECK YOUR BOT WORKING OR NOT PLEASE TYPE (.alive/.ping/.test) ENJOY YOUR BOT! Contact @harshjais369 (Telegram) for any kind of issues regarding ProfessoBot.""")
 async def mafia_is_on():
     try:
         if Config.MAFIABOT_LOGGER != 0:
             await bot.send_file(
                 Config.MAFIABOT_LOGGER,
                 MAFIA_PIC,
-                caption=f"༆ʟɛɢɛռɖaʀʏ ᴀғ ᴍᴀғɪᴀʙᴏᴛ༆\n\n**𝚅𝙴𝚁𝚂𝙸𝙾𝙽 ➪ {mafiaversion}**\n\n𝐓𝐲𝐩𝐞 `.ping` or `.alive` 𝐭𝐨 𝐜𝐡𝐞𝐜𝐤! \n\n𝙹𝙾𝙸𝙽 [𝙼𝙰𝙵𝙸𝙰𝙱𝙾𝚃 𝙲𝙷𝙰𝚃](t.me/MAFIABOT_CHIT_CHAT) 𝚃𝙾 𝚀𝚄𝙴𝚁𝚈 & 𝙹𝙾𝙸𝙽 [𝙼𝙰𝙵𝙸𝙰 𝚄𝙿𝙳𝙰𝚃𝙴𝚂](t.me/MafiaBot_Support) 𝚃𝙾 𝙺𝙽𝙾𝚆 𝚁𝙴𝙶𝚁𝙰𝙳𝙸𝙽𝙶 𝚄𝙿𝙳𝙰𝚃𝙴 𝙰𝙽𝙳 𝙽𝙴𝚆𝚂 𝙰𝙱𝙾𝚄𝚃 𝙼𝙰𝙵𝙸𝙰𝙱𝙾𝚃",
+                caption=f"༆ 𝗣𝗿𝗼𝗳𝗲𝘀𝘀𝗼𝗿 𝗕𝗼𝘁 ༆\n\n**𝚅𝙴𝚁𝚂𝙸𝙾𝙽 ➪** `{mafiaversion}`\n\n𝐓𝐲𝐩𝐞 `.ping` or `.alive` 𝐭𝐨 𝐜𝐡𝐞𝐜𝐤!\n\n𝙲𝚘𝚗𝚝𝚊𝚌𝚝 @harshjais369 𝚝𝚘 𝚛𝚎𝚙𝚘𝚛𝚝 𝚊𝚗𝚢 𝚋𝚞𝚐 𝚒𝚗 𝚋𝚘𝚝 𝚘𝚛 𝚏𝚘𝚛 𝚊𝚗𝚢 𝚔𝚒𝚗𝚍 𝚘𝚏 𝚒𝚜𝚜𝚞𝚎𝚜 𝚛𝚎𝚐𝚊𝚛𝚍𝚒𝚗𝚐 𝚝𝚑𝚎 𝚋𝚘𝚝.",
             )
     except Exception as e:
         LOGS.info(str(e))
