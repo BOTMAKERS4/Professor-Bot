@@ -54,7 +54,7 @@ for name in files:
 
 import userbot._core
 
-print(f"""PROFESSOR BOT IS ON!!! PROFESSOR BOT VERSION:- {mafiaversion} YOUR ℙℝ𝕆𝔽𝔼𝕊𝕊𝕆ℝ 𝔹𝕆𝕋 IS READY TO USE! TO CHECK YOUR BOT WORKING OR NOT PLEASE TYPE (.alive/.ping/.test) ENJOY YOUR BOT! Contact @harshjais369 (Telegram) for any kind of issues regarding ProfessoBot.""")
+print(f"""PROFESSOR BOT IS ON!!! PROFESSOR BOT VERSION:- {mafiaversion} YOUR ℙℝ𝕆𝔽𝔼𝕊𝕊𝕆ℝ 𝔹𝕆𝕋 IS READY TO USE! TO CHECK YOUR BOT WORKING OR NOT PLEASE TYPE (.alive/.ping/.test) ENJOY YOUR BOT! Contact @harshjais369 (Telegram) for any kind of issues regarding ProfessorBot.""")
 async def mafia_is_on():
     try:
         if Config.MAFIABOT_LOGGER != 0:
