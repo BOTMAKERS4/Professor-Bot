@@ -103,7 +103,7 @@ async def kang(args):
         packnick = (
             f"{mafiabot} Vol.{pack}"
             if mafiabot
-            else f"@{user.username}'s MafiaBot Vol.{pack}"
+            else f"@{user.username}'s ProfessorBot Vol.{pack}"
         )
         cmd = "/newpack"
         file = io.BytesIO()
@@ -139,7 +139,7 @@ async def kang(args):
                     packnick = (
                         f"{mafiabot} Vol.{pack}"
                         if mafiabot
-                        else f"@{user.username}'s MafiaBot Vol.{pack}"
+                        else f"@{user.username}'s ProfessorBot Vol.{pack}"
                     )
                     await args.edit(
                         "`Switching to Pack "
@@ -213,7 +213,7 @@ async def kang(args):
                 # Ensure user doesn't get spamming notifications
                 await bot.send_read_acknowledge(conv.chat_id)
         else:
-            await args.edit("`Preparing a new pack....`")
+            await args.edit("`Preparing a new pack...`")
             async with bot.conversation("Stickers") as conv:
                 await conv.send_message(cmd)
                 await conv.get_response()
