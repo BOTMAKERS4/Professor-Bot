@@ -99,7 +99,7 @@ async def kang(args):
                 # pack
                 emoji = splat[1]
 
-        packname = f"HB_{user.username}_MafiaBot_{pack}"
+        packname = f"HB_{user.username}_ProfessorBot_{pack}"
         packnick = (
             f"{mafiabot} Vol.{pack}"
             if mafiabot
