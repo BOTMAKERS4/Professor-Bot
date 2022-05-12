@@ -15,7 +15,7 @@
 #    This Inline Helper Code is solely owned by @SupRemE_AnanD
 #    You Should Not Copy This Code Without Proper Permission.
 
-# Help Pic feature added by @H1M4N5HU0P
+# Help Pic feature added by @harshjais369
 
 from math import ceil
 from re import compile
@@ -33,7 +33,6 @@ from userbot.Config import Config
 mafia_help_pic = Config.HELP_PIC or "https://telegra.ph/file/f6a46c6251bb8a5bea300.mp4"
 mafia_row = Config.BUTTONS_IN_HELP
 mafia_emoji = Config.EMOJI_IN_HELP
-# thats how a lazy guy imports
 # ProfessorBot
 
 def button(page, modules):
@@ -83,7 +82,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             veriler = button(0, sorted(CMD_HELP))
             result = await builder.article(
                 f"Hey! Only use .help please",
-                text=f"**Running ProfessorBot**[⚡🔥]({mafia_help_pic})\n\n__Number of plugins installed__ :`{len(CMD_HELP)}`\n**page:** 1/{veriler[0]}",
+                text=f"**Running ProfessorBot** [⚡🔥]({mafia_help_pic})\n\n__Number of plugins installed__:`{len(CMD_HELP)}`\n**page:** 1/{veriler[0]}",
                 buttons=veriler[1],
                 link_preview=True,
             )
@@ -98,17 +97,14 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         elif event.text=='':
             result = builder.article(
                 "@harshjais369",
-                text=f"""**Hey![🤗]({mafia_help_pic}) This is [ProfessorBot.](https://t.me/harshjais369)\nYou can know more about me from the links given below 👇**""",
+                text=f"""**Hey! [👋]({mafia_help_pic}) This is [ProfessorBot](https://t.me/harshjais369).\nYou can know more about me from the links given below 👇**""",
                 buttons=[
                     [
-                        custom.Button.url("🔥 CHANNEL 🔥", "https://t.me/harsh_hacker_yt"),
-                        custom.Button.url(
-                            "⚡ GROUP ⚡", "https://t.me/harsh_hacker_gp"
-                        ),
+                        custom.Button.url("✨ MY CREATOR ✨", "https://t.me/harshjais369"),
                     ],
                     [
                         custom.Button.url(
-                            "✨ REPO ✨", "https://github.com/harshjais369/ProfessorBot"),
+                            "🔥 REPO 🔥", "https://github.com/harshjais369/ProfessorBot"),
                         custom.Button.url
                     (
                             "🔰 TUTORIAL 🔰", "https://youtu.be/chufjcjfdyc"
@@ -123,14 +119,14 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     async def page(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
-                "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot ™",
+                "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot™\n\nFor any kind of help regarding bot: @harshjais369",
                 cache_time=0,
                 alert=True,
             )
         page = int(event.data_match.group(1).decode("UTF-8"))
         veriler = button(page, CMD_HELP)
         await event.edit(
-            f"**Legenday AF ProfessorBot[⚡🔥]({mafia_help_pic})[.](https://t.me/harshjais369) __Working...__\n\n**Number of modules installed :** `{len(CMD_HELP)}`\n**page:** {page + 1}/{veriler[0]}",
+            f"**Legenday AF ProfessorBot [⚡🔥]({mafia_help_pic})[.](https://t.me/harshjais369)\n\n**Status:** __Working...__\n**Number of modules installed:** `{len(CMD_HELP)}`\n**Page:** {page + 1}/{veriler[0]}",
             buttons=veriler[1],
             link_preview=True,
         )
@@ -138,9 +134,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            await event.edit(f"⚜️ProfessorBot Menu Provider Is now Closed[⚜️]({mafia_help_pic})\n\n         **[© ProfessorBot ™](t.me/harshjais369)**[⚡🔥]({mafia_help_pic})", 5, link_preview=True)
+            await event.edit(f"⚜️ ProfessorBot Menu Provider Is Now Closed [⚜️]({mafia_help_pic})\n\n         **[© ProfessorBot™](t.me/harshjais369)** [⚡🔥]({mafia_help_pic})", 5, link_preview=True)
         else:
-            mafia_alert = "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot ™"
+            mafia_alert = "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot™\n\nFor any kind of help regarding bot: @harshjais369"
             await event.answer(mafia_alert, cache_time=0, alert=True)
           
     @tgbot.on(
@@ -149,7 +145,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     async def Information(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
-                "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot ™",
+                "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot™\n\nFor any kind of help regarding bot: @harshjais369",
                 cache_time=0,
                 alert=True,
             )
@@ -182,7 +178,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     async def commands(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
-                "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot ™",
+                "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot™\n\nFor any kind of help regarding bot: @harshjais369",
                 cache_time=0,
                 alert=True,
             )
@@ -226,4 +222,3 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
 
 
 # Ask owner before using it in your codes
-# Kangers like LB stay away...
