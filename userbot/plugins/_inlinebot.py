@@ -46,6 +46,7 @@ def button(page, modules):
     max_pages = ceil(len(pairs) / Row)
     pairs = [pairs[i : i + Row] for i in range(0, len(pairs), Row)]
     buttons = []
+    LOG.info(pairs)
     for pairs in pairs[page]:
         buttons.append(
             [
@@ -126,7 +127,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         page = int(event.data_match.group(1).decode("UTF-8"))
         veriler = button(page, CMD_HELP)
         await event.edit(
-            f"**Legenday AF ProfessorBot [⚡🔥]({mafia_help_pic})[.](https://t.me/harshjais369)\n\n**Status:** __Working...__\n**Number of modules installed:** `{len(CMD_HELP)}`\n**Page:** {page + 1}/{veriler[0]}",
+            f"**Legenday AF ProfessorBot** [⚡🔥]({mafia_help_pic})[.](https://t.me/harshjais369)\n\n**Status:** __Working...__\n**Number of modules installed:** `{len(CMD_HELP)}`\n**Page:** {page + 1}/{veriler[0]}",
             buttons=veriler[1],
             link_preview=True,
         )
