@@ -1,5 +1,22 @@
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
 from mafiabot import CmdHelp
+from asyncio import sleep
+from telethon import functions
+from userbot.Config import Config
+from . import *
+from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.errors import (
+    BadRequestError,
+    ImageProcessFailedError,
+    PhotoCropSizeSmallError,
+)
+from telethon.tl.types import (
+    ChatAdminRights,
+    ChatBannedRights,
+    MessageEntityMentionName,
+    MessageMediaPhoto,
+)
 
 # Super powerful Mass Report tool by ProfessorBot.
 # Plugin created by: @harshjais369
