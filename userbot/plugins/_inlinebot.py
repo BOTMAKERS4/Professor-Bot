@@ -135,7 +135,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
-            await event.edit(f"⚜️ ProfessorBot Menu Provider Is Now Closed [⚜️]({mafia_help_pic})\n\n         **[© ProfessorBot™](t.me/harshjais369)** [⚡🔥]({mafia_help_pic})", link_preview=True)
+            await event.edit(f"❌ **HELP MENU IS NOW CLOSED** [❌]({mafia_help_pic})\n\n         **[© ProfessorBot™](t.me/harshjais369)** [⚡🔥]({mafia_help_pic})", link_preview=True)
         else:
             mafia_alert = "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot™\n\nFor any kind of help regarding bot: @harshjais369"
             await event.answer(mafia_alert, cache_time=0, alert=True)
