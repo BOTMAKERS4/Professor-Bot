@@ -43,15 +43,15 @@ async def _(event):
 	
 		
 def set_type(t):
-    ret_str = ""
+    ret_str = ''
     if t == 0:
-        ret_str = "Channel           (✅)\n               Group               (❌)\n               User                 (❌)"
+        ret_str = f'{"Channel": <11} (✅){"\n": <15} {"Group": <15} (❌){"\n": <15} {"User": <17} (❌)'
     elif t == 1:
-	ret_str = "Channel           (❌)\n               Group               (✅)\n               User                 (❌)"
+	ret_str = f'{"Channel": <11} (❌){"\n": <15} {"Group": <15} (✅){"\n": <15} {"User": <17} (❌)'
     elif t == 2:
-	ret_str = "Channel           (❌)\n               Group               (❌)\n               User                 (✅)"
+	ret_str = f'{"Channel": <11} (❌){"\n": <15} {"Group": <15} (❌){"\n": <15} {"User": <17} (✅)'
     else:
-	ret_str = "❌ Something went wrong!"
+	ret_str = '❌ Something went wrong!'
     return ret_str
 
 def set_user(u):
@@ -65,7 +65,7 @@ def set_user(u):
     last_name = (
         last_name.replace("\u2060", "") if last_name else ("")
     )
-    ret_str = f"👤 **User info:**\n          **__User ID:__** {str(u.id)}\n          **__Name:__** {first_name} {last_name}\n          **__Username:__** {username}\n          **__Bot:__** {str(u.bot)}\n          **__Restricted:__** {str(u.restricted)}\n          **__Verified by Telegram:__** {str(u.verified)}"
+    ret_str = f'👤 **User info:**{"\n": <10} **__User ID:__** {str(u.id)}{"\n": <10} **__Name:__** {first_name} {last_name}{"\n": <10} **__Username:__** {username}{"\n": <10} **__Bot:__** {str(u.bot)}{"\n": <10} **__Restricted:__** {str(u.restricted)}{"\n": <10} **__Verified by Telegram:__** {str(u.verified)}'
     return ret_str
 
 
