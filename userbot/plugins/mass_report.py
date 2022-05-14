@@ -44,11 +44,14 @@ async def _(event):
 		
 def set_type(t):
     if t == 0:
-        return f'{"Channel".rjust(18)}(✅)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
+        # return f'{"Channel".rjust(18)}(✅)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
+        return '| Channel (✅)| Group | User |'
     elif t == 1:
-	return f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(✅)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
+	# return f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(✅)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
+        return '| Channel | Group (✅)| User |'
     elif t == 2:
-	return f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(✅)".ljust(20)}'
+	# return f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(✅)".ljust(20)}'
+        return '| Channel | Group | User (✅)|'
     return '❌ Something went wrong!'
 
 def set_user(u):
