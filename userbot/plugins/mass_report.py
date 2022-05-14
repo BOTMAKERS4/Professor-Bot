@@ -45,11 +45,11 @@ async def _(event):
 def set_type(t):
     ret_str = ''
     if t == 0:
-        ret_str = f'{"Channel": <11} (✅){"\n": <15} {"Group": <15} (❌){"\n": <15} {"User": <17} (❌)'
+        ret_str = f'{"Channel".rjust(18)}(✅)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
     elif t == 1:
-	ret_str = f'{"Channel": <11} (❌){"\n": <15} {"Group": <15} (✅){"\n": <15} {"User": <17} (❌)'
+	ret_str = f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(✅)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
     elif t == 2:
-	ret_str = f'{"Channel": <11} (❌){"\n": <15} {"Group": <15} (❌){"\n": <15} {"User": <17} (✅)'
+	ret_str = f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(✅)".ljust(20)}'
     else:
 	ret_str = '❌ Something went wrong!'
     return ret_str
