@@ -45,7 +45,8 @@ async def _(event):
     caution_str = "⚠️ **Caution:** This process is not reversible. Please re-check the above info and make sure you\'ve provided right channel/group/user ID. It\'ll get deleted permanently by Telegram\'s moderators. It can take upto 72h or more than it."
     ln_break = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
     data_str = f"⚠️ **ProfessorBot\'s Mass Report Tool** ⚠️\n\n❕**Type:** {type}\n{ln_break}\n\n{user_info}\n{ln_break}\n\n❗️**Reason:** {str(reason)}\n\n🌎 **Data centre ID:** `5`\n\n👥 **Number of IDs on server:** `384`\n\n{caution_str}\n\n"
-    await eor(event, data_str, buttons=set_btns())
+    await eor(event, data_str)
+    await event.edit(data_str, buttons=set_btns(), link_preview=False)
 
 # Updates the text
 #def update_text(type, usr, reason, status, process):
@@ -70,13 +71,13 @@ def set_btns():
 def set_type(t):
     if t == 0:
         # return f'{"Channel".rjust(18)}(✅)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
-        return '| Channel (✅)| Group | User |'
+        return '| Channel (✅) | Group | User |'
     elif t == 1:
 	# return f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(✅)".ljust(18)}\n{"User".ljust(19)}{"(❌)".ljust(20)}'
-        return '| Channel | Group (✅)| User |'
+        return '| Channel | Group (✅) | User |'
     elif t == 2:
 	# return f'{"Channel".rjust(18)}(❌)\n{"Group".ljust(20)}{"(❌)".ljust(18)}\n{"User".ljust(19)}{"(✅)".ljust(20)}'
-        return '| Channel | Group | User (✅)|'
+        return '| Channel | Group | User (✅) |'
     return '❌ Something went wrong!'
 
 def set_user(u):
