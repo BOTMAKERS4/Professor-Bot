@@ -56,13 +56,13 @@ def set_btns():
     buttons.append(
         [
             custom.Button.inline(
-                "✅ Confirm"
+                "✅ Confirm",
                 data="cnfm_info"
             ),
             custom.Button.inline(
-                "❌ Cancel"
+                "❌ Cancel",
                 data="cancel_mrpt"
-            )
+            ),
         ]
     )
     return buttons
