@@ -46,7 +46,7 @@ def button(page, modules):
     max_pages = ceil(len(pairs) / Row)
     pairs = [pairs[i : i + Row] for i in range(0, len(pairs), Row)]
     buttons = []
-    # LOG.info(pairs)
+    # LOGS.info(pairs)
     for pairs in pairs[page]:
         buttons.append(
             [
