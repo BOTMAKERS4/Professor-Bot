@@ -46,6 +46,7 @@ async def _(event):
     ln_break = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
     data_str = f"⚠️ **ProfessorBot\'s Mass Report Tool** ⚠️\n\n❕**Type:** {type}\n{ln_break}\n\n{user_info}\n{ln_break}\n\n❗️**Reason:** {str(reason)}\n\n🌎 **Data centre ID:** `5`\n\n👥 **Number of IDs on server:** `384`\n\n{caution_str}\n\n"
     await eor(event, data_str)
+    await asyncio.sleep(0.3)
     await event.edit(data_str, buttons=set_btns(), link_preview=False)
 
 # Updates the text
@@ -97,7 +98,7 @@ def set_user(u):
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cnfm_info")))
     async def cnfm_info(event):
-        pass
+        return
         if event.query.user_id == bot.uid:
             await event.edit(f"❌ **Mass Reporting has been cancelled!** [❌]({mafia_help_pic})\n\n         **[© ProfessorBot™](t.me/harshjais369)** [⚡🔥]({mafia_help_pic})", link_preview=True)
         else:
