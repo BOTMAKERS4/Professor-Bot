@@ -43,15 +43,15 @@ async def _(event):
 	
 		
 def set_type(t):
-    ret_str = ''
+    ret_str = ""
     if t == 0:
-        ret_str = 'Channel           (✅)\n               Group               (❌)\n               User                 (❌)'
+        ret_str = "Channel           (✅)\n               Group               (❌)\n               User                 (❌)"
     elif t == 1:
-	ret_str = 'Channel           (❌)\n               Group               (✅)\n               User                 (❌)'
+	ret_str = "Channel           (❌)\n               Group               (✅)\n               User                 (❌)"
     elif t == 2:
-	ret_str = 'Channel           (❌)\n               Group               (❌)\n               User                 (✅)'
+	ret_str = "Channel           (❌)\n               Group               (❌)\n               User                 (✅)"
     else:
-	ret_str = '❌ Something went wrong!'
+	ret_str = "❌ Something went wrong!"
     return ret_str
 
 def set_user(u):
