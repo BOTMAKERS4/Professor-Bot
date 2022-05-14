@@ -65,7 +65,7 @@ def set_user(u):
     last_name = (
         last_name.replace("\u2060", "") if last_name else ("")
     )
-    ret_str = f'👤 **User info:**{"\n": <10} **__User ID:__** {str(u.id)}{"\n": <10} **__Name:__** {first_name} {last_name}{"\n": <10} **__Username:__** {username}{"\n": <10} **__Bot:__** {str(u.bot)}{"\n": <10} **__Restricted:__** {str(u.restricted)}{"\n": <10} **__Verified by Telegram:__** {str(u.verified)}'
+    ret_str = f'👤 **User info:**\nㅤㅤㅤ**__User ID:__** {str(u.id)}\nㅤㅤㅤ**__Name:__** {first_name} {last_name}\nㅤㅤㅤ**__Username:__** {username}\nㅤㅤㅤ**__Bot:__** {str(u.bot)}\nㅤㅤㅤ**__Restricted:__** {str(u.restricted)}\nㅤㅤㅤ**__Verified by Telegram:__** {str(u.verified)}'
     return ret_str
 
 
