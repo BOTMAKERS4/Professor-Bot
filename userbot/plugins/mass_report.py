@@ -22,6 +22,8 @@ from telethon.tl.types import (
 # Plugin created by: @harshjais369
 # Do not copy without having any permissions!
 
+alert_str = "HELLO THERE! PLEASE MAKE YOUR OWN PROFESSOR BOT AND USE. © ProfessorBot™\n\nFor any kind of help regarding bot: @harshjais369"
+
 @bot.on(admin_cmd(pattern="mass_report(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="mass_report(?: |$)(.*)", allow_sudo=True))
 async def _(event):
@@ -36,11 +38,27 @@ async def _(event):
     caution_str = "⚠️ **Caution:** This process is not reversible. Please re-check the above info and make sure you\'ve provided right channel/group/user ID. It\'ll get deleted permanently by Telegram\'s moderators. It can take upto 72h or more than it."
     ln_break = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
     data_str = f"⚠️ **ProfessorBot\'s Mass Report Tool** ⚠️\n\n❕**Type:** {type}\n{ln_break}\n\n{user_info}\n{ln_break}\n\n❗️**Reason:** {str(reason)}\n\n🌎 **Data centre ID:** `5`\n\n👥 **Number of IDs on server:** `384`\n\n{caution_str}\n\n"
-    await eor(event, data_str)
+    await eor(event, data_str, buttons=set_btns())
 
 # Updates the text
 #def update_text(type, usr, reason, status, process):
 	
+		
+def set_btns():
+    buttons = []
+    buttons.append(
+        [
+            custom.Button.inline(
+                "✅ Confirm"
+                data="cnfm_info"
+            ),
+            custom.Button.inline(
+                "❌ Cancel"
+                data="cancel_mrpt"
+            )
+        ]
+    )
+    return buttons
 		
 def set_type(t):
     if t == 0:
@@ -68,6 +86,21 @@ def set_user(u):
     ret_str = f'👤 **User info:**\nㅤㅤㅤ**__User ID:__** {str(u.id)}\nㅤㅤㅤ**__Name:__** {first_name} {last_name}\nㅤㅤㅤ**__Username:__** {username}\nㅤㅤㅤ**__Bot:__** {str(u.bot)}\nㅤㅤㅤ**__Restricted:__** {str(u.restricted)}\nㅤㅤㅤ**__Verified by Telegram:__** {str(u.verified)}'
     return ret_str
 
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cnfm_info")))
+    async def cnfm_info(event):
+        pass
+        if event.query.user_id == bot.uid:
+            await event.edit(f"❌ **Mass Reporting has been cancelled!** [❌]({mafia_help_pic})\n\n         **[© ProfessorBot™](t.me/harshjais369)** [⚡🔥]({mafia_help_pic})", link_preview=True)
+        else:
+            await event.answer(alert_str, cache_time=0, alert=True)
+
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cancel_mrpt")))
+    async def cancel_mrpt(event):
+        if event.query.user_id == bot.uid:
+            await event.edit(f"❌ **Mass Reporting has been cancelled!** [❌]({mafia_help_pic})\n\n         **[© ProfessorBot™](t.me/harshjais369)** [⚡🔥]({mafia_help_pic})", link_preview=True)
+        else:
+            await event.answer(alert_str, cache_time=0, alert=True)
 
 async def get_user_from_event(event):
     if event.fwd_from:
