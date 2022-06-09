@@ -35,7 +35,7 @@ async def _(event):
     if event.fwd_from:
         return
     animation_interval = 3
-    animation_ttl = range(12)
+    animation_ttl = range(9)
     event = await edit_or_reply(event, "Initializing...")
     animation_chars = [
         "**ProfessorBot:** Process exited with `status 0`",
@@ -52,9 +52,9 @@ async def _(event):
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 12])
+        await event.edit(animation_chars[i % 9])
 
 CmdHelp("mass_report_start").add_command(
-    "mass_report_start", "", "Starts Mass Repor Tool"
+    "mass_report_start", "", "Starts Mass Report Tool"
 ).add
 
