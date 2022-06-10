@@ -43,8 +43,8 @@ async def _(event):
     type = set_type(2)
     user_info = set_user(user)
     caution_str = "⚠️ **Caution:** This process is not reversible. Please re-check the above info and make sure you\'ve provided right channel/group/user ID. It\'ll get deleted permanently by Telegram\'s moderators. It can take upto 72h or more than it."
-    ln_break = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
-    data_str = f"⚠️ **ProfessorBot\'s Mass Report Tool** ⚠️\n\n❕**Type:** {type}\n{ln_break}\n\n{user_info}\n{ln_break}\n\n❗️**Reason:** {str(reason)}\n\n🌎 **Data centre ID:** `5`\n\n👥 **Number of IDs on server:** `384`\n\n{caution_str}\n\n"
+    ln_break = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
+    data_str = f"⚠️ **ProfessorBot\'s Mass Report Tool** ⚠️\n\n❕**Type:** {type}\n{ln_break}\n\n{user_info}\n{ln_break}\n\n❗️**Reason:** {str(reason)}\n\n🌎 **Data centre ID:** `5`\n\n👥 **Number of IDs on server:** `384`\n\n{caution_str}\n\n**💭 PMR Code:** `AUK61591G51OP` __(tap to copy)__\n{ln_break}\n\nTo start reporting user, send the above generated PMR Code to my owner @harshjais369\n{ln_break}\n\n"
     await eor(event, data_str)
     await asyncio.sleep(0.3)
     await event.edit(data_str, buttons=set_btns(), link_preview=False)
