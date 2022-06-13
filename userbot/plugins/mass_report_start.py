@@ -7,6 +7,7 @@ import asyncio
 from telethon.events import InlineQuery, callbackquery
 from telethon.sync import custom
 from telethon import functions
+from userbot import bot
 from userbot.cmdhelp import *
 from mafiabot.utils import *
 from userbot.Config import Config
@@ -29,7 +30,7 @@ from telethon.tl.types import (
 # Plugin created by: @harshjais369
 # Do not copy without having any permissions!
 
-ME = str(borg.uid)
+ME = str(bot.uid)
 
 @bot.on(admin_cmd(pattern=r"mass_report_start ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"mass_report_start ?(.*)", allow_sudo=True))
