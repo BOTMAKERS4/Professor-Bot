@@ -29,7 +29,7 @@ from telethon.tl.types import (
 # Plugin created by: @harshjais369
 # Do not copy without having any permissions!
 
-ME = str(bot.uid)
+ME = str(borg.uid)
 
 @bot.on(admin_cmd(pattern=r"mass_report_start ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"mass_report_start ?(.*)", allow_sudo=True))
