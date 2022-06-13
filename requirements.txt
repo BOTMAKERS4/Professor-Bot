@@ -1,6 +1,7 @@
 Pillow
 PyGithub
 PyPDF2
+PyDictionary
 pygments
 pymediainfo
 pytz
