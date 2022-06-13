@@ -29,14 +29,14 @@ from telethon.tl.types import (
 # Plugin created by: @harshjais369
 # Do not copy without having any permissions!
 
-ME = str(ALIVE_NAME) if ALIVE_NAME else None
+ME = str(bot.uid)
 
 @bot.on(admin_cmd(pattern=r"mass_report_start ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"mass_report_start ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    if ME is None or ME is not "@harshjais369":
+    if ME is None or ME is not "881259026":
         event = await edit_or_reply(event, "❌ **You\'re not permitted to use this tool!**\n\nIf you still believe you\'re, contact: @harshjais369")
         return
     input_str = event.pattern_match.group(1)
