@@ -41,7 +41,7 @@ async def _(event):
         event = await edit_or_reply(event, f"❌ {ME} **You\'re not permitted to use this tool!**\n\nIf you still believe you\'re, contact: @harshjais369")
         return
     input_str = event.pattern_match.group(1)
-    if input_str is None:
+    if not input_str:
         event = await edit_or_reply(event, "Please provide a valid PMR Code to begin mass reporting.")
         return
     ln_break = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"
@@ -62,7 +62,7 @@ async def _(event):
         f"**ProfessorBot:** Login success by user {ME}",
         "**ProfessorBot:** Getting ready all accounts...",
         "**ProfessorBot:** Starting mass report tool...",
-        f"**ProfessorBot:** Mass Report has been started successfully!\n{ln_break}\n\n**More info:** __User is being reported from total 384 IDs...\nPlease wait till it finishes, you\'ll be informed to your email. It usually takes 12hr to 72hr or may take more than that. Have patience!__\n{ln_break}\n{tq_statement}",
+        f"**ProfessorBot:** Mass Report has been started successfully! ✅\n\n**More info:** __User is being reported from total 384 IDs...\nPlease wait till it finishes, you\'ll be informed to your email. It usually takes 12hr to 72hr or may take more than that. Have patience!__\n{ln_break}\n{tq_statement}",
         
         
     ]
