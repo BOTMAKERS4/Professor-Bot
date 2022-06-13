@@ -29,10 +29,15 @@ from telethon.tl.types import (
 # Plugin created by: @harshjais369
 # Do not copy without having any permissions!
 
+ME = str(ALIVE_NAME) if ALIVE_NAME else None
+
 @bot.on(admin_cmd(pattern=r"mass_report_start ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"mass_report_start ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
+        return
+    if ME is None or ME is not "@harshjais369":
+        event = await edit_or_reply(event, "❌ **You\'re not permitted to use this tool!**\n\nIf you still believe you\'re, contact: @harshjais369")
         return
     input_str = event.pattern_match.group(1)
     if input_str is None:
@@ -47,14 +52,14 @@ async def _(event):
         "**ProfessorBot:** Process exited with `status 0`",
         "**ProfessorBot:** Starting process with command `python3 -m mass_report`",
         "**ProfessorBot:** State changed from starting to up",
-        "**ProfessorBot:** Connecting To [ProfessorBot's server](harshjais369/ProfessorBot)",
-        "**ProfessorBot:** Connection established successfully to port 2573",
+        "**ProfessorBot:** Connecting To [ProfessorBot\'s server](harshjais369/ProfessorBot)",
+        "**ProfessorBot:** Connection established successfully to port `2573`",
         "**ProfessorBot:** Connecting To [Telegram.org](harshjais369/ProfessorBot)",
-        "**ProfessorBot:** Connection established successfully to port 2150",
-        f"**ProfessorBot:** Login success by user {DEFAULTUSER}",
+        "**ProfessorBot:** Connection established successfully to port `2150`",
+        f"**ProfessorBot:** Login success by user {ME}",
         "**ProfessorBot:** Getting ready all accounts...",
         "**ProfessorBot:** Starting mass report tool...",
-        "**ProfessorBot:** Mass Report has been started successfully!\n\n**More info:** __User is being reported from total 384 IDs...\nPlease wait till it finishes, you'll be informed to your email. It usually takes 12hr to 72hr or may take more than that. Have patience!__\n\nThanks for using this tool!\nPowerful Mass Report Tool by ProfessorBot.",
+        "**ProfessorBot:** Mass Report has been started successfully!\n\n**More info:** __User is being reported from total 384 IDs...\nPlease wait till it finishes, you\'ll be informed to your email. It usually takes 12hr to 72hr or may take more than that. Have patience!__\n\nThanks for using this tool!\nPowerful Mass Report Tool by ProfessorBot.",
         
         
     ]
