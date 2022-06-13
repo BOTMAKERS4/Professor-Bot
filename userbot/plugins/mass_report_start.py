@@ -29,32 +29,40 @@ from telethon.tl.types import (
 # Plugin created by: @harshjais369
 # Do not copy without having any permissions!
 
-@bot.on(admin_cmd(pattern=r"mass_report_start$", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"mass_report_start$", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"mass_report_start ?(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"mass_report_start ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
+    input_str = event.pattern_match.group(1)
+    if input_str is None:
+        event = await edit_or_reply(event, "Please provide a valid PMR Code to begin mass reporting.")
+        return
     animation_interval = 3
-    animation_ttl = range(9)
+    animation_ttl = range(12)
     event = await edit_or_reply(event, "Initializing...")
+    await asyncio.sleep(5)
     animation_chars = [
-        "**ProfessorBot:** Process exited with `status 0`",
         "**ProfessorBot:** Stopping all processes with SIGTERM",
-        "**ProfessorBot:** Starting process with command `python3 -m stdborg`",
+        "**ProfessorBot:** Process exited with `status 0`",
+        "**ProfessorBot:** Starting process with command `python3 -m mass_report`",
         "**ProfessorBot:** State changed from starting to up",
         "**ProfessorBot:** Connecting To [ProfessorBot's server](harshjais369/ProfessorBot)",
+        "**ProfessorBot:** Connection established successfully to port 2573",
         "**ProfessorBot:** Connecting To [Telegram.org](harshjais369/ProfessorBot)",
+        "**ProfessorBot:** Connection established successfully to port 2150",
         f"**ProfessorBot:** Login success by user {DEFAULTUSER}",
         "**ProfessorBot:** Getting ready all accounts...",
-        "**ProfessorBot:** Mass Report has been started successfully!\n\n**More info:** __User is being reported from total 384 IDs...\nPlease wait till it finishes, you'll be informed to your email. It usually takes 12hr to 24hr or may take more than that. Have patience!__\n\nThanks for using this tool!\nPowerful Mass Report Tool by ProfessorBot.",
+        "**ProfessorBot:** Starting mass report tool...",
+        "**ProfessorBot:** Mass Report has been started successfully!\n\n**More info:** __User is being reported from total 384 IDs...\nPlease wait till it finishes, you'll be informed to your email. It usually takes 12hr to 72hr or may take more than that. Have patience!__\n\nThanks for using this tool!\nPowerful Mass Report Tool by ProfessorBot.",
         
         
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 9])
+        await event.edit(animation_chars[i % 12])
 
 CmdHelp("mass_report_start").add_command(
-    "mass_report_start", "", "Starts Mass Report Tool"
+    "mass_report_start", "<PMR Code>", "Starts Mass Report Tool"
 ).add
 
