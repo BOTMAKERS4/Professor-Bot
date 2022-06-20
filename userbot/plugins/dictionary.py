@@ -4,7 +4,7 @@
 """Urban Dictionary
 Syntax: .ud Query"""
 import asyncurban
-from PyDictionary import PyDictionary
+import PyDictionary
 
 from userbot import CMD_HELP
 from mafiabot.utils import admin_cmd, edit_or_reply, sudo_cmd
