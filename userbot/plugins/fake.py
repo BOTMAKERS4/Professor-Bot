@@ -17,8 +17,15 @@ import asyncio
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 from userbot import CMD_HELP
-from mafiabot.utils import admin_cmd
+from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
 from userbot.cmdhelp import CmdHelp
+
+@borg.on(admin_cmd(pattern="get_chatid"))
+async def _(event):
+    if event.fwd_from:
+        return
+    await eor(event, str(event.chat_id))
+    
 
 @borg.on(admin_cmd(pattern="fake ?(.*)"))
 async def _(event):
@@ -82,7 +89,8 @@ async def gbun(event):
     await event.delete()
 
 
-CmdHelp("fake").add_command(
+CmdHelp("get_chatid").add_command('get_chatid', None, 'Gets the chat ID.'
+).add_command(
   'fake', '<action>', 'This shows the fake action in the group  the actions are typing, contact, game ,location, voice, round, video, photo, document.'
 ).add_command(
   'gbam', '<reason> (optional)', 'Fake gban. Just for fun! 😂'
