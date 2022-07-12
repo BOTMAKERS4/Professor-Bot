@@ -173,7 +173,7 @@ async def download_video(v_url):
         await edit_or_reply(v_url, "`There was an error during info extraction.`")
         return
     except Exception as e:
-        await edit_or_reply(v_url, f"{str(type(e)): {str(e)}}")
+        await edit_or_reply(v_url, f"{type(e): {e}}")
         return
     c_time = time.time()
     if song:
@@ -214,7 +214,7 @@ async def download_video(v_url):
             caption=ytdl_data["title"],
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, v_url, c_time, "Uploading..", f"{ytdl_data['title']}.mp4"
+                    d, t, v_url, c_time, "Uploading...", f"{ytdl_data['title']}.mp4"
                 )
             ),
         )
