@@ -14,11 +14,15 @@ document
 cancel"""
 
 import asyncio
+from re import compile
+from telethon.sync import custom
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins
-from userbot import CMD_HELP
+from userbot import *
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
-from userbot.cmdhelp import CmdHelp
+from userbot.cmdhelp import *
+from mafiabot.utils import *
+from userbot.Config import Config
     
 
 @borg.on(admin_cmd(pattern="fake_action ?(.*)"))
