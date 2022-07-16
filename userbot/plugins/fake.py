@@ -19,24 +19,17 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from userbot import CMD_HELP
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply as eor
 from userbot.cmdhelp import CmdHelp
-
-@borg.on(admin_cmd(pattern="get_chatid"))
-async def _(event):
-    if event.fwd_from:
-        return
-    await eor(event, str(event.chat_id))
     
 
-@borg.on(admin_cmd(pattern="fake ?(.*)"))
+@borg.on(admin_cmd(pattern="fake_action ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
     await event.delete()
-    input_str = event.pattern_match.group(1)
-    action = "typing"
-    if input_str:
-        action = input_str
-    async with borg.action(event.chat_id, action):
+    user, action = get_user_from_event(event)
+    if user is None or action is None:
+        return
+    async with borg.action(user, action):
         await asyncio.sleep(86400)  # type for 10 seconds
 
 @borg.on(admin_cmd("gbam"))
@@ -89,9 +82,41 @@ async def gbun(event):
     await event.delete()
 
 
-CmdHelp("get_chatid").add_command('get_chatid', None, 'Gets the chat ID.'
-).add_command(
-  'fake', '<action>', 'This shows the fake action in the group  the actions are typing, contact, game ,location, voice, round, video, photo, document.'
+async def get_user_from_event(event):
+    if event.fwd_from:
+        return
+    args = event.pattern_match.group(1).split(" ", 1)
+    extra = "typing"
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        user_obj = await event.client.get_entity(previous_message.sender_id)
+        extra = event.pattern_match.group(1)
+    elif args:
+        user = args[0]
+        if len(args) == 2:
+            extra = args[1]
+        if user.isnumeric():
+            user = int(user)
+        if not user:
+            await event.edit("Pass the user's username, id or reply!")
+            return
+        if event.message.entities:
+            probable_user_mention_entity = event.message.entities[0]
+
+            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                user_id = probable_user_mention_entity.user_id
+                user_obj = await event.client.get_entity(user_id)
+                return user_obj
+        try:
+            user_obj = await event.client.get_entity(user)
+        except (TypeError, ValueError):
+            await event.edit("Could not fetch info of that user.")
+            return None
+    return user_obj, extra
+
+
+CmdHelp("fake").add_command(
+  'fake_action', '<action>', 'This shows the fake action in the group  the actions are typing, contact, game ,location, voice, round, video, photo, document.'
 ).add_command(
   'gbam', '<reason> (optional)', 'Fake gban. Just for fun! 😂'
 ).add_command(
