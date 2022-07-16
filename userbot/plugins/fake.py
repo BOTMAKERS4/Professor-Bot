@@ -26,7 +26,7 @@ async def _(event):
     if event.fwd_from:
         return
     await event.delete()
-    user, action = get_user_from_event(event)
+    user, action = await get_user_from_event(event)
     LOGS.info(f"\n{user}\n\n{action}\n")
     if user is None or action is None:
         return
