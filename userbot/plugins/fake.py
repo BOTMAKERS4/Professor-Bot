@@ -1,6 +1,6 @@
 """Send Chat Actions
-Syntax: .fake <option>
-        fake options: Options for fake
+Syntax: .fake_action <option>
+        fake_action options: Options for fake_action
 
 typing
 contact
@@ -27,6 +27,7 @@ async def _(event):
         return
     await event.delete()
     user, action = get_user_from_event(event)
+    LOGS.info(f"\n{user}\n\n{action}\n")
     if user is None or action is None:
         return
     async with borg.action(user, action):
