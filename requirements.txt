@@ -21,7 +21,7 @@ colorama
 cloudscraper
 DateTime
 dnspython
-emoji==1.7
+emoji
 faker
 fontTools
 glitch_this
