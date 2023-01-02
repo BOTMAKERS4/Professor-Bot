@@ -5,7 +5,7 @@ from telethon.sessions import StringSession
 from telethon import TelegramClient, events, sync
 from userbot.helpers import functions as simpdef
 from userbot.Config import Config
-from var import Var
+from sample_config import Var
 
 
 StartTime = time.time()
