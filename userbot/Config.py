@@ -140,6 +140,7 @@ if ENV:
         MONGO_URI = os.environ.get("MONGO_URI", None)
         #alive
         ALIVE_PIC = os.environ.get("ALIVE_PIC", None)
+        ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
         ALIVE_MSG = os.environ.get("ALIVE_MSG", None)
         HELP_PIC = os.environ.get("HELP_PIC", None)
         BOT_PIC = os.environ.get("BOT_PIC", None)
