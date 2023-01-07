@@ -30,22 +30,37 @@ from telethon.tl.types import (
 # Plugin creator: Harsh Jaiswal (@harshjais369)
 # Do not copy without having any permissions!
 
+AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'quick_answer']
 ME = str(bot.uid)
 
-@bot.on(admin_cmd(pattern="set_ai(?: |$)(.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern="set_ai(?: |$)(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"set_ai(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"set_ai(?: |$)(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     if ME is None or ME != "881259026":
         event = await eor(event, f"❌ {ME} **You\'re not permitted to use this tool!**\n\nIf you still believe you\'re, contact: @harshjais369")
         return
-    input_str = event.pattern_match.group(1)
-    if not input_str:
+    input_str1 = event.pattern_match.group(1)
+    input_str2 = event.pattern_match.group(2)
+    if not input_str1:
+        event = await eor(event, "✅ **OpenAI-GPT3:** Bot mode set to `default`")
+        return
+    if str(input_str1).lower() not in AI_MODES:
         event = await eor(event, "⚠️ Please provide the valid requisite parameters!")
         return
-    eor(event, "✅ Settings updated!")
+    if not input_str2 and str(input_str1)==AI_MODES[0]:
+        event = await eor(event, "⚠️ **AI-user:** No user/user-id specified!")
+        return
+    if str(input_str1) is not AI_MODES[0]:
+        input_str2 = None
+    setGPT(event, str(input_str1).lower(), input_str2)
+
+# ————————————————————————------------------
+async def setGPT(evt, aimode, aiuser_userid):
+    # db set code goes here
+    eor(evt, "✅ Settings updated!")
 
 CmdHelp("set_ai").add_command(
-  "set_ai", "<params>", "Configures ChatGPT3\n__(Default settings will be applied if this command not executed.)__"
+  "set_ai", "<params>", "Configures ChatGPT3\n__(Default settings will be applied if this command not executed or no parameters given.)__"
 ).add
