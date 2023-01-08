@@ -11,6 +11,7 @@ from userbot import bot
 from userbot.cmdhelp import *
 from mafiabot.utils import *
 from userbot.Config import Config
+from userbot.plugins.sql_helper.openaiconfig_sql import getOpenaiConfig, setOpenaiConfig
 from . import *
 from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
 from telethon.tl.functions.users import GetFullUserRequest
@@ -30,7 +31,16 @@ from telethon.tl.types import (
 # Plugin creator: Harsh Jaiswal (@harshjais369)
 # Do not copy without having any permissions!
 
-AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'quick_answer']
+model_dict = {
+    "default"=["text-davinci-003", "0.7", "2048", "1", "0", "0", "", ""]
+    "sarcastic"=["text-davinci-003", "0.7", "2048", "1", "0", "0", "", ""]
+    "sarcastic_human"=["text-davinci-003", "0.7", "2048", "1", "0", "0", "", ""]
+    "quick_answer"=["text-davinci-001", "0.7", "2048", "1", "0", "0", "", ""]
+    "negative"=["text-davinci-002", "0.7", "2048", "1", "0", "0", "", ""]
+    "pleasant"=["text-curie-001", "0.7", "2048", "1", "0", "0", "", ""]
+}
+
+AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'quick_answer', 'negative', 'pleasant']
 ME = str(bot.uid)
 
 @bot.on(admin_cmd(pattern=r"set_ai(?: |$)(.*)", outgoing=True))
@@ -44,6 +54,7 @@ async def _(event):
     input_str1 = event.pattern_match.group(1)
     input_str2 = event.pattern_match.group(2)
     if not input_str1:
+        
         event = await eor(event, "✅ **OpenAI-GPT3:** Bot mode set to `default`")
         return
     if str(input_str1).lower() not in AI_MODES:
