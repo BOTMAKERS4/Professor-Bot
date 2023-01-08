@@ -42,7 +42,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
             model_id=1
             model=model_name
             temperature=temp
-            max_tokens=maxtkn
+            max_tokens=maxtoken
             top_p=topp
             frequency_penalty=frequencypenalty
             presence_penalty=presencepenalty
@@ -73,13 +73,14 @@ def getOpenaiConfig():
             presence_penalty="0"
         ))
         SESSION.commit()
-    data2 = SESSION.query(OpenaiConfig).all()[0]
+        data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
     res_list = [
-        data2.model,
+        data.model,
         data.temperature,
-        data.max_tokens
-        data2.top_p,
+        data.max_tokens,
+        data.top_p,
         data.frequency_penalty,
         data.presence_penalty
     ]
+    SESSION.close()
     return res_list
