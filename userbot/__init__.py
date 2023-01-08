@@ -103,6 +103,9 @@ except:
 
     # OCR API key
     OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
+    
+    # OpenAI ChatGPT3 API key
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", None)
 
     # remove.bg API key
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
@@ -151,7 +154,7 @@ except:
     # Upstream Repo
     UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL",
-    "https://github.com/harshjais369/MafiaBot.git")
+    "https://github.com/harshjais369/ProfessorBot.git")
 
     # Last.fm Module
     BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
