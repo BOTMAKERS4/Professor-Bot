@@ -16,12 +16,18 @@
 
 
 echo """
-                      © 𝙻𝙴𝙶𝙴𝙽𝙳𝙰𝚁𝚈_𝙰𝙵_PROFESSORBOT™
-                                                                    
+© 𝙻𝙴𝙶𝙴𝙽𝙳𝙰𝚁𝚈_𝙰𝙵_PROFESSORBOT™
+
  █▀█ █▀█ █▀█ █▀▀ █▀▀ █▀ █▀ █▀█ █▀█    █▄▄ █▀█ ▀█▀
  █▀▀ █▀▄ █▄█ █▀░ ██▄ ▄█ ▄█ █▄█ █▀▄    █▄█ █▄█ ░█░
  
-                     © 𝙻𝙴𝙶𝙴𝙽𝙳𝙰𝚁𝚈_𝙰𝙵_PROFESSORBOT™                       
-                                      @harshjais369
+                     © 𝙻𝙴𝙶𝙴𝙽𝙳𝙰𝚁𝚈_𝙰𝙵_PROFESSORBOT™
+___________________________________________________
+  ★ ProfessorBot now with OpenAI-GPT3 Chatbot ★
+---------------------------------------------------
+
+By: Harsh Jaiswal
+   (@harshjais369)
 """
+
 python3 -m userbot
