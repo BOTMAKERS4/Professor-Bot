@@ -35,34 +35,35 @@ class OpenaiConfig(BASE):
 OpenaiConfig.__table__.create(checkfirst=True)
 
 
-def setOpenaiConfig(model_name, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
+def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presencepenalty):
     data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
     if data is None:
         session.add(OpenaiConfig(
             model_id=1
-            model="text-davinci-003"
-            temperature="0.7"
-            max_tokens="2048"
-            top_p="1"
-            frequency_penalty="0"
-            presence_penalty="0"
+            model=model_name
+            temperature=temp
+            max_tokens=maxtkn
+            top_p=topp
+            frequency_penalty=frequencypenalty
+            presence_penalty=presencepenalty
         ))
-        session.commit()
-    data.update({
-        OpenaiConfig.model_name=model_name,
-        OpenaiConfig.temperature = temperature,
-        OpenaiConfig.max_tokens = max_tokens,
-        OpenaiConfig.top_p = top_p,
-        OpenaiConfig.frequency_penalty = frequency_penalty,
-        OpenaiConfig.presence_penalty = presence_penalty,
-    })
+        SESSION.commit()
+    else:
+        data.update({
+            OpenaiConfig.model=model_name,
+            OpenaiConfig.temperature = temperature,
+            OpenaiConfig.max_tokens = max_tokens,
+            OpenaiConfig.top_p = top_p,
+            OpenaiConfig.frequency_penalty = frequency_penalty,
+            OpenaiConfig.presence_penalty = presence_penalty,
+        })
     SESSION.close()
     return True
 
 def getOpenaiConfig():
     data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
     if data is None:
-        session.add(OpenaiConfig(
+        SESSION.add(OpenaiConfig(
             model_id=1
             model="text-davinci-003"
             temperature="0.7"
@@ -71,34 +72,14 @@ def getOpenaiConfig():
             frequency_penalty="0"
             presence_penalty="0"
         ))
-        session.commit()
-    data2 = SESSION.query(OpenaiConfig).all()[0]
-    res_list = [data2.model]
-    return res_list
-
-def is_approved(chat_id):
-    try:
-        return SESSION.query(OpenaiConfig).filter(OpenaiConfig.chat_id == str(chat_id)).one()
-    except:
-        return None
-    finally:
-        SESSION.close()
-
-
-def approve(chat_id, reason):
-    adder = OpenaiConfig(str(chat_id), str(reason))
-    SESSION.add(adder)
-    SESSION.commit()
-
-
-def disapprove(chat_id):
-    rem = SESSION.query(OpenaiConfig).get(str(chat_id))
-    if rem:
-        SESSION.delete(rem)
         SESSION.commit()
-
-
-def get_all_approved():
-    rem = SESSION.query(OpenaiConfig).all()
-    SESSION.close()
-    return rem
+    data2 = SESSION.query(OpenaiConfig).all()[0]
+    res_list = [
+        data2.model,
+        data.temperature,
+        data.max_tokens
+        data2.top_p,
+        data.frequency_penalty,
+        data.presence_penalty
+    ]
+    return res_list
