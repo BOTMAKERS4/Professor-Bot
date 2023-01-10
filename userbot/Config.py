@@ -1,5 +1,7 @@
 import os
+from dotenv import load_dotenv
 from telethon.tl.types import ChatBannedRights
+load_dotenv(verbose=True)
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     import os
