@@ -49,15 +49,15 @@ where,
     (model, temperature, max_tokens, top_p, frequency_penalty,
     presence_penalty, txt_before_prompt, txt_after_prompt RESPECTIVELY)
 """
-model_dict = {
-    "default"=["text-davinci-003", "0.7", "2048", "1", "0", "0", "", ""],
-    "sarcastic"=["text-davinci-003", "0.5", "2048", "0.3", "0.5", "0", smtxt, "\nMarv:"],
-    "sarcastic_human"=["text-davinci-003", "0.5", "2048", "0.3", "0.5", "0", shmtxt, "\nProfessor:"],
-    "friend"=["text-davinci-003", "0.5", "2048", "1", "0.5", "0", fmtxt, "\nFriend:"],
-    "quick_answer"=["text-davinci-001", "0.7", "2048", "1", "0", "0", "", ""],
-    "negative"=["text-davinci-002", "0.8", "2048", "1", "0", "0", nmtxt, "\nTerrex"],
-    "pleasant"=["text-curie-001", "0.7", "2048", "1", "0", "0", "", ""]
-}
+model_dict = dict(
+    default=["text-davinci-003", "0.7", "2048", "1", "0", "0", "", ""],
+    sarcastic=["text-davinci-003", "0.5", "2048", "0.3", "0.5", "0", smtxt, "\nMarv:"],
+    sarcastic_human=["text-davinci-003", "0.5", "2048", "0.3", "0.5", "0", shmtxt, "\nProfessor:"],
+    friend=["text-davinci-003", "0.5", "2048", "1", "0.5", "0", fmtxt, "\nFriend:"],
+    quick_answer=["text-davinci-001", "0.7", "2048", "1", "0", "0", "", ""],
+    negative=["text-davinci-002", "0.8", "2048", "1", "0", "0", nmtxt, "\nTerrex:"],
+    pleasant=["text-curie-001", "0.7", "2048", "1", "0", "0", "", ""]
+)
 
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
 ME = str(bot.uid)
@@ -121,5 +121,5 @@ async def setAIUser(evt, aiuser):
 
 
 CmdHelp("set_ai").add_command(
-  "set_ai", "<params>", "Configures ChatGPT3\n__(Default settings will be applied if this command not executed or no parameters given.)__"
+  "set_ai", "<params>", "Configures ChatGPT3\n__(Default settings will be applied if this command not executed or if no parameters have provisioned.)__"
 ).add
