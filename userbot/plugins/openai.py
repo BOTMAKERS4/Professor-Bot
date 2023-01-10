@@ -48,31 +48,35 @@ async def _(event):
         event = await eor(event, "**OpenAI ChatGPT:** Hey! This is OpenAI's GPT3 chatbot, now available with ProfessorBot by Harsh Jaiswal. I am here to talk to you in a friendly, meaningful way as well as answer any questions you may have.")
         return
     if not event.reply_to_msg_id:
-        # process new convo
+        # initiate a new convo
         event = await eor(event, asknew(str(input_str)))
-        return    
-    message = event.message
+        return
     prompt_msg = ""
-    while message:
-        tmp_message = message
-        reply = await message.get_reply_message() # reply=None (if reply not found)
-        if message.id == ME:
-            if not reply.text:
-                message = None
-                eor(event, "I\'ve not got the ability to comprehend anything other than text yet.")
-                break
-        prompt_msg = message.text + prompt_msg # Need correct func()
-        message = reply
-        if tmp_message.id != ME:
-            message = None
-    # ...
+    current_msg = event.message
+    reply = await current_msg.get_reply_message() # reply=None (if reply not found)
+    if not reply.text:
+        eor(event, "**OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
+        return
+    if (reply.id != ME) or (not reply.text.contains("**OpenAI ChatGPT:**)):
+        prompt_msg = reply.text + str(input_str)
+    else:
+        prompt_msg = str(input_str)
+        while reply:
+            tmp_reply = reply
+            # gets reply of current reply msg
+            next_reply = await reply.get_reply_message()
+            prompt_msg = reply.text + prompt_msg
+            reply = next_reply
+            if tmp_reply.id != ME:
+                reply = None
+    askfromreply(prompt_msg)
     return
             
 # ————————————————————————---------------------
-def asknew():
+def asknew(prompt):
     pass
 
-def askfromreply():
+def askfromreply(prompt):
     pass
     
 
