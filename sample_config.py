@@ -12,6 +12,8 @@ class Var(object):
     GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
     ABUSE = os.environ.get("ABUSE", None)
     BAN_PIC = os.environ.get("BAN_PIC", None)
+    ALIVE_PIC = os.environ.get("ALIVE_PIC", None)
+    ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
     # Here for later purposes
     SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "1212368262").split())
     WHITELIST_USERS = set(int(x) for x in os.environ.get("WHITELIST_USERS", "").split())
