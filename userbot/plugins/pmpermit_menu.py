@@ -1,17 +1,18 @@
 import asyncio
 from telethon import functions
+from telethon.tl.functions.users import GetFullUserRequest
 from userbot.plugins.sql_helper import pmpermit_sql as pmpermit_sql
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
 PREV_REPLY_MESSAGE = {}
 
 
 @command(pattern=r"\/start", incoming=True)
 async def _(event):
     chat_id = event.sender_id
-    event.sender_id
+    pm_user_obj = await event.client(GetFullUserRequest(chat_id))
     if not pmpermit_sql.is_approved(chat_id):
         chat = await event.get_chat()
         if event.fwd_from:
@@ -19,7 +20,7 @@ async def _(event):
         if event.is_private:
 
             PM = (
-                "`Hello. You are accessing the availabe menu of my master,`"
+                f"`Hey [{pm_user_obj.user.first_name}](tg://user?id={chat_id})! You are accessing the availabe menu of my master,`"
                 f"{DEFAULTUSER}.\n"
                 "__Let's make this smooth and let me know why you are here.__\n"
                 "**Choose one of the following reasons why you are here:**\n\n"
@@ -29,7 +30,7 @@ async def _(event):
                 "`4`. To request something\n"
             )
             ONE = (
-                "__Okay! Your request has been registered. Do not spam my master's inbox.You can expect a reply within 24 to 72 hours.__\n\n"
+                "__Okay! Your request has been registered. Please do not spam here. You can expect a reply within 24 to 72 hours.__\n\n"
                 "** You will be blocked and reported if you spam **\n\n"
                 "__Use__ `/start` __to go back to the main menu.__"
             )
