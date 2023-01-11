@@ -33,7 +33,7 @@ from telethon.tl.types import (
 # ————————————————————————---------------------
 
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
-ME = str(bot.uid)
+ME = int(bot.uid)
 
 @bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
@@ -56,18 +56,23 @@ async def _(event):
     if not reply.text:
         eor(event, "**OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
-    if (reply.id != ME) or (not reply.message.contains("**OpenAI ChatGPT:** ")):
+    if (reply.sender_id != ME) or (reply.message.count("**OpenAI ChatGPT:** ", 0, 25) == 0):
         prompt_msg = str(reply.message) + str(input_str)
     else:
         prompt_msg = str(input_str)
         while reply:
             prompt_msg = str(reply.message) + prompt_msg
-            if reply.id != ME:
+            if reply.sender_id != ME:
                 break
             reply = reply.get_reply_message()
     event = await eor(event, askfromreply(prompt_msg))
+    await asyncio.sleep(5)
+    if reply.message.count("**OpenAI ChatGPT:** ", 0, 25) == 0:
+        event = await eor(event, "Not found!")
+    else:
+        event = await eor(event, "Found!")
     return
-            
+
 # ————————————————————————---------------------
 def asknew(prompt):
     return f"#new_convo\nYour prompt: {prompt}"
