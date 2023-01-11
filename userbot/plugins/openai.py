@@ -54,8 +54,15 @@ async def _(event):
     prompt_msg = "" # prompt msg to be sent to AI
     reply = await event.message.get_reply_message() # reply=None (if reply not found)
     if not reply.text:
-        eor(event, "**OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
+        eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
+    # Test starts ---------
+    if reply.message.count("**OpenAI ChatGPT:** ", 0, 25) == 0:
+        event = await eor(event, "Not found!")
+    else:
+        event = await eor(event, "Found!")
+    await asyncio.sleep(5)
+    # Test ends ---------
     if (reply.sender_id != ME) or (reply.message.count("**OpenAI ChatGPT:** ", 0, 25) == 0):
         prompt_msg = str(reply.message) + str(input_str)
     else:
@@ -66,11 +73,6 @@ async def _(event):
                 break
             reply = reply.get_reply_message()
     event = await eor(event, askfromreply(prompt_msg))
-    await asyncio.sleep(5)
-    if reply.message.count("**OpenAI ChatGPT:** ", 0, 25) == 0:
-        event = await eor(event, "Not found!")
-    else:
-        event = await eor(event, "Found!")
     return
 
 # ————————————————————————---------------------
