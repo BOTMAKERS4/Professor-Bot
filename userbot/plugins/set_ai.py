@@ -15,6 +15,7 @@ from userbot.plugins.sql_helper.openaiconfig_sql import getOpenaiConfig, setOpen
 from . import *
 from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
 from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
 from telethon.errors import (
     BadRequestError,
     ImageProcessFailedError,
