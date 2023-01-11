@@ -35,8 +35,7 @@ class OpenaiConfig(BASE):
         self.text_after_prompt = text_after_prompt
 
     def __repr__(self):
-        return "<OpenaiConfig(model_id=%d, model='%s', temperature='%s', max_tokens='%s', top_p='%s', frequency_penalty='%s', presence_penalty='%s', text_before_prompt='%s', text_after_prompt='%s')>"
-            % (int(self.model_id), self.model, self.temperature, self.max_tokens, self.top_p, self.frequency_penalty, self.presence_penalty, self.text_before_prompt, self.text_after_prompt)
+        return "<OpenaiConfig(model_id=%d, model='%s', temperature='%s', max_tokens='%s', top_p='%s', frequency_penalty='%s', presence_penalty='%s', text_before_prompt='%s', text_after_prompt='%s')>" % (int(self.model_id), self.model, self.temperature, self.max_tokens, self.top_p, self.frequency_penalty, self.presence_penalty, self.text_before_prompt, self.text_after_prompt)
 
 OpenaiConfig.__table__.create(checkfirst=True)
 
