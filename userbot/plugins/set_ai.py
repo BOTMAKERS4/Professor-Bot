@@ -71,7 +71,6 @@ async def _(event):
         event = await eor(event, f"❌ {ME} **You\'re not permitted to use this tool!**\n\nIf you still believe you\'re, contact: @harshjais369")
         return
     input_str1 = event.pattern_match.group(1)
-    input_str2 = event.pattern_match.group(2)
     if not input_str1:
         if setOpenaiConfig(
             model_dict["default"][0],
@@ -89,14 +88,39 @@ async def _(event):
         event = await eor(event, "⚠️ Please provide the valid requisite parameters!")
         return
     if str(input_str1) == AI_MODES[0]:
-        if not input_str2:
-            event = await eor(event, "⚠️ **AI-user:** No user/user-id specified!")
+        tmp_user_id = None
+        tmp_user_obj = None
+        if event.reply_to_msg_id:
+            if event.reply_to_msg_id == int(Me):
+                event = await eor(event, "⚠️ **AI-user:** You already have access to use ChatGPT bot!\nPlease provide me a different user whom you wish to allow use my all features.")
+                return
+            tmp_reply_msg_obj = await event.get_reply_message()
+            tmp_user_id = tmp_reply_msg_obj.sender_id
+        else:
+            tmp_args = input_str1.split(" ", 1)
+            if not tmp_args:
+                event = await eor(event, "⚠️ **AI-user:** No user/user-id specified!")
+                return
+            else:
+                tmp_user_str = tmp_args[0].strip()
+                if tmp_user_str.isnumeric():
+                    tmp_user_id = int(tmp_user_str)
+                elif event.message.entities:
+                    probable_user_mention_entity = event.message.entities[0]
+                    if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                        tmp_user_id = probable_user_mention_entity.user_id
+                tmp_user_obj = await event.client.get_entity(tmp_user_id)
+        try:
+            tmp_user_obj = await event.client.get_entity(tmp_user_id)
+        except (TypeError, ValueError):
+            await event.edit("Could not fetch info of that user. Kindly re-check the provisioned parameters!")
             return
         # setAIUser(event, user)
     else:
+        # if not AI-user
         input_str2 = None
         if not setGPT(str(input_str1).lower()):
-            event = await eor(event, "⚠️ An unknown error occurred while configuring GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369")
+            event = await eor(event, "❌ An unknown error occurred while configuring GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369")
         else:
             event = await eor(event, "✅ **Settings updated!**\n\nAI chat mode: `{}`".format(str(input_str1).lower()))
     return
