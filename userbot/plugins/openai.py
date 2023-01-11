@@ -41,7 +41,7 @@ async def _(event):
     if event.fwd_from:
         return
     if Config.OPENAI_API_KEY is None:
-        event = await eor(event, "OpenAI API key is not set.")
+        event = await eor(event, "❌ OpenAI API key has not configured yet.")
         return
     input_str = event.pattern_match.group(1)
     if not input_str:
@@ -51,33 +51,29 @@ async def _(event):
         # initiate a new convo
         event = await eor(event, asknew(str(input_str)))
         return
-    prompt_msg = ""
-    current_msg = event.message
-    reply = await current_msg.get_reply_message() # reply=None (if reply not found)
+    prompt_msg = "" # prompt msg to be sent to AI
+    reply = await event.message.get_reply_message() # reply=None (if reply not found)
     if not reply.text:
         eor(event, "**OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
-    if (reply.id != ME) or (not reply.text.contains("**OpenAI ChatGPT:**)):
-        prompt_msg = reply.text + str(input_str)
+    if (reply.id != ME) or (not reply.message.contains("**OpenAI ChatGPT:** ")):
+        prompt_msg = str(reply.message) + str(input_str)
     else:
         prompt_msg = str(input_str)
         while reply:
-            tmp_reply = reply
-            # gets reply of current reply msg
-            next_reply = await reply.get_reply_message()
-            prompt_msg = reply.text + prompt_msg
-            reply = next_reply
-            if tmp_reply.id != ME:
-                reply = None
-    askfromreply(prompt_msg)
+            prompt_msg = str(reply.message) + prompt_msg
+            if reply.id != ME:
+                break
+            reply = reply.get_reply_message()
+    event = await eor(event, askfromreply(prompt_msg))
     return
             
 # ————————————————————————---------------------
 def asknew(prompt):
-    pass
+    return f"#new_convo\nYour prompt: {prompt}"
 
 def askfromreply(prompt):
-    pass
+    return f"#reply_from_previous\nYour prompt: {prompt}"
     
 
 CmdHelp("q").add_command(
