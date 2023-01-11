@@ -79,8 +79,8 @@ async def _(event):
             model_dict["default"][2],
             model_dict["default"][3],
             model_dict["default"][4],
-            model_dict["default"][5]
-            model_dict["default"][6]
+            model_dict["default"][5],
+            model_dict["default"][6],
             model_dict["default"][7]
         ):
             event = await eor(event, "✅ **OpenAI-GPT3:** Bot mode set to `default`")
