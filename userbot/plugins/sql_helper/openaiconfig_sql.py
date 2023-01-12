@@ -54,7 +54,6 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
             text_before_prompt=textbeforeprompt,
             text_after_prompt=textafterprompt
         ))
-        SESSION.commit()
     else:
         data.model = model_name
         data.temperature = temp
@@ -64,9 +63,11 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
         data.presence_penalty = presencepenalty
         data.text_before_prompt = textbeforeprompt
         data.text_after_prompt = textafterprompt
+    try:
         SESSION.commit()
-    SESSION.close()
-    return True
+        return True
+    except:
+        return False
 
 def getOpenaiConfig():
     data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
