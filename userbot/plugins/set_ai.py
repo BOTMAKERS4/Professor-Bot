@@ -119,7 +119,6 @@ async def _(event):
         # setAIUser(event, user)
     else:
         # if not AI-user
-        input_str2 = None
         if not setGPT(str(input_str1).lower()):
             event = await eor(event, "❌ An unknown error occurred while configuring GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369")
         else:
