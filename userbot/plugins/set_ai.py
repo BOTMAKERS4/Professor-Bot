@@ -84,6 +84,8 @@ async def _(event):
             model_dict["default"][7]
         ):
             event = await eor(event, "✅ **OpenAI-GPT3:** Bot mode set to `default`")
+        else:
+            event = await eor(event, "❌ An unknown error occurred while configuring GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369")
         return
     if str(input_str1).lower() not in AI_MODES:
         event = await eor(event, "⚠️ Please provide the valid requisite parameters!")
@@ -92,11 +94,10 @@ async def _(event):
         tmp_user_id = None
         tmp_user_obj = None
         if event.reply_to_msg_id:
-            if event.reply_to_msg_id == int(Me):
+            tmp_user_id = await event.get_reply_message().sender_id
+            if tmp_user_id == int(Me):
                 event = await eor(event, "⚠️ **AI-user:** You already have access to use ChatGPT bot!\nPlease provide me a different user whom you wish to allow use my all features.")
                 return
-            tmp_reply_msg_obj = await event.get_reply_message()
-            tmp_user_id = tmp_reply_msg_obj.sender_id
         else:
             tmp_args = input_str1.split(" ", 1)
             if not tmp_args:
@@ -113,9 +114,8 @@ async def _(event):
                 tmp_user_obj = await event.client.get_entity(tmp_user_id)
         try:
             tmp_user_obj = await event.client.get_entity(tmp_user_id)
-        except (TypeError, ValueError):
-            await event.edit("Could not fetch info of that user. Kindly re-check the provisioned parameters!")
-            return
+        except:
+            event = await eor(event, "❌ Could not fetch info of that user. Kindly re-check the provisioned parameters!")
         # setAIUser(event, user)
     else:
         # if not AI-user
