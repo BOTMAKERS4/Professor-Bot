@@ -4,12 +4,12 @@ from userbot.plugins.sql_helper import BASE, SESSION
 class OpenaiConfig(BASE):
     __tablename__ = "openai_config"
     model_id = Column(Integer, primary_key=True)
-    model = Column(String(50))
-    temperature = Column(String(14))
-    max_tokens = Column(String(14))
-    top_p = Column(String(14))
-    frequency_penalty = Column(String(14))
-    presence_penalty = Column(String(14))
+    model = Column(String())
+    temperature = Column(String())
+    max_tokens = Column(String())
+    top_p = Column(String())
+    frequency_penalty = Column(String())
+    presence_penalty = Column(String())
     text_before_prompt = Column(String())
     text_after_prompt = Column(String())
 
