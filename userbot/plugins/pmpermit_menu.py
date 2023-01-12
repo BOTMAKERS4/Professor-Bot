@@ -11,12 +11,13 @@ PREV_REPLY_MESSAGE = {}
 @command(pattern=r"\/start", incoming=True)
 async def _(event):
     chat_id = event.sender_id
+    event.sender_id
     if not pmpermit_sql.is_approved(chat_id):
         chat = await event.get_chat()
         if event.fwd_from:
             return
         if event.is_private:
-            pm_user_obj = await event.client(functions.users.GetFullUserRequest(chat_id))
+            pm_user_obj = await event.client(functions.users.GetFullUserRequest(chat.id))
             PM = (
                 f"`Hey [{pm_user_obj.user.first_name}](tg://user?id={chat_id})! You are accessing the availabe menu of my master,`"
                 f"{DEFAULTUSER}.\n"
