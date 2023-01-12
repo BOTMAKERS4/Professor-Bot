@@ -54,7 +54,7 @@ async def _(event):
     prompt_msg = "" # prompt msg to be sent to AI
     reply = await event.message.get_reply_message() # reply=None (if reply not found)
     if not reply.text:
-        eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
+        event = await eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
     # Test starts ---------
     if reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0:
@@ -71,7 +71,7 @@ async def _(event):
             prompt_msg = str(reply.message) + "\n" + prompt_msg
             if reply.sender_id != ME:
                 break
-            reply = reply.get_reply_message()
+            reply = await reply.get_reply_message()
     event = await eor(event, askfromreply(prompt_msg))
     return
 
