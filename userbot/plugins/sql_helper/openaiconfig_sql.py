@@ -41,7 +41,7 @@ OpenaiConfig.__table__.create(checkfirst=True)
 
 
 def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presencepenalty, textbeforeprompt, textafterprompt):
-    data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
+    data = SESSION.query(OpenaiConfig).filter(OpenaiConfig.model_id == 1).first()
     if data is None:
         session.add(OpenaiConfig(
             model_id=1,
