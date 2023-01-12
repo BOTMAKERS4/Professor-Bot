@@ -56,7 +56,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
         ))
         SESSION.commit()
     else:
-        data.update({OpenaiConfig.model = model_name, OpenaiConfig.temperature = temp, OpenaiConfig.max_tokens = maxtokens, OpenaiConfig.top_p = topp, OpenaiConfig.frequency_penalty = frequencypenalty, OpenaiConfig.presence_penalty = presencepenalty, OpenaiConfig.text_before_prompt = textbeforeprompt, OpenaiConfig.text_after_prompt = textafterprompt})
+        data.update({OpenaiConfig.model = model_name, OpenaiConfig.temperature = temp, OpenaiConfig.max_tokens = maxtoken, OpenaiConfig.top_p = topp, OpenaiConfig.frequency_penalty = frequencypenalty, OpenaiConfig.presence_penalty = presencepenalty, OpenaiConfig.text_before_prompt = textbeforeprompt, OpenaiConfig.text_after_prompt = textafterprompt})
         SESSION.commit()
     SESSION.close()
     return True
