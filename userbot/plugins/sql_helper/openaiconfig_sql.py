@@ -4,7 +4,7 @@ from userbot.plugins.sql_helper import BASE, SESSION
 class OpenaiConfig(BASE):
     __tablename__ = "openai_config"
     model_id = Column(Integer, primary_key=True)
-    model = Column(String(14))
+    model = Column(String(50))
     temperature = Column(String(14))
     max_tokens = Column(String(14))
     top_p = Column(String(14))
