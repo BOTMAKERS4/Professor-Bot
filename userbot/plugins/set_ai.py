@@ -63,8 +63,8 @@ model_dict = dict(
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
 ME = str(bot.uid)
 
-@bot.on(admin_cmd(pattern=r"set_ai (?: |$) (.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"set_ai (?: |$) (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"set_ai(?: |$) (.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"set_ai(?: |$) (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
