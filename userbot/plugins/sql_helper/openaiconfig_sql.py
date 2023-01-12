@@ -68,6 +68,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
                 OpenaiConfig.text_after_prompt = text_after_prompt
             }
         )
+        SESSION.commit()
     SESSION.close()
     return True
 
