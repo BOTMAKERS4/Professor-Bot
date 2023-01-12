@@ -93,8 +93,7 @@ async def _(event):
     if str(input_str1) == AI_MODES[0]:
         tmp_user_id = None
         tmp_user_obj = None
-        tmp_is_reply = await event.reply_to_msg_id
-        if tmp_is_reply:
+        if event.reply_to_msg_id:
             tmp_user_obj = await event.get_reply_message()
             tmp_user_id = tmp_user_obj.sender_id
             if tmp_user_id == int(Me):
