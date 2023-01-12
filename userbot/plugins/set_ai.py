@@ -93,29 +93,30 @@ async def _(event):
     if str(input_str1) == AI_MODES[0]:
         tmp_user_id = None
         tmp_user_obj = None
-        if event.reply_to_msg_id:
-            tmp_user_id = await event.get_reply_message().sender_id
+        tmp_is_reply = await event.reply_to_msg_id
+        if tmp_is_reply:
+            tmp_user_obj = await event.get_reply_message()
+            tmp_user_id = tmp_user_obj.sender_id
             if tmp_user_id == int(Me):
                 event = await eor(event, "⚠️ **AI-user:** You already have access to use ChatGPT bot!\nPlease provide me a different user whom you wish to allow use my all features.")
                 return
         else:
-            tmp_args = input_str1.split(" ", 1)
-            if not tmp_args:
+            input_str2 = event.pattern_match.group(2)
+            if not input_str2:
                 event = await eor(event, "⚠️ **AI-user:** No user/user-id specified!")
                 return
             else:
-                tmp_user_str = tmp_args[0].strip()
+                tmp_user_str = input_str2.strip()
                 if tmp_user_str.isnumeric():
                     tmp_user_id = int(tmp_user_str)
                 elif event.message.entities:
-                    probable_user_mention_entity = event.message.entities[0]
+                    probable_user_mention_entity = await event.message.entities[0]
                     if isinstance(probable_user_mention_entity, MessageEntityMentionName):
                         tmp_user_id = probable_user_mention_entity.user_id
-                tmp_user_obj = await event.client.get_entity(tmp_user_id)
         try:
             tmp_user_obj = await event.client.get_entity(tmp_user_id)
         except:
-            event = await eor(event, "❌ Could not fetch info of that user. Kindly re-check the provisioned parameters!")
+            event = await eor(event, "❌ Could not fetch info of the user! Kindly re-check the provisioned parameters and try again.")
         # setAIUser(event, user)
     else:
         # if not AI-user
@@ -126,7 +127,7 @@ async def _(event):
     return
 
 # ————————————————————————---------------------
-async def setGPT(ai_mode):
+def setGPT(ai_mode):
     return setOpenaiConfig(
         model_dict[ai_mode][0],
         model_dict[ai_mode][1],
@@ -138,7 +139,7 @@ async def setGPT(ai_mode):
         model_dict[ai_mode][7]
     )
 
-async def setAIUser(evt, aiuser):
+def setAIUser(evt, aiuser):
     # db set code goes here
     # eor(evt, "✅ Settings updated!")
     pass
