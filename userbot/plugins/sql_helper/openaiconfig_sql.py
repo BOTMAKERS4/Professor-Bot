@@ -57,7 +57,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
         SESSION.commit()
     else:
         data.update({
-            OpenaiConfig.model=model_name,
+            OpenaiConfig.model = model_name,
             OpenaiConfig.temperature = temperature,
             OpenaiConfig.max_tokens = max_tokens,
             OpenaiConfig.top_p = top_p,
