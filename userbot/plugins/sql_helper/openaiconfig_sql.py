@@ -42,8 +42,8 @@ OpenaiConfig.__table__.create(checkfirst=True)
 
 def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presencepenalty, textbeforeprompt, textafterprompt):
     data = SESSION.query(OpenaiConfig).filter(OpenaiConfig.model_id == 1).first()
-    if data is None:
-        SESSION.add(OpenaiConfig(
+    if (not data) or (data is None):
+        data = OpenaiConfig(
             model_id=1,
             model=model_name,
             temperature=temp,
@@ -53,7 +53,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
             presence_penalty=presencepenalty,
             text_before_prompt=textbeforeprompt,
             text_after_prompt=textafterprompt
-        ))
+        )
     else:
         data.model = model_name
         data.temperature = temp
@@ -64,6 +64,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
         data.text_before_prompt = textbeforeprompt
         data.text_after_prompt = textafterprompt
     try:
+        SESSION.add(data)
         SESSION.commit()
         return True
     except:
