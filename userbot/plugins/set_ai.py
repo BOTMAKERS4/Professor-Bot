@@ -63,8 +63,8 @@ model_dict = dict(
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
 ME = str(bot.uid)
 
-@bot.on(admin_cmd(pattern=r"set_ai(?: |$)(.*) (.*)", outgoing=True))
-@bot.on(sudo_cmd(pattern=r"set_ai(?: |$)(.*) (.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern=r"set_ai(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern=r"set_ai(?: |$)(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -87,10 +87,10 @@ async def _(event):
         else:
             event = await eor(event, "❌ An unknown error occurred while configuring GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369")
         return
-    if str(input_str1).lower() not in AI_MODES:
+    if str(input_str1).lower().split()[0] not in AI_MODES:
         event = await eor(event, "⚠️ Please provide the valid requisite parameters!")
         return
-    if str(input_str1) == AI_MODES[0]:
+    if str(input_str1).lower().split()[0] == AI_MODES[0]:
         tmp_user_id = None
         tmp_user_obj = None
         if event.reply_to_msg_id:
@@ -100,26 +100,27 @@ async def _(event):
                 event = await eor(event, "⚠️ **AI-user:** You already have access to use ChatGPT bot!\nPlease provide me a different user whom you wish to allow use my all features.")
                 return
         else:
-            input_str2 = event.pattern_match.group(2)
-            if not input_str2:
+            try:
+                tmp_user_id = str(input_str1).lower().split()[1]
+            except:
                 event = await eor(event, "⚠️ **AI-user:** No user/user-id specified!")
                 return
-            else:
-                tmp_user_str = input_str2.strip()
-                if tmp_user_str.isnumeric():
-                    tmp_user_id = int(tmp_user_str)
-                elif event.message.entities:
-                    probable_user_mention_entity = await event.message.entities[0]
-                    if isinstance(probable_user_mention_entity, MessageEntityMentionName):
-                        tmp_user_id = probable_user_mention_entity.user_id
+            tmp_user_str = tmp_user_id.strip()
+            if tmp_user_str.isnumeric():
+                tmp_user_id = int(tmp_user_str)
+            elif event.message.entities:
+                probable_user_mention_entity = await event.message.entities[0]
+                if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                    tmp_user_id = probable_user_mention_entity.user_id
         try:
             tmp_user_obj = await event.client.get_entity(tmp_user_id)
+            # setAIUser(event, user)
+            event = await eor(event, "✅ **New AI-user added:** `{tmp_user_id}`")
         except:
             event = await eor(event, "❌ Could not fetch info of the user! Kindly re-check the provisioned parameters and try again.")
-        # setAIUser(event, user)
     else:
         # if not AI-user
-        if not setGPT(str(input_str1).lower()):
+        if not setGPT(str(input_str1).lower().split()[0]):
             event = await eor(event, "❌ An unknown error occurred while configuring GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369")
         else:
             event = await eor(event, "✅ **Settings updated!**\n\nAI chat mode: `{}`".format(str(input_str1).lower()))
