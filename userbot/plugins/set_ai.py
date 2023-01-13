@@ -97,7 +97,7 @@ async def _(event):
             tmp_reply_user = await event.get_reply_message()
             tmp_user_id = tmp_reply_user.sender_id
             tmp_user_obj = await event.client.get_entity(tmp_user_id)
-            if tmp_user_obj.id == int(Me):
+            if tmp_user_obj.id == int(ME):
                 event = await eor(event, "⚠️ **AI-user:** You already have superuser access!\nPlease provide me a different user whom you wish to allow use my all features.")
                 return
         else:
@@ -110,7 +110,7 @@ async def _(event):
             if tmp_user_str.isnumeric():
                 tmp_user_id = int(tmp_user_str)
             elif event.message.entities:
-                probable_user_mention_entity = await event.message.entities[0]
+                probable_user_mention_entity = event.message.entities[0]
                 if isinstance(probable_user_mention_entity, MessageEntityMentionName):
                     tmp_user_id = probable_user_mention_entity.user_id
         try:
