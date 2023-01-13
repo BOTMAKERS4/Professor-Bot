@@ -94,10 +94,11 @@ async def _(event):
         tmp_user_id = None
         tmp_user_obj = None
         if event.reply_to_msg_id:
-            tmp_user_obj = await event.get_reply_message()
-            tmp_user_id = tmp_user_obj.sender_id
-            if tmp_user_id == int(Me):
-                event = await eor(event, "⚠️ **AI-user:** You already have access to use ChatGPT bot!\nPlease provide me a different user whom you wish to allow use my all features.")
+            tmp_reply_user = await event.get_reply_message()
+            tmp_user_id = tmp_reply_user.sender_id
+            tmp_user_obj = await event.client.get_entity(tmp_user_id)
+            if tmp_user_obj.id == int(Me):
+                event = await eor(event, "⚠️ **AI-user:** You already have superuser access!\nPlease provide me a different user whom you wish to allow use my all features.")
                 return
         else:
             try:
