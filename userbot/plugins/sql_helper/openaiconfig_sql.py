@@ -73,8 +73,8 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
         LOGS.info("\nLog: setOpenaiConfig: data commited!!\n")
         LOGS.info(f"\nLog: setOpenaiConfig: data={data}\n")
         return True
-    except as e:
-        LOGS.info(f"\nLog: setOpenaiConfig: Error:\n\n\n{e}\n")
+    except Exception as e:
+        LOGS.info(f"\nLog: setOpenaiConfig: Error:\n\n\n{str(e)}\n")
         return False
 
 def getOpenaiConfig():
