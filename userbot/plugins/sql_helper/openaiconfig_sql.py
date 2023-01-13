@@ -11,7 +11,7 @@ class OpenaiConfig(BASE):
     top_p = Column(String(255))
     frequency_penalty = Column(String(255))
     presence_penalty = Column(String(255))
-    text_before_prompt = Column(String(255))
+    text_before_prompt = Column(String(2048))
     text_after_prompt = Column(String(255))
 
     def __init__(self,
