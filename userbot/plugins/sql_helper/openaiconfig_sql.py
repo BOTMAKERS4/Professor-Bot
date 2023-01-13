@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, Integer
 from userbot.plugins.sql_helper import BASE, SESSION
+from userbot import LOGS
 
 class OpenaiConfig(BASE):
     __tablename__ = "openai_config"
@@ -42,7 +43,9 @@ OpenaiConfig.__table__.create(checkfirst=True)
 
 def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presencepenalty, textbeforeprompt, textafterprompt):
     data = SESSION.query(OpenaiConfig).filter(OpenaiConfig.model_id == 1).first()
+    LOGS.info(f"\nLog: setOpenaiConfig: data={data}\n")
     if (not data) or (data is None):
+        LOGS.info(f"\nLog: setOpenaiConfig: data found none!! Adding...\n")
         data = OpenaiConfig(
             model_id=1,
             model=model_name,
@@ -55,6 +58,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
             text_after_prompt=textafterprompt
         )
     else:
+        LOGS.info("\nLog: setOpenaiConfig: data exists already!! Updating...\n")
         data.model = model_name
         data.temperature = temp
         data.max_tokens = maxtoken
@@ -66,8 +70,11 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
     try:
         SESSION.add(data)
         SESSION.commit()
+        LOGS.info("\nLog: setOpenaiConfig: data commited!!\n")
+        LOGS.info(f"\nLog: setOpenaiConfig: data={data}\n")
         return True
-    except:
+    except as e:
+        LOGS.info(f"\nLog: setOpenaiConfig: Error:\n\n\n{e}\n")
         return False
 
 def getOpenaiConfig():
