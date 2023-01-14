@@ -6,3 +6,5 @@ source venv/bin/activate
 echo "Installing requirements..."
 python3 pip install -U -r requirements.txt
 echo "Installed requirements successfully!"
+echo "Launching ProfessorBot..."
+python3 -m userbot
