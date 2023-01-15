@@ -19,14 +19,14 @@ async def _(event):
         if event.is_private:
             pm_user_obj = await event.client(functions.users.GetFullUserRequest(chat.id))
             PM = (
-                f"`Hey [{pm_user_obj.user.first_name}](tg://user?id={chat_id})! You are accessing the availabe menu of my master,`"
-                f"{DEFAULTUSER}.\n"
-                "__Let's make this smooth and let me know why you are here.__\n"
-                "**Choose one of the following reasons why you are here:**\n\n"
+                f"__Hey [{pm_user_obj.full_user.first_name}](tg://user?id={chat_id})!__\n__Sorry for the inconvenience, this protocol was implemented by my master ({DEFAULTUSER}) to prevent misleading spams and unwanted users/bots from infiltrating this chat.__"
+                "\n\n**Let's make this smooth and choose one of the following reasons which best describes why you are here:**\n\n"
                 "`1`. To chat with my master\n"
                 "`2`. To inform about something.\n"
                 "`3`. To enquire something\n"
                 "`4`. To request something\n"
+                "`5`. Chat with AI bot __(unavailable)__"
+                
             )
             ONE = (
                 "__Okay! Your request has been registered. Please do not spam here. You can expect a reply within 24 to 72 hours.__\n\n"
