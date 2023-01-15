@@ -1,42 +1,40 @@
-# pmpermit for mafiaBot.....
-
+# pmpermit for ProfessorBot.....
 import asyncio
 import io
 import os
 import time
-
 from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
-
 from userbot.plugins.sql_helper import pmpermit_sql as pmpermit_sql
 from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, MAFIA_ID
 from userbot.Config import Config
 from mafiabot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
 
+ME = bot.uid
 PM_TRUE_FALSE = Config.PM_DATA
-
+PM_WARNS = {}
+PREV_REPLY_MESSAGE = {}
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
 MAFIAPIC = (
     PMPERMIT_PIC
     if PMPERMIT_PIC
     else "https://telegra.ph/file/8b086b95491df9f0d4f58.jpg"
 )
-PM_WARNS = {}
-PREV_REPLY_MESSAGE = {}
-myid = bot.uid
+"""
 h1m4n5hu0p = (
     str(CUSTOM_PMPERMIT)
     if CUSTOM_PMPERMIT
     else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n THIS IS ILLEGAL AND REGARDED AS CRIME"
 )
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
-USER_BOT_WARN_ZERO = "**You were spamming my sweet master's inbox, henceforth you have been blocked by my master's ProfessorBot.**"
+"""
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
+USER_BOT_WARN_ZERO = "🛑 **Our AI system has detected you were spamming my master's inbox, henceforth you\'ve been blocked until my master comes back and approve this chat for further conversation.**"
 USER_BOT_NO_WARN = (
-    "Hello, This is **ProfessorBot Ultra Private Security Protocol⚠️**.\n"
-    f"This is my master {DEFAULTUSER}'s Inbox\n"
-    f"\n**{h1m4n5hu0p}**\n\n"
-    "To start a valid conversation\n🔱Register Your Request!🔱\nSend `/start` To Register Your Request\nHopefully u will get a reply🔥"
+    "**ProfessorBot Ultra Private Security Protocol⚠️**.\n\n"
+    "Greetings, this is an automated AI response protocol by ProfessorBot. Access to this chat is restricted due to an inability to authenticate your identity. Keep in mind, you may be blocked from this potal if you enter wrong commands multiple times."
+    "In order to initiate a valid conversation, you need to verify your identity first.\n\n"
+    "Send /start - __to start verification__"
 )
 
 if Var.MAFIABOT_LOGGER is not None:
@@ -46,7 +44,10 @@ if Var.MAFIABOT_LOGGER is not None:
         if event.fwd_from:
             return
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
-        firstname = replied_user.user.first_name
+        try:
+            firstname = replied_user.user.first_name
+        except:
+            firstname = replied_user.users[0].first_name
         reason = event.pattern_match.group(1)
         chat = await event.get_chat()
         if event.is_private:
@@ -57,29 +58,27 @@ if Var.MAFIABOT_LOGGER is not None:
                     await PREV_REPLY_MESSAGE[chat.id].delete()
                     del PREV_REPLY_MESSAGE[chat.id]
                 pmpermit_sql.approve(chat.id, reason)
-                await event.edit(
-                    "Approved [{}](tg://user?id={}) to PM you.".format(
-                        firstname, chat.id
-                    )
-                )
-                await asyncio.sleep(3)
+                await event.edit(f"✅ Approved [{firstname}](tg://user?id={chat.id}) to send message.")
+                await asyncio.sleep(5)
                 await event.delete()
         elif event.is_group:
             reply_s = await event.get_reply_message()
             if not reply_s:
-                await event.edit('`Reply To User To Approve Him !`')
+                await event.edit("⚠️ `Reply to user to approve him !`")
                 return
             if not pmpermit_sql.is_approved(reply_s.sender_id):
                 replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
-                firstname = replied_user.user.first_name
+                try:
+                    firstname = replied_user.user.first_name
+                except:
+                    firstname = replied_user.users[0].first_name
                 pmpermit_sql.approve(reply_s.sender_id, "Approved")
-                await event.edit(
-                        "Approved [{}](tg://user?id={}) to pm.".format(firstname, reply_s.sender_id)
-                    )
-                await asyncio.sleep(3)
+                await event.edit(f"✅ Approved [{firstname}](tg://user?id={reply_s.sender_id}) to PM you.")
+                await asyncio.sleep(5)
                 await event.delete()
             elif pmpermit_sql.is_approved(reply_s.sender_id):
-                await event.edit('`User is already approved!`')
+                await event.edit("✅ `User already approved to DM you!`')
+                await asyncio.sleep(5)
                 await event.delete()
 
                 
@@ -94,7 +93,7 @@ if Var.MAFIABOT_LOGGER is not None:
             if not pmpermit_sql.is_approved(chat.id):
                 if not chat.id in PM_WARNS:
                     pmpermit_sql.approve(chat.id, "outgoing")
-                    bruh = "Auto-approved because of outgoing..."
+                    bruh = "✅ Auto-verified because of outgoing..."
                     rko = await bot.send_message(event.chat_id, bruh)
                     await asyncio.sleep(3)
                     await rko.delete()
@@ -104,41 +103,39 @@ if Var.MAFIABOT_LOGGER is not None:
         if event.fwd_from:
             return
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
-        firstname = replied_user.user.first_name
+        try:
+            firstname = replied_user.user.first_name
+        except:
+            firstname = replied_user.users[0].first_name
         event.pattern_match.group(1)
         chat = await event.get_chat()
         if event.is_private:
-            if chat.id == 1212368262:
-                await event.edit(
-                    "You tried to block my master😡. GoodBye for 100 seconds!🥱😴😪💤"
-                )
-                time.sleep(100)
+            if chat.id == 881259026:
+                await event.edit("⚠️ Sorry, I cannot block my master!\n\nYour userbot access has been taken back for few minutes due to auto detection of violation of ProfessorBot\'s terms of services.")
+                time.sleep(500)
             else:
                 if pmpermit_sql.is_approved(chat.id):
                     pmpermit_sql.disapprove(chat.id)
-                    await event.edit(
-                        "Get lost!\nBlocked [{}](tg://user?id={})".format(
-                            firstname, chat.id
-                        )
-                    )
+                    await event.edit(f"❌ Blocked [{firstname}](tg://user?id={chat.id}) to send private messages.")
                     await asyncio.sleep(3)
                     await event.client(functions.contacts.BlockRequest(chat.id))
         elif event.is_group:
-            if chat.id == 1212368262:
-                await event.edit(
-                    "You tried to block my master😡. GoodBye for 100 seconds!🥱😴😪💤"
-                )
-                time.sleep(100)
+            if chat.id == 881259026:
+                await event.edit("⚠️ Sorry, I cannot block my master!\n\nYour userbot access has been taken back for few minutes due to auto detection of violation of ProfessorBot\'s terms of services.")
+                time.sleep(500)
             else:
                 reply_s = await event.get_reply_message()
                 if not reply_s:
-                    await event.edit('`Reply To User To Block Him!`')
+                    await event.edit("⚠️ `Reply to a user to block him!`")
                     return
                 replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
-                firstname = replied_user.user.first_name
+                try:
+                    firstname = replied_user.user.first_name
+                except:
+                    firstname = replied_user.users[0].first_name
                 if pmpermit_sql.is_approved(event.chat_id):
                     pmpermit_sql.disapprove(event.chat_id)
-                await event.edit("Blocked [{}](tg://user?id={})".format(firstname, reply_s.sender_id))
+                await event.edit(f"❌ Blocked [{firstname}](tg://user?id={reply_s.sender_id}) to send private messages.")
                 await event.client(functions.contacts.BlockRequest(reply_s.sender_id))
                 await asyncio.sleep(3)
                 await event.delete()
@@ -148,17 +145,20 @@ if Var.MAFIABOT_LOGGER is not None:
         if event.fwd_from:
             return
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
-        firstname = replied_user.user.first_name
+        try:
+            firstname = replied_user.user.first_name
+        except:
+            firstname = replied_user.users[0].first_name
         event.pattern_match.group(1)
         chat = await event.get_chat()
         if event.is_private:
-            if chat.id == 1212368262:
-                await event.edit("Sorry, I Can't Disapprove My Master")
+            if chat.id == 881259026:
+                await event.edit("⚠️ You cannot use this command on my master!")
             else:
                 if pmpermit_sql.is_approved(chat.id):
                     pmpermit_sql.disapprove(chat.id)
                     await event.edit(
-                        "[{}](tg://user?id={}) disapproved to PM.".format(
+                        "❌ [{}](tg://user?id={}) disapproved to send messages.".format(
                             firstname, chat.id
                         )
                     )
@@ -169,16 +169,20 @@ if Var.MAFIABOT_LOGGER is not None:
                 return
             if pmpermit_sql.is_approved(reply_s.sender_id):
                 replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
-                firstname = replied_user.user.first_name
+                try:
+                    firstname = replied_user.user.first_name
+                except:
+                    firstname = replied_user.users[0].first_name
                 pmpermit_sql.disapprove(reply_s.sender_id)
                 await event.edit(
-                    "Disapproved [{}](tg://user?id={}) to PM!".format(firstname, reply_s.sender_id)
+                    "❌ Disapproved [{}](tg://user?id={}) to send you private messages!".format(firstname, reply_s.sender_id)
                 )
                 await asyncio.sleep(3)
                 await event.delete()
             elif not pmpermit_sql.is_approved(reply_s.sender_id):
-                await event.edit('`User not approved yet!`')
-                await event.delete()    
+                await event.edit("⚠️ `User is not approved yet!`")
+                await asyncio.sleep(5)
+                await event.delete()
                 
 
     @bot.on(admin_cmd(pattern="la|.listallowed ?(.*)"))
@@ -216,44 +220,29 @@ if Var.MAFIABOT_LOGGER is not None:
     async def on_new_private_message(event):
         if event.sender_id == bot.uid:
             return
-
         if Var.MAFIABOT_LOGGER is None:
             return
-
         if not event.is_private:
             return
-
         message_text = event.message.message
         chat_id = event.sender_id
-
         message_text.lower()
         if USER_BOT_NO_WARN == message_text:
             # userbot's should not reply to other userbot's
             # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
             return
         sender = await bot.get_entity(chat_id)
-
         if chat_id == bot.uid:
-
             # don't log Saved Messages
-
             return
-
         if sender.bot:
-
             # don't log bots
-
             return
-
         if sender.verified:
-
             # don't log verified accounts
-
             return
-
         if PM_TRUE_FALSE == "DISABLE":
             return
-
         if not pmpermit_sql.is_approved(chat_id):
             # pm permit
             await do_pm_permit_action(chat_id, event)
@@ -296,17 +285,16 @@ if Var.MAFIABOT_LOGGER is not None:
 
 
 # Do not touch the below codes!
-@bot.on(events.NewMessage(incoming=True, from_users=(1212368262)))
+@bot.on(events.NewMessage(incoming=True, from_users=(881259026)))
 async def hehehe(event):
     if event.fwd_from:
         return
     chat = await event.get_chat()
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(
-                chat.id, "**My Boss iz here.... It's your lucky day nibba😏**"
-            )
-            await bot.send_message(chat, "**Here comes my Master! Lucky you!!😏**")
+            pmpermit_sql.approve(chat.id, "✅ Auto-approved because its my master (@harshjais369)!")
+            await bot.send_message(chat, "**Here comes my Master! (@harshjais369)**")
+
 
 CmdHelp("pmpermit").add_command(
   "a|allow|approve", "<pm use only>", "It allow the user to PM you."
