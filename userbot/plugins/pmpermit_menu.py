@@ -18,8 +18,9 @@ async def _(event):
             return
         if event.is_private:
             pm_user_obj = await event.client(functions.users.GetFullUserRequest(chat.id))
+            LOGS.info(f"\n\nid={chat.id} ._ {chat_id}\npm_user_obj={pm_user_obj}\n\n\n")
             PM = (
-                f"__Hey [{pm_user_obj.full_user.first_name}](tg://user?id={chat_id})!__\n__Sorry for the inconvenience, this protocol was implemented by my master ({DEFAULTUSER}) to prevent misleading spams and unwanted users/bots from infiltrating this chat.__"
+                f"__Hey [{pm_user_obj.user.first_name}](tg://user?id={chat_id})!__\n__Sorry for the inconvenience, this protocol was implemented by my master ({DEFAULTUSER}) to prevent misleading spams and unwanted users/bots from infiltrating this chat.__"
                 "\n\n**Let's make this smooth and choose one of the following reasons which best describes why you are here:**\n\n"
                 "`1`. To chat with my master\n"
                 "`2`. To inform about something.\n"
