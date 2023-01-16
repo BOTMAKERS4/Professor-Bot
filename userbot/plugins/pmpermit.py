@@ -160,7 +160,6 @@ if Var.MAFIABOT_LOGGER is not None:
                 if pmpermit_sql.is_approved(chat.id):
                     pmpermit_sql.disapprove(chat.id)
                     await event.edit(f"❌ [{firstname}](tg://user?id={chat.id}) disapproved to send messages.")
-                    )
         elif event.is_group:
             reply_s = await event.get_reply_message()
             if not reply_s:
