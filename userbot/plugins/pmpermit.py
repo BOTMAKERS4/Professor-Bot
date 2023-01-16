@@ -1,4 +1,3 @@
-# pmpermit for ProfessorBot.....
 import asyncio
 import io
 import os
@@ -10,6 +9,9 @@ from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, MAFIA_ID
 from userbot.Config import Config
 from mafiabot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
+
+# pmpermit for ProfessorBot.....
+# by @harshjais369
 
 ME = bot.uid
 PM_TRUE_FALSE = Config.PM_DATA
@@ -58,7 +60,7 @@ if Var.MAFIABOT_LOGGER is not None:
                     await PREV_REPLY_MESSAGE[chat.id].delete()
                     del PREV_REPLY_MESSAGE[chat.id]
                 pmpermit_sql.approve(chat.id, reason)
-                await event.edit(f"✅ Approved [{firstname}](tg://user?id={chat.id}) to send message.")
+                await event.edit(f"✅ Approved [{firstname}](tg://user?id={chat.id}) to send messages.")
                 await asyncio.sleep(5)
                 await event.delete()
         elif event.is_group:
@@ -77,7 +79,7 @@ if Var.MAFIABOT_LOGGER is not None:
                 await asyncio.sleep(5)
                 await event.delete()
             elif pmpermit_sql.is_approved(reply_s.sender_id):
-                await event.edit("✅ `User already approved to DM you!`')
+                await event.edit("✅ `User already approved to DM you!`")
                 await asyncio.sleep(5)
                 await event.delete()
 
@@ -157,15 +159,12 @@ if Var.MAFIABOT_LOGGER is not None:
             else:
                 if pmpermit_sql.is_approved(chat.id):
                     pmpermit_sql.disapprove(chat.id)
-                    await event.edit(
-                        "❌ [{}](tg://user?id={}) disapproved to send messages.".format(
-                            firstname, chat.id
-                        )
+                    await event.edit(f"❌ [{firstname}](tg://user?id={chat.id}) disapproved to send messages.")
                     )
         elif event.is_group:
             reply_s = await event.get_reply_message()
             if not reply_s:
-                await event.edit('`Reply to the user to disapprove him.`')
+                await event.edit("`⚠️ Reply to a user to disapprove him.`")
                 return
             if pmpermit_sql.is_approved(reply_s.sender_id):
                 replied_user = await event.client(GetFullUserRequest(reply_s.sender_id))
@@ -174,9 +173,7 @@ if Var.MAFIABOT_LOGGER is not None:
                 except:
                     firstname = replied_user.users[0].first_name
                 pmpermit_sql.disapprove(reply_s.sender_id)
-                await event.edit(
-                    "❌ Disapproved [{}](tg://user?id={}) to send you private messages!".format(firstname, reply_s.sender_id)
-                )
+                await event.edit(f"❌ Disapproved [{firstname}](tg://user?id={reply_s.sender_id}) to send you private messages!")
                 await asyncio.sleep(3)
                 await event.delete()
             elif not pmpermit_sql.is_approved(reply_s.sender_id):
@@ -196,11 +193,9 @@ if Var.MAFIABOT_LOGGER is not None:
                 if a_user.reason:
                     APPROVED_PMs += f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id}) for {a_user.reason}\n"
                 else:
-                    APPROVED_PMs += (
-                        f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id})\n"
-                    )
+                    APPROVED_PMs += (f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id})\n")
         else:
-            APPROVED_PMs = "No Approved PMs (yet)"
+            APPROVED_PMs = "No Approved PMs (yet)."
         if len(APPROVED_PMs) > 4095:
             with io.BytesIO(str.encode(APPROVED_PMs)) as out_file:
                 out_file.name = "approved.pms.text"
@@ -218,7 +213,7 @@ if Var.MAFIABOT_LOGGER is not None:
 
     @bot.on(events.NewMessage(incoming=True))
     async def on_new_private_message(event):
-        if event.sender_id == bot.uid:
+        if event.sender_id == ME:
             return
         if Var.MAFIABOT_LOGGER is None:
             return
@@ -232,7 +227,7 @@ if Var.MAFIABOT_LOGGER is not None:
             # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
             return
         sender = await bot.get_entity(chat_id)
-        if chat_id == bot.uid:
+        if chat_id == ME:
             # don't log Saved Messages
             return
         if sender.bot:
@@ -301,9 +296,9 @@ CmdHelp("pmpermit").add_command(
 ).add_command(
   "da|disallow|disapprove", "<pm use only>", "It disallows the user to PM. If user crosses the PM limit after disallow he/she will get blocked automatically"
 ).add_command(
-  "block", "<pm use only>", "You know what it does.... Blocks the user"
+  "block", "<pm use only>", "Blocks the user from sending PM\'s"
 ).add_command(
-  "la|listallowed", None, "Gives you the list of allowed PM's list"
+  "la|listallowed", None, "Gives you the list of allowed PM\'s list"
 ).add_command(
   "set var PM_DATA", "DISABLE", "Turn off pm protection by your userbot. Your PM will not be protected."
 ).add()
