@@ -73,7 +73,7 @@ if ENV:
         NO_P_M_SPAM = bool(os.environ.get("NO_P_M_SPAM", True))
         # define "spam" in PMs
         NO_SONGS = bool(os.environ.get("NO_SONGS", False))
-        MAX_FLOOD_IN_P_M_s = int(os.environ.get("MAX_FLOOD_IN_P_M_s", 3))
+        MAX_FLOOD_IN_P_M_s = int(os.environ.get("MAX_FLOOD_IN_P_M_s", 10))
         #pm log
         PM_LOG_GRP_ID = os.environ.get("PM_LOG_GRP_ID", None)
         # set to True if you want to log PMs to your PM_LOGGR_BOT_API_ID
@@ -153,9 +153,7 @@ if ENV:
         #Lydia API
         LYDIA_API = os.environ.get("LYDIA_API",None)
        # PLUGIN_CHANNEL = int(os.environ.get("PLUGIN_CHANNEL", None))
-        UPSTREAM_REPO = os.environ.get(
-            "UPSTREAM_REPO", "https://github.com/harshjais369/MafiaBot"
-        )
+        UPSTREAM_REPO = os.environ.get("UPSTREAM_REPO", "https://github.com/harshjais369/ProfessorBot.git")
         STRING_SESSION = os.environ.get("STRING_SESSION", None)
         BOT_MODE = os.environ.get("BOT_MODE", "ON")
         BOT_TRIGGER = os.environ.get("BOT_TRIGGER", "^/")
