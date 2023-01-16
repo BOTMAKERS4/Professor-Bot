@@ -8,7 +8,7 @@ import openai
 from telethon.events import InlineQuery, callbackquery
 from telethon.sync import custom
 from telethon import functions
-from userbot import bot
+from userbot import bot, LOGS
 from userbot.cmdhelp import *
 from mafiabot.utils import *
 from userbot.Config import Config
@@ -32,8 +32,9 @@ from telethon.tl.types import (
 # Do not copy without having any permissions!
 # ————————————————————————---------------------
 
-AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
 ME = int(bot.uid)
+AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
+AI_ERROR = "❌ ProfessorBot An unknown error occurred while communicating with GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369"
 
 @bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
@@ -41,26 +42,23 @@ async def _(event):
     if event.fwd_from:
         return
     if Config.OPENAI_API_KEY is None:
-        event = await eor(event, "❌ OpenAI API key has not configured yet.")
+        event = await eor(event, "❌ OpenAI API key is not configured.")
         return
     input_str = event.pattern_match.group(1)
     if not input_str:
-        event = await eor(event, "**OpenAI ChatGPT:** Hey! This is OpenAI's GPT3 chatbot, now available with ProfessorBot by Harsh Jaiswal. I am here to talk to you in a friendly, meaningful way as well as answer any questions you may have.")
+        event = await eor(event, "**OpenAI ChatGPT:** Hey! This is OpenAI\'s GPT3 chatbot, now available with ProfessorBot by Harsh Jaiswal. I am here to talk with you in friendly and meaningful way as well as answer any questions you may have.")
         return
     if not event.reply_to_msg_id:
         # initiate a new convo
         event = await eor(event, asknew(str(input_str)))
         return
     prompt_msg = "" # prompt msg to be sent to AI
-    reply = await event.message.get_reply_message() # reply=None (if reply not found)
+    reply = await event.message.get_reply_message() # (reply=None; if reply not found)
     if not reply.text:
         event = await eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
     # Test starts ---------
-    if reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0:
-        event = await eor(event, "Not found!")
-    else:
-        event = await eor(event, "Found!")
+    event = await eor(event, "Not found!") if reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0 else await eor(event, "Found!")
     await asyncio.sleep(5)
     # Test ends ---------
     if (reply.sender_id != ME) or (reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0):
@@ -75,14 +73,60 @@ async def _(event):
     event = await eor(event, askfromreply(prompt_msg))
     return
 
+@bot.on(admin_cmd(pattern="e(?: |$)(.*)", outgoing=True))
+@bot.on(sudo_cmd(pattern="e(?: |$)(.*)", allow_sudo=True))
+async def _(event):
+    if event.fwd_from:
+        return
+    if Config.OPENAI_API_KEY is None:
+        event = await eor(event, "❌ OpenAI API key is not configured.")
+        return
+    input_str = event.pattern_match.group(1)
+    if not input_str:
+        event = await eor(event, "**OpenAI ChatGPT:** Hey! This is OpenAI\'s GPT3 chatbot, now available with ProfessorBot by Harsh Jaiswal. I am here to talk with you in friendly and meaningful way as well as answer any questions you may have.")
+        return
+    if not event.reply_to_msg_id:
+        event = await eor(event, correctGrammarFunc(str(input_str)))
+    else:
+        reply = await event.message.get_reply_message() # (reply=None; if reply not found)
+        if not reply.text:
+            event = await eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
+            return
+        resp = correctGrammarFunc(str(reply.message))
+        event = await eor(event, resp)
+        if resp == AI_ERROR:
+            await asyncio.sleep(3)
+            await event.delete()
+    return
+
 # ————————————————————————---------------------
 def asknew(prompt):
     return f"#new_convo\nYour prompt: {prompt}"
 
 def askfromreply(prompt):
     return f"#reply_from_previous\nYour prompt: {prompt}"
+
+def correctGrammarFunc(prompt):
+    resp_obj = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=f"Correct this into standard and more fluent English:\n\n{prompt}",
+        temperature=0,
+        max_tokens=2048,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    )
+    try:
+        ans_str = resp_obj["choices"][0]["text"]
+        if resp_obj["choices"][0]["finish_reason"] == "length":
+            ans_str = f"{ans_str}...\n__(reached max. text limit)__"
+    except:
+        ans_str = AI_ERROR
+    return ans_str
     
 
 CmdHelp("q").add_command(
-  "q", "<your question>", "Talk to ChatGPT3 AI."
+  "q", "<your question>", "Start a chat with ChatGPT3."
+).add_command(
+  "e", "<reply/text>", "Corrects sentences into standard and fluent English by GPT3 AI."
 ).add
