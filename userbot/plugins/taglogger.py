@@ -1,7 +1,7 @@
 from telethon import custom, events
 from telethon.tl.types import Channel
 from telethon.utils import get_display_name
-
+from userbot import bot
 from userbot.Config import Config
 
 if Config.TAG_LOGGER:
@@ -19,7 +19,11 @@ if Config.TAG_LOGGER:
     async def all_messages_catcher(event):
         # the bot might not have the required access_hash to mention the
         # appropriate PM
-        await event.forward_to(Var.TG_BOT_USER_NAME_BF_HER)
+        try:
+            await event.forward_to(Var.TG_BOT_USER_NAME_BF_HER)
+        except:
+            enn = await bot.get_entity(str(Config.TG_BOT_USER_NAME_BF_HER))
+            fwd_to_prfbot = await bot.forward_messages(enn, event.message, silent=True)
 
         # construct message
         # the message format is stolen from @MasterTagAlertBot
