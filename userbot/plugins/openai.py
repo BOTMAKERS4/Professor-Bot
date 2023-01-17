@@ -33,15 +33,16 @@ from telethon.tl.types import (
 # ————————————————————————---------------------
 
 ME = int(bot.uid)
+AI_API_KEY = Config.OPENAI_API_KEY
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
-AI_ERROR = "❌ ProfessorBot An unknown error occurred while communicating with GPT3-AI Model.\nFor more information and further assistance, contact: @harshjais369"
+AI_ERROR = "❌ **ProfessorBot:** An unknown error occurred while communicating with GPT3-AI Model. Make sure you\'ve configured the correct OpenAI API key in your `.env` file.\n\nFor more information and further assistance, contact: @harshjais369"
 
 @bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    if Config.OPENAI_API_KEY is None:
+    if AI_API_KEY is None:
         event = await eor(event, "❌ OpenAI API key is not configured.")
         return
     input_str = event.pattern_match.group(1)
@@ -78,7 +79,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    if Config.OPENAI_API_KEY is None:
+    if AI_API_KEY is None:
         event = await eor(event, "❌ OpenAI API key is not configured.")
         return
     input_str = event.pattern_match.group(1)
@@ -107,22 +108,23 @@ def askfromreply(prompt):
     return f"#reply_from_previous\nYour prompt: {prompt}"
 
 def correctGrammarFunc(prompt):
-    resp_obj = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=f"Correct this into standard and more fluent English:\n\n{prompt}",
-        temperature=0,
-        max_tokens=2048,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
-    )
     try:
+        openai.api_key = AI_API_KEY
+        resp_obj = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=f"Correct this into standard and more fluent English:\n\n{prompt}",
+            temperature=0,
+            max_tokens=2048,
+            top_p=1.0,
+            frequency_penalty=0.0,
+            presence_penalty=0.0
+        )
         ans_str = resp_obj["choices"][0]["text"]
         if resp_obj["choices"][0]["finish_reason"] == "length":
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
+        return ans_str
     except:
-        ans_str = AI_ERROR
-    return ans_str
+        return AI_ERROR
     
 
 CmdHelp("q").add_command(
