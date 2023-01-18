@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+_get_repolink () {
+    local regex
+    regex='(https?)://github.com/.+/.+'
+    echo "https://github.com/harshjais369/ProfessorBot/archive/master.zip"
+}
+
+
+_set_bot () {
+    rm -rf ProfessorBot-main
+    python3 pip install --upgrade pip
+    python3 pip install -U -r requirements.txt
+    local zippath
+    zippath="professorbot.zip"
+    echo "  Downloading source code ..."
+    wget -q $(_get_repolink) -O "$zippath"
+    echo "  Unpacking Data ..."
+    MAFIAPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    unzip -qq "$zippath"
+    echo "Done!"
+    echo "  Cleaning..."
+    rm -rf "$zippath"
+    sleep 5
+    cd $MAFIAPATH
+    echo "    Starting ProfessorBot...    "
+    echo """
+© 𝙻𝙴𝙶𝙴𝙽𝙳𝙰𝚁𝚈_𝙰𝙵_PROFESSORBOT™
+ █▀█ █▀█ █▀█ █▀▀ █▀▀ █▀ █▀ █▀█ █▀█    █▄▄ █▀█ ▀█▀
+ █▀▀ █▀▄ █▄█ █▀░ ██▄ ▄█ ▄█ █▄█ █▀▄    █▄█ █▄█ ░█░
+ 
+                     © 𝙻𝙴𝙶𝙴𝙽𝙳𝙰𝚁𝚈_𝙰𝙵_PROFESSORBOT™
+___________________________________________________
+  ★ ProfessorBot now with OpenAI-GPT3 Chatbot ★
+---------------------------------------------------
+By: Harsh Jaiswal
+   (@harshjais369)
+"""
+    python3 -m userbot
+}
+
+_set_bot
