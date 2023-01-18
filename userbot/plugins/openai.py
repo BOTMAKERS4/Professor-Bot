@@ -12,6 +12,7 @@ from userbot import bot, LOGS
 from userbot.cmdhelp import *
 from mafiabot.utils import *
 from userbot.Config import Config
+from userbot.plugins.sql_helper.openaiconfig_sql import getOpenaiConfig, setOpenaiConfig
 from . import *
 from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
 from telethon.tl.functions.users import GetFullUserRequest
@@ -50,8 +51,9 @@ async def _(event):
         event = await eor(event, "**OpenAI ChatGPT:** Hey! This is OpenAI\'s GPT3 chatbot, now available with ProfessorBot by Harsh Jaiswal. I am here to talk with you in friendly and meaningful way as well as answer any questions you may have.")
         return
     if not event.reply_to_msg_id:
-        # initiate a new convo
-        event = await eor(event, asknew(str(input_str)))
+        # initiate a fresh convo
+        resstr = f"**> Harsh:** {str(input_str)}\n\n**OpenAI ChatGPT:** {asknew(str(input_str))}"
+        event = await eor(event, resstr)
         return
     prompt_msg = "" # prompt msg to be sent to AI
     reply = await event.message.get_reply_message() # (reply=None; if reply not found)
@@ -59,8 +61,8 @@ async def _(event):
         event = await eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
     # Test starts ---------
-    event = await eor(event, "Not found!") if reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0 else await eor(event, "Found!")
-    await asyncio.sleep(5)
+    # event = await eor(event, "Not found!") if reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0 else await eor(event, "Found!")
+    # await asyncio.sleep(5)
     # Test ends ---------
     if (reply.sender_id != ME) or (reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0):
         prompt_msg = str(reply.message) + str(input_str)
@@ -102,7 +104,32 @@ async def _(event):
 
 # ————————————————————————---------------------
 def asknew(prompt):
-    return f"#new_convo\nYour prompt: {prompt}"
+    conf = getOpenaiConfig()
+    if conf is None:
+        return AI_ERROR
+    try:
+        conf[6] = conf[6].replace("{{{", "", 1).replace("}}}", "", 1)
+    except:
+        pass
+    try:
+        openai.api_key = AI_API_KEY
+        resp_obj = openai.Completion.create(
+            model=conf[0],
+            prompt=f"{conf[6]}{prompt}{conf[7]}",
+            temperature=conf[1],
+            max_tokens=conf[2],
+            top_p=conf[3],
+            frequency_penalty=conf[4],
+            presence_penalty=conf[5]
+        )
+        ans_str = resp_obj["choices"][0]["text"]
+        if resp_obj["choices"][0]["finish_reason"] == "length":
+            ans_str = f"{ans_str}...\n__(reached max. text limit)__"
+        ans_str = f"{ans_str}\n\n───────────────────\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
+        return ans_str.expandtabs(10)
+    except:
+        return AI_ERROR
+    # return f"#new_convo\nYour prompt: {prompt}"
 
 def askfromreply(prompt):
     return f"#reply_from_previous\nYour prompt: {prompt}"
@@ -122,7 +149,8 @@ def correctGrammarFunc(prompt):
         ans_str = resp_obj["choices"][0]["text"]
         if resp_obj["choices"][0]["finish_reason"] == "length":
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
-        return ans_str
+        ans_str = f"{ans_str}\n\n───────────────────\n**Gʀᴀᴍᴍᴀʀ ʀᴇᴄᴛɪꜰɪᴄᴀᴛɪᴏɴ ᴛᴏᴏʟ**\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
+        return ans_str.expandtabs(10)
     except:
         return AI_ERROR
     
