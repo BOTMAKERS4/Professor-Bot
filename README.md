@@ -1,3 +1,10 @@
+[![FlyIO Deploy](https://github.com/harshjais369/ProfessorBot/actions/workflows/fly.yml/badge.svg?branch=main)](https://github.com/harshjais369/ProfessorBot/actions/workflows/fly.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/harshjais369/ProfessorBot)
+[![Contact Me](https://img.shields.io/badge/Telegram-Contact%20Me-informational)](https://t.me/harshjais369)
+
+
+
+
 <h1 align="center">⚡ PROFESSOR 𝚄𝚂𝙴𝚁𝙱𝙾𝚃 ⚡</h1>
 
 
@@ -10,11 +17,11 @@
 # FORK AT YOUR OWN RISK
 
 <details>
-  <summary> • ⚡INSTALLING⚡ • </summary>
+  <summary> • INSTALLING ⚡ </summary>
 
-### The Easy Way
+### One click installation:
 
-<h4>⚜️DEPLOY TO HEROKU⚜️</h4>
+• Deploy to Heroku ⚜️
 
 <a href="https://dashboard.heroku.com/new?template=https://github.com/harshjais369/ProfessorBot" rel="nofollow" style="background-color: initial; box-sizing: border-box; color: #0366d6; text-decoration-line: none;"><img alt="Deploy" data-canonical-src="https://www.herokucdn.com/deploy/button.svg" src="https://camo.githubusercontent.com/83b0e95b38892b49184e07ad572c94c8038323fb/68747470733a2f2f7777772e6865726f6b7563646e2e636f6d2f6465706c6f792f627574746f6e2e737667" style="border-style: none; box-sizing: initial; max-width: 100%;" /></a></div>
 
@@ -22,19 +29,14 @@
 </details>
 
 <details>
-  <summary> • 🏅CREDITS🏅 • </summary>
+  <summary> • CREDITS 🏅 </summary>
+  
+ • [MafiaBot](https://github.com)
 
-• [JaaduBot](https://github.com/Amberyt/JaaduBot)
-
-• [Uniborg](https://github.com/spechide/uniborg)
-
-• [Hêllẞø†](https://github.com/thevaders/vader)
-
-• [Kittu](https://t.me/Autichrist)
 </details>
 
 <details>
-  <summary> • ✅OFFICIAL SUPPORTS✅ • </summary>
+  <summary> • OFFICIAL SUPPORTS ✅ </summary>
 
 ```
 Get help regarding setting up 
@@ -43,37 +45,38 @@ support Group and get updates
 notifications in Update Channel.
 ```
 
-<a href="https://t.me/MafiaBot_Support"><img src="https://img.shields.io/badge/Join-Support%20Channel-red.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://t.me/harsh_hacker_gp"><img src="https://img.shields.io/badge/Join-Support%20Channel-red.svg?style=for-the-badge&logo=Telegram"></a>
 </details>
 
 <h1 align="center">⚙️ SET-UP ⚙️</h1>
 
 <details>
-  <summary> • 🌟GENERATE STRING SESSION🌟 • </summary>
+  <summary> • GENERATE STRING SESSION 🌟 </summary>
 
 - Termux
-    - Clone `git clone https://github.com/H1M4N5HU0P/MAFIA-BOT.git`
-    - Then Do  `cd MAFIA-BOT`
+    - Clone `git clone https://github.com/harshjais369/ProfessorBot.git`
+    - Then Do  `cd professorbot`
     - Run String Generator By
            `bash string.sh`
     - Then Fill The Required Details.
     - API ID, API HASH, PHONE NUMBER (WITH COUNTRY CODE)
  
 - Repl Run
-    - Click [Here](https://replit.com/@H1M4N5HU0P/MAFIABOT#main.py) to open Repl run.
+    - Click [Here](https://replit.com/@harshjais369/ProfessorBot#tg_session_generator.py) to open Repl run.
     - Click On Green Play Button.
-    - Wait for a while then fill the details.
+    - Wait for a while, then enter the requisite details.
     - String will be saved in your Saved Message.
 </details>
 
 <details>
-  <summary> • 💫HOSTING💫 • </summary>
+  <summary> • HOSTING 💫 </summary>
 
-- Choose A Hosting Site. And fill the mandatory vars.
+- Choose A Hosting Site. Ensure the mandatory vars are provisioned to run environment.
 
 ## Deploys
 
-- You Can Deploy it on 
+- You Can Deploy it on:
+    - [Fly.io](https://fly.io) (Free)
     - [Zeet](https://zeet.co/new)
     - [Uffizzi](https://uffizzi.com)
     - Any Other VPS.
@@ -97,7 +100,7 @@ notifications in Update Channel.
 </details>
 
 <details>
-  <summary> • 📄LICENSE📄 • </summary>
+  <summary> • LICENSE 📄 </summary>
 
 ![](https://www.gnu.org/graphics/gplv3-or-later.png)
 
