@@ -79,8 +79,8 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
 
 def getOpenaiConfig():
     data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
-    if data is None:
-        SESSION.add(OpenaiConfig(
+    if (not data) or data is None:
+        data = OpenaiConfig(
             model_id=1,
             model="text-davinci-003",
             temperature="0.7",
@@ -90,9 +90,12 @@ def getOpenaiConfig():
             presence_penalty="0",
             text_before_prompt="",
             text_after_prompt=""
-        ))
-        SESSION.commit()
-        data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
+        )
+        try:
+            SESSION.add(data)
+            SESSION.commit()
+        except:
+            return None
     res_list = [
         data.model,
         data.temperature,
