@@ -5,7 +5,7 @@ import time
 from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 from userbot.plugins.sql_helper import pmpermit_sql as pmpermit_sql
-from userbot import ALIVE_NAME, CUSTOM_PMPERMIT, MAFIA_ID
+from userbot import CUSTOM_PMPERMIT, MAFIA_ID
 from userbot.Config import Config
 from mafiabot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
@@ -30,10 +30,10 @@ h1m4n5hu0p = (
     else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n THIS IS ILLEGAL AND REGARDED AS CRIME"
 )
 """
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 USER_BOT_WARN_ZERO = "🛑 **Our AI system has detected you were spamming my master's inbox, henceforth you\'ve been blocked until my master comes back and approve this chat for further conversation.**"
 USER_BOT_NO_WARN = (
-    "**ProfessorBot Ultra Private Security Protocol⚠️**.\n\n"
+    "**ProfessorBot Ultra Private Security Protocol ⚠️**\n\n"
     "Greetings, this is an automated AI response protocol by ProfessorBot. Access to this chat is restricted due to an inability to authenticate your identity. Keep in mind, you may be blocked from this potal if you enter wrong commands multiple times."
     "In order to initiate a valid conversation, you need to verify your identity first.\n\n"
     "Send /start - __to start verification__"
