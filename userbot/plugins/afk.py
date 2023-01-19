@@ -4,7 +4,6 @@ from datetime import datetime
 from telethon import events
 from telethon.tl import functions, types
 from userbot import CMD_HELP, mafiaversion
-from userbot *
 from mafiabot.utils import admin_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
