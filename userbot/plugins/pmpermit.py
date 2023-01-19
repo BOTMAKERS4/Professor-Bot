@@ -5,7 +5,6 @@ import time
 from telethon import events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 from userbot.plugins.sql_helper import pmpermit_sql as pmpermit_sql
-from userbot import CUSTOM_PMPERMIT, MAFIA_ID
 from userbot.Config import Config
 from mafiabot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
@@ -25,8 +24,8 @@ MAFIAPIC = (
 )
 """
 h1m4n5hu0p = (
-    str(CUSTOM_PMPERMIT)
-    if CUSTOM_PMPERMIT
+    str(Config.CUSTOM_PMPERMIT)
+    if Config.CUSTOM_PMPERMIT
     else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n THIS IS ILLEGAL AND REGARDED AS CRIME"
 )
 """
