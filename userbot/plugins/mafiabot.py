@@ -1,5 +1,4 @@
 import time
-
 from userbot import StartTime, mafiaversion
 from mafiabot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from telethon import events, version
@@ -15,7 +14,7 @@ async def reply_id(event):
     return reply_to_id
 
 
-DEFAULTUSER = ALIVE_NAME or "ProfessorBot User"
+DEFAULTUSER = Config.ALIVE_NAME or "ProfessorBot User"
 MAFIA_IMG = Config.ALIVE_PIC
 CUSTOM_ALIVE_TEXT = Config.ALIVE_MSG or "𝕃𝕖𝕘𝕖𝕟𝕕𝕒𝕣𝕪_𝔸𝔽_ℙ𝕣𝕠𝕗𝕖𝕤𝕤𝕠𝕣𝔹𝕠𝕥"
 
