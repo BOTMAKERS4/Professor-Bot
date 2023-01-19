@@ -6,17 +6,14 @@ import math
 import os
 import time
 from datetime import datetime
-
 from pySmartDL import SmartDL
-
 from userbot import CMD_HELP
 from mafiabot.utils import admin_cmd, humanbytes, progress, sudo_cmd
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
-
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 
 @bot.on(admin_cmd(pattern="download(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="download(?: |$)(.*)", allow_sudo=True))
