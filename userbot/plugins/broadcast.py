@@ -1,15 +1,14 @@
-# credits goes to cat userbot
-# thanks to cat userbot
-
 import base64
 from asyncio import sleep
-
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from mafiabot.utils import admin_cmd, edit_or_reply, sudo_cmd
-from userbot import BOTLOG, BOTLOG_CHATID
+from userbot.Config import Config
 from userbot.helpers.format import parse_pre
 from userbot.plugins.sql_helper import broadcast_sql as sql
 from userbot.cmdhelp import CmdHelp
+
+BOTLOG = str(Config.BOTLOG) if Config.BOTLOG else None
+BOTLOG_CHATID = str(Config.BOTLOG_CHATID) if Config.BOTLOG_CHATID else None
 
 @bot.on(admin_cmd(pattern="sendto(?: |$)(.*)", command="sendto"))
 @bot.on(sudo_cmd(pattern="sendto(?: |$)(.*)", command="sendto", allow_sudo=True))
