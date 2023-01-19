@@ -1,8 +1,3 @@
-# Made By @Kraken_The_BadASS. Keep Credit if you are gonna copy paste it. LOL NOOBS....
-# Exclusive plugins from my channel @testpy12
-# Also some from my bro's channel @pyforub......(sawan me lagg gai aag🔥🔥🔥🔥🔥🔥🔥🔥)
-# Now in mafiabot....
-
 import random
 from asyncio import sleep
 import asyncio
@@ -12,7 +7,7 @@ from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 
 h1m4n5hu0p = bot.uid
 
