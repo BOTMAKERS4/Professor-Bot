@@ -1,16 +1,12 @@
-#credit goes to Hellbot
-#modifiy by @D3krish for Mafiabot
-#If you kang this plugin please don't forget to give credit to Mafiabot and Hellbot. 
 import os
 import random
 import time
-
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterPhotos, InputMessagesFilterDocument
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.Config import Config
 from . import *
-
+from userbot import ALIVE_NAME
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
 mafia = borg.uid
