@@ -6,9 +6,8 @@ from telethon.tl.types import InputMessagesFilterPhotos, InputMessagesFilterDocu
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.Config import Config
 from . import *
-from userbot import ALIVE_NAME
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 mafia = borg.uid
 
 PICS_STR = []
