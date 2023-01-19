@@ -1,1 +1,1 @@
-worker: bash professorbot
+userbot: python3 -m userbot
