@@ -4,7 +4,7 @@ from userbot.plugins.sql_helper import pmpermit_sql as pmpermit_sql
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 PREV_REPLY_MESSAGE = {}
 
 
