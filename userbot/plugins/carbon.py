@@ -2,10 +2,8 @@ import asyncio
 import os
 import random
 from urllib.parse import quote_plus
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 from userbot import CMD_HELP
 from userbot.helpers.functions import deEmojify
 from mafiabot.utils import admin_cmd, edit_or_reply, sudo_cmd
@@ -13,18 +11,16 @@ from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
-
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 CARBONLANG = "auto"
 LANG = "en"
-
 
 @bot.on(admin_cmd(outgoing=True, pattern="carbon(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="carbon(?: |$)(.*)", allow_sudo=True))
 async def carbon_api(e):
     if e.fwd_from:
         return
-    """ A Wrapper for carbon.now.sh """
+    # A Wrapper for carbon.now.sh
     await e.edit("`Processing..`")
     CARBON = "https://carbon.now.sh/?l={lang}&code={code}"
     textx = await e.get_reply_message()
