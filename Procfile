@@ -1,1 +1,1 @@
-worker: bash professorbot
+worker: bash startprfbottg
