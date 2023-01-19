@@ -10,24 +10,20 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
-# 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "𝗣𝗿𝗼𝗳𝗲𝘀𝘀𝗼𝗿 𝗕𝗼𝘁"
 
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "𝗣𝗿𝗼𝗳𝗲𝘀𝘀𝗼𝗿 𝗕𝗼𝘁"
 ludosudo = Config.SUDO_USERS
-
 if ludosudo:
     sudou = "True"
 else:
     sudou = "False"
-
-mafia = bot.uid
-
+ME = bot.uid
 MAFIA_IMG = Config.ALIVE_PIC or "https://telegra.ph/file/e97d640332ce5eadb3f89.mp4"
 pm_caption = "  __**🔥⚡ 𝙿𝚁𝙾𝙵𝙴𝚂𝚂𝙾𝚁 𝙱𝙾𝚃 𝙸𝚂 𝙰𝙻𝙸𝚅𝙴 ⚡🔥**__\n\n"
 
 pm_caption += f"**━━━━━━━━━━━━━━━━━━━━━━**\n\n"
 pm_caption += (
-    f"                 👑𝐌𝐀𝐒𝐓𝐄𝐑👑\n       **『😈[{DEFAULTUSER}](tg://user?id={mafia})😈』**\n\n"
+    f"                 👑𝐌𝐀𝐒𝐓𝐄𝐑👑\n       **『😈[{DEFAULTUSER}](tg://user?id={ME})😈』**\n\n"
 )
 pm_caption += f"┏━━━━━━━━━━━━━━━━━━━━━\n"
 pm_caption += f"┣•**➳ Telethon:** `{version.__version__}`\n"
