@@ -1,10 +1,9 @@
 import html
-
 from userbot.cmdhelp import CmdHelp
-from userbot import bot, CMD_HELP, ALIVE_NAME
+from userbot import bot, CMD_HELP
+from userbot.Config import Config
 from userbot.plugins.sql_helper.gban_sql import is_gbanned
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply
-
 from telethon import events
 from telethon.events import ChatAction
 from telethon.utils import get_input_location
@@ -18,7 +17,7 @@ from telethon.tl.functions.channels import EditAdminRequest, EditBannedRequest, 
 from telethon.tl.types import ChatAdminRights, ChannelParticipantsAdmins, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto
 
 
-HARSHJ = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot user"
+HARSHJ = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot user"
 papa = borg.uid
 
 
