@@ -3,13 +3,10 @@ Syntax: .night REASON"""
 
 import asyncio
 import datetime
-
 from telethon import events
 from telethon.tl import functions, types
-
 from userbot.Config import Config
 from . import *
-
 from mafiabot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
 
@@ -19,11 +16,7 @@ global last_night_message  # pylint:disable=E0602
 USER_night = {}
 night_time = None
 last_night_message = {}
-
-DEFAULTUSER = (
-    str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
-)
-
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 
 @borg.on(events.NewMessage(outgoing=True))  # pylint:disable=E0602
 async def set_not_night(event):
