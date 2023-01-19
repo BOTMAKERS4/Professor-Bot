@@ -1,6 +1,5 @@
 import asyncio
 from datetime import datetime
-
 from .. import CMD_HELP
 from ..utils import admin_cmd, edit_or_reply, sudo_cmd
 from ..cmdhelp import CmdHelp
@@ -8,7 +7,7 @@ from userbot.Config import Config
 from . import *
 
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 h1m4n5hu0p = borg.uid
 MAFIA_IMG = Config.ALIVE_PIC
 
