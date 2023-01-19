@@ -1,4 +1,4 @@
-[![FlyIO Deploy](https://github.com/harshjais369/ProfessorBot/actions/workflows/fly.yml/badge.svg?branch=main)](https://github.com/harshjais369/ProfessorBot/actions/workflows/fly.yml)
+[![Docker Image CI](https://github.com/harshjais369/ProfessorBot/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/harshjais369/ProfessorBot/actions/workflows/docker-image.yml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/harshjais369/ProfessorBot)
 [![Contact Me](https://img.shields.io/badge/Telegram-Contact%20Me-informational)](https://t.me/harshjais369)
 
