@@ -1,25 +1,20 @@
 """Get Telegram Profile Picture and other information
 and set as own profile.
 Syntax: .clone @username"""
-# Copy That Plugin by @ViperAdnan
-# modified by @Kraken_The_BadASS
-# Give credit if you are going to kang it.
 
 import html
-
 from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-
 from userbot import CMD_HELP
 from mafiabot.utils import admin_cmd
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "Mafia User"
 
-DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "LEGENDARY AF MAFIABOT"
+DEFAULTUSERBIO = str(Config.BIO_MSG) if Config.BIO_MSG else "LEGENDARY AF ProfessorBot"
 BOTLOG_CHATID = Config.MAFIABOT_LOGGER
 BOTLOG = True
 
