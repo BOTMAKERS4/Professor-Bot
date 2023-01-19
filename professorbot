@@ -42,3 +42,4 @@ By: Harsh Jaiswal
 
 python3 pip install --upgrade pip
 python3 pip install -U -r requirements.txt
+python3 -m userbot
