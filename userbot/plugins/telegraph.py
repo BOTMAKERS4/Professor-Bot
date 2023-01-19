@@ -1,19 +1,16 @@
 import os
 import datetime
-
 from PIL import Image
 from telegraph import Telegraph, exceptions, upload_file
-
 from userbot.Config import Config
 from . import *
-
 from userbot.helpers.extras import delete_mafia as eod
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 
-MAFIA_NAME = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
-h1m4n5hu0p = bot.uid
-mafia_mention = "[{MAFIA_NAME}](tg://user?id={h1m4n5hu0p})"
+MY_NAME = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
+ME = bot.uid
+mafia_mention = "[{MY_NAME}](tg://user?id={ME})"
 lg_id = Config.MAFIABOT_LOGGER
 
 telegraph = Telegraph()
@@ -59,7 +56,7 @@ async def _(event):
                 os.remove(downloaded_file_name)
                 await edit_or_reply(event, 
                    "✓ **𝖥𝗂𝗅𝖾 𝗎𝗉𝗅𝗈𝖺𝖽𝖾𝖽 𝗍𝗈 : https://telegra.ph{}** \n✓ **𝖳𝗂𝗆𝖾 𝗍𝖺𝗄𝖾𝗇 :-** `{}` 𝗌𝖾𝖼𝗌 \n✓ **𝖡𝗒 :-** [{}](tg://user?id={})".format(
-                        media_urls[0], (ms + ms_two), MAFIA_NAME, h1m4n5hu0p
+                        media_urls[0], (ms + ms_two), MY_NAME, ME
                     ),
                     link_preview=True,
                 )
@@ -88,7 +85,7 @@ async def _(event):
             ms = (end - start).seconds
             mafiaboy = f"https://telegra.ph/{response['path']}"
             await edit_or_reply(event, 
-                  f"✓ **𝗉𝖺𝗌𝗍𝖾𝖽 𝗍𝗈** {mafiaboy} \n✓ **𝖳𝗂𝗆𝖾 𝗍𝖺𝗄𝖾𝗇 :-** `{ms}` 𝖲𝖾𝖼𝗌\n✓ **𝖡𝗒:-** [{MAFIA_NAME}](tg://user?id={h1m4n5hu0p})", link_preview=True)
+                  f"✓ **𝗉𝖺𝗌𝗍𝖾𝖽 𝗍𝗈** {mafiaboy} \n✓ **𝖳𝗂𝗆𝖾 𝗍𝖺𝗄𝖾𝗇 :-** `{ms}` 𝖲𝖾𝖼𝗌\n✓ **𝖡𝗒:-** [{MY_NAME}](tg://user?id={Me})", link_preview=True)
     else:
         await eod(event, 
             "Reply to a message to get a permanent telegra.ph link."
