@@ -17,7 +17,7 @@ from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 # credits to kraken, john snow
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 # credits to kraken, john snow
 h1m4n5hu0p = bot.uid
 # credits to kraken, john snow
