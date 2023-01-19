@@ -1,13 +1,12 @@
 import asyncio
 from collections import deque
-
 from userbot import *
 from mafiabot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 
 
 @bot.on(admin_cmd(pattern=r"boxs$", outgoing=True))
