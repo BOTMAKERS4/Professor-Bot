@@ -45,7 +45,7 @@ nekos.py
 oauth2client
 openai
 patool
-
+psycopg2
 psycopg2-binary
 PyLyrics
 pyaztro
