@@ -45,6 +45,8 @@ if ENV:
         SPOTIFY_USERNAME = os.environ.get("SPOTIFY_USERNAME", None)
         SPOTIFY_PASS = os.environ.get("SPOTIFY_PASS", None)
         SPOTIFY_BIO_PREFIX = os.environ.get("SPOTIFY_BIO_PREFIX", None)
+        BOTLOG = os.environ.get("BOTLOG", None)
+        BOTLOG_CHATID = os.environ.get("BOTLOG_CHATID", None)
         #log
         DUAL_LOG = os.environ.get("DUAL_LOG", None)
         # DO NOT EDIT BELOW THIS LINE IF YOU DO NOT KNOW WHAT YOU ARE DOING
