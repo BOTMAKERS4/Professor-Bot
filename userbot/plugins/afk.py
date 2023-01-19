@@ -1,12 +1,10 @@
-# by unibot...Thanks @spechide
-# Now will be used in ProfessorBot too....
 import asyncio
 import datetime
 from datetime import datetime
-
 from telethon import events
 from telethon.tl import functions, types
 from userbot import CMD_HELP, mafiaversion
+from userbot *
 from mafiabot.utils import admin_cmd, edit_or_reply
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
@@ -15,7 +13,6 @@ from . import *
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
 
 mafia = bot.uid
-
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
