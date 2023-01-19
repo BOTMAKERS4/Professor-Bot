@@ -10,9 +10,8 @@ from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "ProfessorBot User"
-
-mafia = bot.uid
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
+ME = bot.uid
 
 global USER_AFK  # pylint:disable=E0602
 global afk_time  # pylint:disable=E0602
@@ -94,7 +93,7 @@ async def on_afk(event):
         msg = None
         
         message_to_reply = (
-            f"Hey!! My Legend master [{DEFAULTUSER}](tg://user?id={mafia}) is currently offline... Since when?\n**For** `{total_afk_time}`\n"
+            f"Hey!! My Legend master [{DEFAULTUSER}](tg://user?id={ME}) is currently offline... Since when?\n**For** `{total_afk_time}`\n"
             + f"\n\n👇__The Reason Is__👇 :-\n`{reason}`"
   if reason
             else f"**Heyy!**\n__I am currently unavailable.__\n__Since when, you ask? From__ `{total_afk_time}`\nI'll be back when I feel to come🚶"
