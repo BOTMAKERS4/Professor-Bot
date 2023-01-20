@@ -9,7 +9,7 @@ from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSERBIO = str(BIO_MSG) if BIO_MSG else "ʟᴇɢᴇɴᴅᴀʀʏ ᴀғ ᴍᴀғɪᴀʙᴏᴛ"
+DEFAULTUSERBIO = str(Config.BIO_MSG) if Config.BIO_MSG else "ʟᴇɢᴇɴᴅᴀʀʏ ᴀғ ᴍᴀғɪᴀʙᴏᴛ"
 DEL_TIME_OUT = 60
 DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "Mafia User"
 
