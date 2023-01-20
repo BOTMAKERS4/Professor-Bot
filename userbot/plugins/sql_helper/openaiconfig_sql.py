@@ -78,7 +78,7 @@ def setOpenaiConfig(model_name, temp, maxtoken, topp, frequencypenalty, presence
         return False
 
 def getOpenaiConfig():
-    data = SESSION.query(OpenaiConfig).filter(int(OpenaiConfig.model_id) == 1).first()
+    data = SESSION.query(OpenaiConfig).filter(OpenaiConfig.model_id == 1).first()
     if (not data) or data is None:
         data = OpenaiConfig(
             model_id=1,
