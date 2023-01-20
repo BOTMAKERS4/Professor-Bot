@@ -1,5 +1,8 @@
 from userbot import CMD_HELP, CMD_HELP_BOT
 import os
+from dotenv import load_dotenv
+
+load_dotenv(verbose=True)
 
 COMMAND_HAND_LER = os.environ.get("COMMAND_HAND_LER", r".")
 
