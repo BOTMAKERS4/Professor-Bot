@@ -98,11 +98,11 @@ def getOpenaiConfig():
             return None
     res_list = [
         data.model,
-        data.temperature,
-        data.max_tokens,
-        data.top_p,
-        data.frequency_penalty,
-        data.presence_penalty,
+        int(data.temperature),
+        int(data.max_tokens),
+        int(data.top_p),
+        int(data.frequency_penalty),
+        int(data.presence_penalty),
         data.text_before_prompt,
         data.text_after_prompt
     ]
