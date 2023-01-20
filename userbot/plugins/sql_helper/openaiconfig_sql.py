@@ -97,14 +97,14 @@ def getOpenaiConfig():
         except:
             return None
     res_list = [
-        data.model,
-        int(data.temperature),
+        str(data.model),
+        float(data.temperature),
         int(data.max_tokens),
-        int(data.top_p),
-        int(data.frequency_penalty),
-        int(data.presence_penalty),
-        data.text_before_prompt,
-        data.text_after_prompt
+        float(data.top_p),
+        float(data.frequency_penalty),
+        float(data.presence_penalty),
+        str(data.text_before_prompt),
+        str(data.text_after_prompt)
     ]
     SESSION.close()
     return res_list
