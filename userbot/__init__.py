@@ -6,8 +6,9 @@ from telethon import TelegramClient, events, sync
 from userbot.helpers import functions as simpdef
 from userbot.Config import Config
 from var import Var
+from dotenv import load_dotenv
 
-
+load_dotenv(verbose=True)
 StartTime = time.time()
 mafiaversion = "2.0.5"
 botversion = "0.1"
