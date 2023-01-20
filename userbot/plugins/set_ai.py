@@ -51,13 +51,13 @@ where,
     presence_penalty, txt_before_prompt, txt_after_prompt RESPECTIVELY)
 """
 model_dict = dict(
-    default=["text-davinci-003", "0.7", "2048", "1", "0", "0", "", ""],
+    default=["text-davinci-003", "0.7", "2048", "1", "0", "0", "You: ", "\nA:"],
     sarcastic=["text-davinci-003", "0.5", "2048", "0.3", "0.5", "0", smtxt, "\nMarv:"],
     sarcastic_human=["text-davinci-003", "0.5", "2048", "0.3", "0.5", "0", shmtxt, "\nProfessor:"],
     friend=["text-davinci-003", "0.5", "2048", "1", "0.5", "0", fmtxt, "\nFriend:"],
-    quick_answer=["text-davinci-001", "0.7", "2048", "1", "0", "0", "", ""],
+    quick_answer=["text-davinci-001", "0.7", "2048", "1", "0", "0", "You: ", "\nA:"],
     negative=["text-davinci-002", "0.8", "2048", "1", "0", "0", nmtxt, "\nTerrex:"],
-    pleasant=["text-curie-001", "0.7", "2048", "1", "0", "0", "", ""]
+    pleasant=["text-curie-001", "0.7", "2048", "1", "0", "0", "You: ", "\nA:"]
 )
 
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
