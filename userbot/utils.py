@@ -1,5 +1,3 @@
-# credits to @mrconfused 
-
 import asyncio
 import datetime
 import importlib
@@ -22,13 +20,13 @@ from telethon import events
 from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
 from userbot.helpers.tools import media_type
-
 from var import Var
-
 from userbot import CMD_LIST, LOAD_PLUG, LOGS, SUDO_LIST, bot
 from userbot.helpers.exceptions import CancelProcess
 from userbot.Config import Config
+from dotenv import load_dotenv
 
+load_dotenv(verbose=True)
 ENV = bool(os.environ.get("ENV", False))
 if ENV:
     from userbot.Config import Config
@@ -52,7 +50,6 @@ def load_module(shortname):
         LOGS.info("ProfessorBot - Successfully imported " + shortname)
     else:
         import userbot.utils
-
         path = Path(f"userbot/plugins/{shortname}.py")
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -70,7 +67,7 @@ def load_module(shortname):
         mod.edit_or_reply = edit_or_reply
         mod.delete_mafia = delete_mafia
         mod.media_type = media_type
-        # support for mafiabot originals
+        # support for ProfessorBot originals
         sys.modules["mafiabot.utils"] = userbot.utils
         sys.modules["mafiabot"] = userbot
         # support for paperplaneextended
@@ -78,7 +75,7 @@ def load_module(shortname):
         spec.loader.exec_module(mod)
         # for imports
         sys.modules["userbot.plugins." + shortname] = mod
-        LOGS.info("⚡🔥ProfessorBot⚡🔥 - Successfully imported " + shortname)
+        LOGS.info("🔥⚡ProfessorBot⚡🔥 - Successfully imported " + shortname)
 
 
 def remove_plugin(shortname):
@@ -87,10 +84,8 @@ def remove_plugin(shortname):
             for i in LOAD_PLUG[shortname]:
                 bot.remove_event_handler(i)
             del LOAD_PLUG[shortname]
-
         except BaseException:
             name = f"userbot.plugins.{shortname}"
-
             for i in reversed(range(len(bot._event_builders))):
                 ev, cb = bot._event_builders[i]
                 if cb.__module__ == name:
@@ -319,10 +314,8 @@ def on(**args):
         async def wrapper(event):
             # do things like check if sudo
             await func(event)
-
         client.add_event_handler(wrapper, events.NewMessage(**args))
         return wrapper
-
     return decorater
 
 
@@ -331,26 +324,21 @@ def errors_handler(func):
         try:
             await func(errors)
         except BaseException:
-
             date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
             new = {
                 'error': str(sys.exc_info()[1]),
                 'date': datetime.datetime.now()
             }
-
             text = "**USERBOT CRASH REPORT**\n\n"
-
-            link = "[here](https://t.me/sn12384)"
+            link = "[here](https://t.me/harshjais369)"
             text += "If you wanna you can report it"
             text += f"- just forward this message {link}.\n"
             text += "Nothing is logged except the fact of error and date\n"
-
             ftext = "\nDisclaimer:\nThis file uploaded ONLY here,"
             ftext += "\nwe logged only fact of error and date,"
             ftext += "\nwe respect your privacy,"
             ftext += "\nyou may not report this error if you've"
             ftext += "\nany confidential data here, no one will see your data\n\n"
-
             ftext += "--------BEGIN USERBOT TRACEBACK LOG--------"
             ftext += "\nDate: " + date
             ftext += "\nGroup ID: " + str(errors.chat_id)
@@ -364,9 +352,7 @@ def errors_handler(func):
             ftext += "\n\n--------END USERBOT TRACEBACK LOG--------"
 
             command = "git log --pretty=format:\"%an: %s\" -5"
-
             ftext += "\n\n\nLast 5 commits:\n"
-
             process = await asyncio.create_subprocess_shell(
                 command,
                 stdout=asyncio.subprocess.PIPE,
@@ -374,16 +360,14 @@ def errors_handler(func):
             stdout, stderr = await process.communicate()
             result = str(stdout.decode().strip()) \
                 + str(stderr.decode().strip())
-
             ftext += result
-
     return wrapper
 
 
 async def progress(
     current, total, event, start, type_of_ps, file_name=None, is_cancelled=None
 ):
-    """Generic progress_callback for uploads and downloads."""
+    # Generic progress_callback for uploads and downloads
     now = time.time()
     diff = now - start
     if is_cancelled is True:
@@ -435,7 +419,6 @@ def human_to_bytes(size: str) -> int:
         "T": 2 ** 40,
         "TB": 2 ** 40,
     }
-
     size = size.upper()
     if not re.match(r" ", size):
         size = re.sub(r"([KMGT])", r" \1", size)
@@ -491,13 +474,10 @@ def register(**args):
     pattern = args.get("pattern", None)
     disable_edited = args.get("disable_edited", True)
     allow_sudo = args.get("allow_sudo", False)
-
     if pattern is not None and not pattern.startswith("(?i)"):
         args["pattern"] = "(?i)" + pattern
-
     if "disable_edited" in args:
         del args["disable_edited"]
-
     reg = re.compile("(.*)")
     if pattern is not None:
         try:
@@ -506,24 +486,20 @@ def register(**args):
                 cmd = cmd.group(1).replace("$", "").replace("\\", "").replace("^", "")
             except BaseException:
                 pass
-
             try:
                 CMD_LIST[file_test].append(cmd)
             except BaseException:
                 CMD_LIST.update({file_test: [cmd]})
         except BaseException:
             pass
-
     if allow_sudo:
         args["from_users"] = list(Config.SUDO_USERS)
         # Mutually exclusive with outgoing (can only set one of either).
         args["incoming"] = True
         del args["allow_sudo"]
-
     # error handling condition check
     elif "incoming" in args and not args["incoming"]:
         args["outgoing"] = True
-
     # add blacklist chats, UB should not respond in these chats
     args["blacklist_chats"] = True
     black_list_chats = list(Config.UB_BLACK_LIST_CHAT)
@@ -539,18 +515,15 @@ def register(**args):
         except Exception:
             LOAD_PLUG.update({file_test: [func]})
         return func
-
     return decorator
 
 
 def command(**args):
     args["func"] = lambda e: e.via_bot_id is None
-
     stack = inspect.stack()
     previous_stack_frame = stack[1]
     file_test = Path(previous_stack_frame.filename)
     file_test = file_test.stem.replace(".py", "")
-
     pattern = args.get("pattern", None)
     allow_sudo = args.get("allow_sudo", None)
     allow_edited_updates = args.get("allow_edited_updates", False)
@@ -558,13 +531,11 @@ def command(**args):
     args["outgoing"] = True
     if bool(args["incoming"]):
         args["outgoing"] = False
-
     try:
         if pattern is not None and not pattern.startswith("(?i)"):
             args["pattern"] = "(?i)" + pattern
     except BaseException:
         pass
-
     reg = re.compile("(.*)")
     if pattern is not None:
         try:
@@ -606,7 +577,6 @@ def command(**args):
         except BaseException:
             LOAD_PLUG.update({file_test: [func]})
         return func
-
     return decorator
 
 
