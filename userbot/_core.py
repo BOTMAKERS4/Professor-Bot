@@ -10,10 +10,10 @@ from userbot import *
 from userbot import bot as mafiabot
 
 DELETE_TIMEOUT = 5
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
 mafia_logo = "./H1M4N5HU0P/mafiabot_logo.jpg"
-h1m4n5hu0p = mafiabot.uid
-mafia = f"[{DEFAULTUSER}](tg://user?id={h1m4n5hu0p})"
+ME = mafiabot.uid
+mafia = f"[{DEFAULTUSER}](tg://user?id={ME})"
 
 @mafiabot.on(admin_cmd(pattern=r"send (?P<shortname>\w+)", outgoing=True))
 @mafiabot.on(sudo_cmd(pattern=r"send (?P<shortname>\w+)", allow_sudo=True))
@@ -82,17 +82,17 @@ async def install(event):
     
 @mafiabot.on(admin_cmd(pattern=r"uninstall (?P<shortname>\w+)", outgoing=True))
 @mafiabot.on(sudo_cmd(pattern=r"uninstall (?P<shortname>\w+)", allow_sudo=True))
-async def uninstall(h1m4n5hu0p):
-    if h1m4n5hu0p.fwd_from:
+async def uninstall(ME):
+    if ME.fwd_from:
         return
-    shortname = h1m4n5hu0p.pattern_match["shortname"]
+    shortname = ME.pattern_match["shortname"]
     dir_path =f"./userbot/plugins/{shortname}.py"
     try:
         remove_plugin(shortname)
         os.remove(dir_path)
-        await h1m4n5hu0p.edit(f"Uninstalled `{shortname}` successfully")
+        await ME.edit(f"Uninstalled `{shortname}` successfully")
     except OSError as e:
-        await h1m4n5hu0p.edit("Error: %s : %s" % (dir_path, e.strerror))
+        await ME.edit("Error: %s : %s" % (dir_path, e.strerror))
 
 @mafiabot.on(admin_cmd(pattern=r"unload (?P<shortname>\w+)$"))
 @mafiabot.on(sudo_cmd(pattern=r"upload (?P<shortname>\w+)$", allow_sudo=True))
