@@ -1,6 +1,5 @@
 from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 from telethon.tl.types import ChatBannedRights
-
 from userbot import CMD_HELP
 from userbot.events import errors_handler, register
 from mafiabot.utils import admin_cmd, sudo_cmd, edit_or_reply
@@ -9,11 +8,8 @@ from userbot.Config import Config
 from . import *
 
 
-DEFAULTUSER = (
-    str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
-)
-
-h1m4n5hu0p = bot.uid
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "Set ALIVE_NAME in config vars"
+ME = bot.uid
 
 @bot.on(admin_cmd(pattern=r"lock ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern=r"lock ?(.*)", allow_sudo=True))
@@ -98,7 +94,7 @@ async def locks(event):
         await event.client(
             EditChatDefaultBannedRightsRequest(peer=peer_id, banned_rights=lock_rights)
         )
-        await edit_or_reply(event, f"[{DEFAULTUSER}](tg://user?id={h1m4n5hu0p}) Locked `{what}` \n__Cause its Rest Time Nimba!!__")
+        await edit_or_reply(event, f"[{DEFAULTUSER}](tg://user?id={ME}) Locked `{what}` \n__Cause its Rest Time Nimba!!__")
     except BaseException as e:
         await edit_or_reply(event, f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
         return
@@ -189,7 +185,7 @@ async def rem_locks(event):
                 peer=peer_id, banned_rights=unlock_rights
             )
         )
-        await edit_or_reply(event, f"[{DEFAULTUSER}](tg://user?id={h1m4n5hu0p}) Unlocked `{what}` \n__Now Start Chit Chat !!__")
+        await edit_or_reply(event, f"[{DEFAULTUSER}](tg://user?id={ME}) Unlocked `{what}`")
     except BaseException as e:
         await edit_or_reply(event, f"`Do I have proper rights for that ??`\n**Error:** {str(e)}")
         return
