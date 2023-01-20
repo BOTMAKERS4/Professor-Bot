@@ -1,23 +1,14 @@
-# Ascii module by @kraken_the_badass for @hellbot_official
-# A over powerful bot
-# I know u will kang...
-# GTFO!! MOTHERFUCKER!!!!!!!!!!!
-
-
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
 from userbot import CMD_HELP
 from mafiabot.utils import admin_cmd, edit_or_reply, sudo_cmd
 from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
-
-USERID = bot.uid
-
-mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
+ME = bot.uid
+mention = f"[{DEFAULTUSER}](tg://user?id={ME})"
 
 
 @bot.on(admin_cmd("ascii ?(.*)"))
