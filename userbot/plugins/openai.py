@@ -37,6 +37,7 @@ ME = int(bot.uid)
 AI_API_KEY = Config.OPENAI_API_KEY
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
 AI_ERROR = "❌ **ProfessorBot:** An unknown error occurred while communicating with GPT3-AI Model. Make sure you\'ve configured the correct OpenAI API key in your `.env` file.\n\nFor more information and further assistance, contact: @harshjais369"
+AI_FOOTER_STR = "\n\n───────────────────\n**Gʀᴀᴍᴍᴀʀ ʀᴇᴄᴛɪꜰɪᴄᴀᴛɪᴏɴ ᴛᴏᴏʟ**\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
 
 @bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
@@ -65,9 +66,9 @@ async def _(event):
         event = await eor(event, f"{AI_ERROR}\n\n**Error details:** `Failed to fetch OpenAI config from ProfessorBot\'s server.`")
         return
     if (reply.sender_id != ME) or (reply.message.count("OpenAI ChatGPT: ", 0) == 0):
-        prompt_msg = f"{conf[6]}\"{str(reply.message)}\"\n\n{str(input_str)}\n\n{conf[7]}"
+        prompt_msg = f"{conf[6]}\"{str(reply.message)}\"\n\n{str(input_str)}\n{conf[7]}"
     else:
-        prompt_msg = f"You: {str(input_str)}\n\n{conf[7]}"
+        prompt_msg = f"You: {str(input_str)}\n{conf[7]}"
         while reply:
             prompt_msg = str(reply.message) + "\n\n" + prompt_msg
             if str(reply.message).count("OpenAI ChatGPT: ") == 0:
@@ -75,8 +76,9 @@ async def _(event):
             if reply.sender_id != ME:
                 break
             reply = await reply.get_reply_message()
-        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n\n", "") + " ").replace("> Harsh: ", "You: ")
-    event = await eor(event, askfromreply(prompt_msg, conf))
+        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n", "") + " ").replace("> Harsh: ", "You: ")
+    resstr = f"**> Harsh:** {str(input_str)}\n\n**OpenAI ChatGPT:** {askfromreply(prompt_msg, conf)}"
+    event = await eor(event, resstr)
     return
 
 @bot.on(admin_cmd(pattern="e(?: |$)(.*)", outgoing=True))
@@ -109,7 +111,7 @@ async def _(event):
 def asknew(prompt):
     conf = getOpenaiConfig()
     if conf is None:
-        return f"{AI_ERROR}\n\n**Error details:** `Failed to fetch OpenAI config from ProfessorBot\'s server.`\n\n**Exit code:** `1`"
+        return f"{AI_ERROR}\n\n**Error details:** `Failed to fetch OpenAI config from ProfessorBot\'s server.`"
     try:
         conf[6] = conf[6].replace("{{{", "", 1).replace("}}}", "", 1)
     except:
@@ -128,7 +130,7 @@ def asknew(prompt):
         ans_str = resp_obj["choices"][0]["text"].lstrip()
         if resp_obj["choices"][0]["finish_reason"] == "length":
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
-        ans_str = f"{ans_str}\n\n───────────────────\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
+        ans_str = f"{ans_str}{AI_FOOTER_STR}"
         return ans_str.expandtabs(10)
     except Exception as e:
         return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
@@ -154,9 +156,9 @@ def correctGrammarFunc(prompt):
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
         ans_str = f"{ans_str}\n\n───────────────────\n**Gʀᴀᴍᴍᴀʀ ʀᴇᴄᴛɪꜰɪᴄᴀᴛɪᴏɴ ᴛᴏᴏʟ**\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
         return ans_str.expandtabs(10)
-    except:
-        return AI_ERROR
-    
+    except Exception as e:
+        return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
+
 
 CmdHelp("q").add_command(
   "q", "<your question>", "Start a chat with ChatGPT3."
