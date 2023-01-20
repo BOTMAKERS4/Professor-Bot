@@ -8,6 +8,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 from mafiabot.utils import *
 from userbot import *
 from userbot import bot as mafiabot
+from userbot.Config import Config
 
 DELETE_TIMEOUT = 5
 DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
