@@ -55,25 +55,28 @@ async def _(event):
         resstr = f"**> Harsh:** {str(input_str)}\n\n**OpenAI ChatGPT:** {asknew(str(input_str))}"
         event = await eor(event, resstr)
         return
-    prompt_msg = "" # prompt msg to be sent to AI
+    prompt_msg = "" # prompt which has to be sent to AI
     reply = await event.message.get_reply_message() # (reply=None; if reply not found)
     if not reply.text:
         event = await eor(event, "❌ **OpenAI ChatGPT:** I\'ve not got the ability to comprehend anything other than text yet. For further assistance, talk to my trainner: @harshjais369")
         return
-    # Test starts ---------
-    # event = await eor(event, "Not found!") if reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0 else await eor(event, "Found!")
-    # await asyncio.sleep(5)
-    # Test ends ---------
-    if (reply.sender_id != ME) or (reply.message.count("OpenAI ChatGPT: ", 0, 25) == 0):
-        prompt_msg = str(reply.message) + str(input_str)
+    conf = getOpenaiConfig()
+    if conf is None:
+        event = await eor(event, f"{AI_ERROR}\n\n**Error details:** `Failed to fetch OpenAI config from ProfessorBot\'s server.`")
+        return
+    if (reply.sender_id != ME) or (reply.message.count("OpenAI ChatGPT: ", 0) == 0):
+        prompt_msg = f"{conf[6]}\"{str(reply.message)}\"\n\n{str(input_str)}\n\n{conf[7]}"
     else:
-        prompt_msg = str(input_str)
+        prompt_msg = f"You: {str(input_str)}\n\n{conf[7]}"
         while reply:
-            prompt_msg = str(reply.message) + "\n" + prompt_msg
+            prompt_msg = str(reply.message) + "\n\n" + prompt_msg
+            if str(reply.message).count("OpenAI ChatGPT: ") == 0:
+                prompt_msg = "You: " + prompt_msg
             if reply.sender_id != ME:
                 break
             reply = await reply.get_reply_message()
-    event = await eor(event, askfromreply(prompt_msg))
+        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n\n", "") + " ").replace("> Harsh: ", "You: ")
+    event = await eor(event, askfromreply(prompt_msg, conf))
     return
 
 @bot.on(admin_cmd(pattern="e(?: |$)(.*)", outgoing=True))
@@ -106,7 +109,7 @@ async def _(event):
 def asknew(prompt):
     conf = getOpenaiConfig()
     if conf is None:
-        return AI_ERROR
+        return f"{AI_ERROR}\n\n**Error details:** `Failed to fetch OpenAI config from ProfessorBot\'s server.`\n\n**Exit code:** `1`"
     try:
         conf[6] = conf[6].replace("{{{", "", 1).replace("}}}", "", 1)
     except:
@@ -122,17 +125,17 @@ def asknew(prompt):
             frequency_penalty=conf[4],
             presence_penalty=conf[5]
         )
-        ans_str = resp_obj["choices"][0]["text"]
+        ans_str = resp_obj["choices"][0]["text"].lstrip()
         if resp_obj["choices"][0]["finish_reason"] == "length":
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
         ans_str = f"{ans_str}\n\n───────────────────\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
         return ans_str.expandtabs(10)
-    except:
-        return AI_ERROR
-    # return f"#new_convo\nYour prompt: {prompt}"
+    except Exception as e:
+        return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
 
-def askfromreply(prompt):
-    return f"#reply_from_previous\nYour prompt: {prompt}"
+def askfromreply(prompt, conf):
+    
+    return f"#reply_from_previous\nYour prompt:\n\n{prompt}"
 
 def correctGrammarFunc(prompt):
     try:
