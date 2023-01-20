@@ -4,11 +4,9 @@ from userbot.cmdhelp import CmdHelp
 from userbot.Config import Config
 from . import *
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Mafia User"
-
-USERID = bot.uid
-
-mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
+DEFAULTUSER = str(Config.ALIVE_NAME) if Config.ALIVE_NAME else "ProfessorBot User"
+ME = bot.uid
+mention = f"[{DEFAULTUSER}](tg://user?id={ME})"
 
 @bot.on(admin_cmd(pattern="carry (.*)"))
 @bot.on(sudo_cmd(pattern="carry (.*)", allow_sudo=True))
@@ -20,7 +18,7 @@ async def kraken(carry):
         carry,
         f"**Carry ~> {name} .**\n\n                     ⣤⣶⣶⣶⣦⣤⣄⡀\n⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀\n⠀⠀⠀⢀⣾⣿⣿⣿⠿⠿⠟⠻⠿⢿⣿⣿⣿⡆\n⠀⠀⠀⢰⣿⣿⡿⠂⠀⠀⠀⠀⠀⠀ ⠈⠉⢻⡇ \n⠀⠀⠀⠈⠿⣿⣇⣠⠤⠤⠤⢤⣀⣤⠤⠤⣺⡏ \n⠀⠀⠀⠀⠐⢉⣯⠹⣀⣀⣢⡸⠉⢏⡄⣀⣯⠁ \n⠀⠀⠀⠀⠡⠀⢹⣆⠀⠀⠀⣀⡀⡰⠀⢠⠖⠂ \n⠀⠀⠀⠀⠀⠈⠙⣿⣿⠀⠠⠚⢋⡁⠀⡜ \n⠀⠀⠀⠀⠀⠀⢸⠈⠙⠦⣤⣀⣤⣤⡼⠁  \n⠀⠀⠀ ⠀⢀⡌⠀⠀⠀⠀ ⠉⢏⡉  \n⠀⠀⠀⣀⣴⣿⣷⣶⣤⣤⣤⣴⣾⣷⣶⣦⡀ \n⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄ \n⠚⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛",
     )
-
+    return
 
 @bot.on(admin_cmd(pattern="ded (.*)"))
 @bot.on(sudo_cmd(pattern="ded (.*)", allow_sudo=True))
