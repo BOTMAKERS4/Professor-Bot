@@ -77,7 +77,7 @@ async def _(event):
             if reply.sender_id != ME:
                 break
             reply = await reply.get_reply_message()
-        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n", "") + " ").replace("> Harsh: ", "You: ").replace("You: ", "", 0)
+        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n", "") + " ").replace("> Harsh: ", "You: ").replace("You: ", "", 0).replace(AI_FOOTER_STR, "")
     resstr = f"**> Harsh:** {str(input_str)}\n\n**OpenAI ChatGPT:** {askfromreply(prompt_msg, conf)}"
     event = await eor(event, resstr)
     return
@@ -137,6 +137,7 @@ def asknew(prompt):
         return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
 
 def askfromreply(prompt, conf):
+    LOGS.info(prompt_msg)
     try:
         conf[6] = conf[6].replace("{{{", "", 1).replace("}}}", "", 1)
     except:
