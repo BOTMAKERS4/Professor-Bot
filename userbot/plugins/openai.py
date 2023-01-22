@@ -137,7 +137,7 @@ def asknew(prompt):
         return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
 
 def askfromreply(prompt, conf):
-    LOGS.info(prompt_msg)
+    LOGS.info(prompt)
     try:
         conf[6] = conf[6].replace("{{{", "", 1).replace("}}}", "", 1)
     except:
