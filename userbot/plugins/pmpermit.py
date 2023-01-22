@@ -155,10 +155,10 @@ if Var.MAFIABOT_LOGGER is not None:
         if event.is_private:
             chat = await event.get_chat()
             replied_user = await event.client(GetFullUserRequest(event.chat_id))
-                try:
-                    firstname = replied_user.user.first_name
-                except:
-                    firstname = replied_user.users[0].first_name
+            try:
+                firstname = replied_user.user.first_name
+            except:
+                firstname = replied_user.users[0].first_name
             if chat.id == 881259026:
                 await event.edit("⚠️ You cannot use this command on my master!")
             else:
