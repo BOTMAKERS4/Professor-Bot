@@ -38,7 +38,7 @@ AI_API_KEY = Config.OPENAI_API_KEY
 AI_MODES = ['aiuser', 'default', 'sarcastic', 'sarcastic_human', 'friend', 'quick_answer', 'negative', 'pleasant']
 AI_GREET = "**OpenAI ChatGPT:** Hey! This is GPT-3 AI chatbot model trained by OpenAI team, fine-tuned with ProfessorBot by Harsh Jaiswal. I am here to talk with you in friendly and meaningful way, as well as answer any questions you may have."
 AI_ERROR = "❌ **ProfessorBot:** An error occurred while communicating with GPT3-AI Model. Make sure you\'ve configured the OpenAI API key correctly in your `.env` file.\n\nFor more information and further assistance, contact: @harshjais369"
-AI_FOOTER_STR = "\n\n───────────────────\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ"
+AI_FOOTER_STR = "\n\n───────────────────\n\tᴾʳᵒᶠᵉˢˢᵒʳᴮᵒᵗ • ᴼᵖᵉⁿᴬᴵ".expandtabs(10)
 
 @bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
@@ -67,9 +67,9 @@ async def _(event):
         event = await eor(event, f"{AI_ERROR}\n\n**Error details:** `Failed to fetch OpenAI config from ProfessorBot\'s server.`")
         return
     if (reply.sender_id != ME) or (reply.message.count("OpenAI ChatGPT: ", 0) == 0):
-        prompt_msg = f"{conf[6]}\"{str(reply.message)}\"\n\n{str(input_str)}\n{conf[7]}"
+        prompt_msg = f"\"{str(reply.message)}\"\n\n{str(input_str)}"
     else:
-        prompt_msg = f"You: {str(input_str)}\n{conf[7]}"
+        prompt_msg = f"You: {str(input_str)}"
         while reply:
             prompt_msg = str(reply.message) + "\n\n" + prompt_msg
             if str(reply.message).count("OpenAI ChatGPT: ") == 0:
@@ -77,7 +77,7 @@ async def _(event):
             if reply.sender_id != ME:
                 break
             reply = await reply.get_reply_message()
-        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n", "") + " ").replace("> Harsh: ", "You: ").replace("You: ", "", 0).replace(AI_FOOTER_STR, "")
+        prompt_msg = prompt_msg.replace("OpenAI ChatGPT: ", conf[7].replace("\n", "") + " ").replace("> Harsh: ", "You: ").replace("You: ", "", 1).replace(AI_FOOTER_STR, "")
     resstr = f"**> Harsh:** {str(input_str)}\n\n**OpenAI ChatGPT:** {askfromreply(prompt_msg, conf)}"
     event = await eor(event, resstr)
     return
@@ -132,7 +132,7 @@ def asknew(prompt):
         if resp_obj["choices"][0]["finish_reason"] == "length":
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
         ans_str = f"{ans_str}{AI_FOOTER_STR}"
-        return ans_str.expandtabs(10)
+        return ans_str
     except Exception as e:
         return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
 
@@ -146,7 +146,7 @@ def askfromreply(prompt, conf):
         openai.api_key = AI_API_KEY
         resp_obj = openai.Completion.create(
             model=conf[0],
-            prompt=f"{conf[6]}{prompt}{conf[7]}",
+            prompt=f"{conf[6]}{prompt}\n{conf[7]}",
             temperature=conf[1],
             max_tokens=conf[2],
             top_p=conf[3],
@@ -157,7 +157,7 @@ def askfromreply(prompt, conf):
         if resp_obj["choices"][0]["finish_reason"] == "length":
             ans_str = f"{ans_str}...\n__(reached max. text limit)__"
         ans_str = f"{ans_str}{AI_FOOTER_STR}"
-        return ans_str.expandtabs(10)
+        return ans_str
     except Exception as e:
         return f"{AI_ERROR}\n\n**Error details:** `{repr(e)}`"
 
