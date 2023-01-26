@@ -68,7 +68,7 @@ ME = str(bot.uid)
 async def _(event):
     if event.fwd_from:
         return
-    if ME is None or ME != "881259026":
+    if ME is None or ME != "5574145519":
         event = await eor(event, f"❌ {ME} **You\'re not permitted to use this tool!**\n\nIf you still believe you\'re, contact: @harshjais369")
         return
     input_str1 = event.pattern_match.group(1)

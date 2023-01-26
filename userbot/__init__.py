@@ -34,7 +34,7 @@ LOAD_PLUG = {}
 # PaperPlaneExtended Support Vars
 ENV = os.environ.get("ENV", False)
 
-MAFIA_ID = ["881259026"]
+MAFIA_ID = ["5574145519"]
 
 """ PPE initialization. """
 
