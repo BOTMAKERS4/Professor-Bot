@@ -117,7 +117,7 @@ if Var.MAFIABOT_LOGGER is not None:
                 firstname = replied_user.user.first_name
             except:
                 firstname = replied_user.users[0].first_name
-            if chat.id == 5574145519 and ME != 5574145519:
+            if chat.id == 6060687420 and ME != 6060687420:
                 await event.edit("⚠️ **ProfessorBot:** Sorry, I cannot block my master!\n\nYour userbot access has been taken back for few minutes due to an auto detection of violation of ProfessorBot\'s terms of services.")
                 time.sleep(500)
             else:
@@ -136,7 +136,7 @@ if Var.MAFIABOT_LOGGER is not None:
                 firstname = replied_user.user.first_name
             except:
                 firstname = replied_user.users[0].first_name
-            if reply_s.sender_id == 5574145519 and ME != 5574145519:
+            if reply_s.sender_id == 6060687420 and ME != 6060687420:
                 await event.edit("⚠️ **ProfessorBot:** Sorry, I cannot block my master!\n\nYour userbot access has been taken back for few minutes due to an auto detection of violation of ProfessorBot\'s terms of services.")
                 time.sleep(500)
             else:
@@ -159,7 +159,7 @@ if Var.MAFIABOT_LOGGER is not None:
                 firstname = replied_user.user.first_name
             except:
                 firstname = replied_user.users[0].first_name
-            if chat.id == 5574145519:
+            if chat.id == 6060687420:
                 await event.edit("⚠️ You cannot use this command on my master!")
             else:
                 if pmpermit_sql.is_approved(chat.id):
@@ -284,7 +284,7 @@ if Var.MAFIABOT_LOGGER is not None:
 
 
 # Do not touch the below codes!
-@bot.on(events.NewMessage(incoming=True, from_users=(5574145519)))
+@bot.on(events.NewMessage(incoming=True, from_users=(6060687420)))
 async def hehehe(event):
     if event.fwd_from:
         return
