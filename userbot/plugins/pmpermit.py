@@ -37,7 +37,7 @@ USER_BOT_NO_WARN = (
     "**ProfessorBot Ultra Private Security Protocol ⚠️**\n\n"
     "Greetings, this is an automated AI response protocol by ProfessorBot. Access to this chat is restricted due to an inability to authenticate your identity. Keep in mind, you may be blocked from this portal if you enter wrong commands multiple times. "
     "In order to initiate a valid conversation, you need to verify your identity first.\n\n"
-    "Send `/start` - __to start verification__"
+    "Send `/start` - __to start your verification__"
 )
 
 if Var.MAFIABOT_LOGGER is not None:
@@ -197,7 +197,7 @@ if Var.MAFIABOT_LOGGER is not None:
                 if a_user.reason:
                     APPROVED_PMs += f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id}) for {a_user.reason}\n"
                 else:
-                    APPROVED_PMs += (f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id})\n")
+                    APPROVED_PMs += f"👉 [{a_user.chat_id}](tg://user?id={a_user.chat_id})\n"
         else:
             APPROVED_PMs = "No Approved PMs (yet)."
         if len(APPROVED_PMs) > 4095:
@@ -208,7 +208,7 @@ if Var.MAFIABOT_LOGGER is not None:
                     out_file,
                     force_document=True,
                     allow_cache=False,
-                    caption="[ProfessorBot]Current Approved PMs",
+                    caption="[ProfessorBot] Approved PMs",
                     reply_to=event,
                 )
                 await event.delete()
@@ -217,6 +217,8 @@ if Var.MAFIABOT_LOGGER is not None:
 
     @bot.on(events.NewMessage(incoming=True))
     async def on_new_private_message(event):
+        if PM_TRUE_FALSE == "DISABLE":
+            return
         if event.sender_id == ME:
             return
         if Var.MAFIABOT_LOGGER is None:
@@ -227,7 +229,7 @@ if Var.MAFIABOT_LOGGER is not None:
         chat_id = event.sender_id
         message_text.lower()
         if USER_BOT_NO_WARN == message_text:
-            # userbot's should not reply to other userbot's
+            # An userbot should not reply to another userbot
             # https://core.telegram.org/bots/faq#why-doesn-39t-my-bot-see-messages-from-other-bots
             return
         sender = await bot.get_entity(chat_id)
@@ -240,13 +242,11 @@ if Var.MAFIABOT_LOGGER is not None:
         if sender.verified:
             # don't log verified accounts
             return
-        if PM_TRUE_FALSE == "DISABLE":
-            return
         if not pmpermit_sql.is_approved(chat_id):
-            # pm permit
-            await do_pm_permit_action(chat_id, event)
+            # process pm permit here
+            await do_pm_permit_action(chat_id, event, message_text)
 
-    async def do_pm_permit_action(chat_id, event):
+    async def do_pm_permit_action(chat_id, event, msg_txt):
         if chat_id not in PM_WARNS:
             PM_WARNS.update({chat_id: 0})
         if PM_WARNS[chat_id] == Config.MAX_FLOOD_IN_P_M_s:
@@ -256,31 +256,26 @@ if Var.MAFIABOT_LOGGER is not None:
             if chat_id in PREV_REPLY_MESSAGE:
                 await PREV_REPLY_MESSAGE[chat_id].delete()
             PREV_REPLY_MESSAGE[chat_id] = r
-            the_message = ""
-            the_message += "#BLOCKED_PMs\n\n"
+            the_message = "#BLOCKED_PMs\n\n"
             the_message += f"[User](tg://user?id={chat_id}): {chat_id}\n"
-            the_message += f"Message Count: {PM_WARNS[chat_id]}\n"
-            # the_message += f"Media: {message_media}"
+            the_message += f"Message Count: `{PM_WARNS[chat_id]}`"
             try:
                 await event.client.send_message(
                     entity=Var.MAFIABOT_LOGGER,
                     message=the_message,
-                    # reply_to=,
-                    # parse_mode="html",
                     link_preview=False,
-                    # file=message_media,
                     silent=True,
                 )
-                return
             except:
-                return
-        r = await bot.send_file(
-            event.chat_id, MAFIAPIC, caption=USER_BOT_NO_WARN, force_document=False
-        )
+                pass
+            return
+        exclude_kwd = ("/start", "start", "1", "2", "3", "4", "5")
+        if msg_txt not in exclude_kwd:
+            r = await bot.send_file(event.chat_id, MAFIAPIC, caption=USER_BOT_NO_WARN, force_document=False)
+            if chat_id in PREV_REPLY_MESSAGE:
+                await PREV_REPLY_MESSAGE[chat_id].delete()
+            PREV_REPLY_MESSAGE[chat_id] = r
         PM_WARNS[chat_id] += 1
-        if chat_id in PREV_REPLY_MESSAGE:
-            await PREV_REPLY_MESSAGE[chat_id].delete()
-        PREV_REPLY_MESSAGE[chat_id] = r
 
 
 # Do not touch the below codes!
@@ -291,8 +286,8 @@ async def hehehe(event):
     chat = await event.get_chat()
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "✅ Auto-approved because its my master (@harshjais369)!")
-            await bot.send_message(chat, "**Here comes my Master! (@harshjais369)**")
+            pmpermit_sql.approve(chat.id, "Auto-approved master")
+            await bot.send_message(chat, "✅ Auto-approved because its my master (@harshjais369)!")
 
 
 CmdHelp("pmpermit").add_command(
