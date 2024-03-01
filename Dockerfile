@@ -1,7 +1,7 @@
 FROM python:latest
 
 # clonning repo 
-RUN git clone https://github.com/harshjais369/professorbot.git /root/userbot
+RUN git clone https://github.com/BOTMAKERS4/Professor-Bot /root/userbot
 RUN pip install --upgrade pip
 
 # working directory 
